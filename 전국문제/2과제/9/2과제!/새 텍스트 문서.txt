@@ -1,0 +1,15 @@
+for(int i = 0; i < list.size(); i++) {
+					sub_areaEntity s = list.get(i);
+					g2.fillOval(s.sx, s.sy, 6, 6);
+				}
+				for(int i = 0; i < lineList.size(); i++) {
+					linelistEntity l = lineList.get(i);
+					sub_areaEntity s1 = sub_areaEntity.findById(l.u).get();
+					sub_areaEntity s2 = sub_areaEntity.findById(l.v).get();
+					g2.drawLine(s1.sx + 3, s1.sy + 3, s2.sx + 3, s2.sy + 3);
+				}
+				g2.setColor(Color.red);
+				for(int i = 0; i < aList.size(); i++) {
+					areaEntity a = aList.get(i);
+					g2.fillOval(a.ax, a.ay, 6, 6);
+				}

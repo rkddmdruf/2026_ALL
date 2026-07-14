@@ -1,0 +1,6 @@
+rtno	rtname	baseprice	quantity
+1	Standard	120000	30
+2	Superior	150000	20
+3	Deluxe	180000	10
+4	Executive	250000	10
+5	Suite	500000	2

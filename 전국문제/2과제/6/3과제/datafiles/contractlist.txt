@@ -1,0 +1,4 @@
+cno	pno	uno	loan_price	period	interest_rdate	date
+1	1	1	1000000000	35	4	2026-08-23
+2	2	1	1000000	35	4	2026-08-23
+						

@@ -1,0 +1,11 @@
+uno	name	id	pw	rank
+1	홍길동	user01	user01!	1
+2	이서준	user02	user02!	2
+3	김준수	user03	user03!	3
+4	황영화	user04	user04!	2
+5	박수재	user05	user05!	1
+6	김민수	user06	user06!	4
+7	최지훈	user07	user07!	5
+8	박서연	user08	user08!	2
+9	정유진	user09	user09!	3
+10	한도윤	user10	user10!	1

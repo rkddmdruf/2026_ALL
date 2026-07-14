@@ -1,0 +1,11 @@
+cno	cid	cpw	cname	ctel	tracking_url	delivery_types
+1	com01	com01!	CJ대한통운	1588-1255	cjlogistics.com	1,2,3,4,5,6
+2	com02	com02!	한진택배	1588-0011	hanjin.com	1,4,5
+3	com03	com03!	롯데택배	1588-2121	lotteglogis.com	1,2,5
+4	com04	com04!	우체국택배	1588-1300	epost.go.kr	1
+5	com05	com05!	로젠택배	1588-9988	ilogen.com	1,5
+6	com06	com06!	CU편의점택배	1577-1287	cvsnet.co.kr	1
+7	com07	com07!	GS25택배	1544-4101	cvsnet.co.kr	1
+8	com08	com08!	대신택배	043-222-4582	daesinlogistics.co.kr	1,4
+9	com09	cj	경동택배	1899-5368	kdexp.com	1,4
+10	com10	com10!	일양로지스	1588-0002	ilogen.com	1,5

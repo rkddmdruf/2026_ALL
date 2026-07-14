@@ -1,0 +1,7 @@
+    /*for (Data d : Connections.select("SELECT TABLE_NAME, CONSTRAINT_TYPE, CONSTRAINT_NAME \r\n"
+					+ "FROM information_schema.table_constraints \r\n"
+					+ "WHERE TABLE_SCHEMA = 'italba' \r\n"
+					+ "AND CONSTRAINT_TYPE = 'FOREIGN KEY;")) {
+				System.out.println(d);
+			}
+			String fk = "public " + "className" + " Entity get" + "className" + "() { return " + "className" + "Entity.find" + "By or Id(" + "pk" + "), or get();}";*/

@@ -1,0 +1,3 @@
+gno	uno	fno	mno	num	phone
+1	1	1	1	1	010-4825-8950
+					
