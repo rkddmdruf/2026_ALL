@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -14,7 +15,17 @@ import java.awt.Toolkit;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EventObject;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -46,6 +57,7 @@ import static utils.Properties.*;
 import utils.getter;
 
 public class Util {
+	private static boolean[][] visit = new boolean[800][800];
 	public static void textIsBlank(JTextField...fields) {
 		for(JTextField tf : fields) {
 			if(tf.getText().isBlank()) {

@@ -17,6 +17,8 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
@@ -54,6 +56,12 @@ public class Home extends JPanel{
 	
 	public JPanel goToPanel() {
 		JPanel p1 = panel(getter.getImage("logo/maze.png", 50, 50), "미로", "포인트 적립");
+		p1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Maps(1).setVisible(true);
+			}
+		});
 		JPanel p2 = panel(getter.getImage("logo/roulette.png", 50, 50), "경품", "룰렛 뽑기");
 		JPanel panel = col(
 					10, 5, 10, fillWidth(lb("바로가기", FONT(getter.font.deriveFont(1).deriveFont(16f)))),
