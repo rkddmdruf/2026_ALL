@@ -14,7 +14,6 @@ import orms.userEntity;
 
 public class getter {
 
-	public static final String text = "K-TRADE";
 	public static final Font font = new Font("맑은 고딕", 0, 12);
 	public static final Color color = new Color(230, 240, 250);
 	public static final Border line = BorderFactory.createLineBorder(Color.black);

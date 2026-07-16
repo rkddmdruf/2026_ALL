@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,16 +40,15 @@ public class Maps extends CFrame{
 	boolean[][] visit = new boolean[800][800];
 	Map<Integer, List<Point>> guPoints = new LinkedHashMap<>();
 	
-	sub_areaEntity start, userStation = sub_areaEntity.findById(getter.user.sno).get();
+	sub_areaEntity startStation, userStation = sub_areaEntity.findById(getter.user.sno).get();
 	int nowStation;
 	int productStation = 0;      // 지금 몇 번째 구간(sted[i] -> sted[i+1])을 그리는 중인지
 	int productLine = 0;         // 그 구간 안에서 몇 스텝째인지 (0 ~ STEPS)
 	final int STEPS = 40; 
 	
 	public Maps(int pno) {
-		start = sub_areaEntity.findById(productEntity.findById(pno).get().sno).get();
-		nowStation = areaEntity.findById(start.ano).get().ano;
-		sted = dijkstra(120, 19);
+		startStation = sub_areaEntity.findById(productEntity.findById(pno).get().sno).get();
+		sted = dijkstra(startStation.sno, userStation.sno);
 		System.out.println(sted);
 		setFrame("test", 820, 820, () -> {});
 	}
@@ -98,11 +98,12 @@ public class Maps extends CFrame{
 				}
 				g2.setColor(Color.green);
 
+				g2.setStroke(new BasicStroke(3f));
 				// 이미 다 그려진 구간들은 완성된 실선으로
 				for (int i = 0; i < productStation; i++) {
 					sub_areaEntity s1 = sub_areaEntity.findById(sted.get(i)).get();
 					sub_areaEntity s2 = sub_areaEntity.findById(sted.get(i + 1)).get();
-					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
+					g2.drawLine(s1.sx + 3, s1.sy + 3, s2.sx + 3, s2.sy + 3);
 				}
 
 				// 지금 그려지는 중인 구간 (진행률만큼만)
@@ -114,10 +115,7 @@ public class Maps extends CFrame{
 					int curX = (int) (s1.sx + (s2.sx - s1.sx) * ratio);
 					int curY = (int) (s1.sy + (s2.sy - s1.sy) * ratio);
 
-					g2.drawLine(s1.sx, s1.sy, curX, curY);   // s1에서 지금 지점까지만 그려짐
-
-					g2.setColor(Color.orange);
-					g2.fillOval(curX - 4, curY - 4, 8, 8);   // 지금 그려지고 있는 맨 끝 지점 표시
+					g2.drawLine(s1.sx + 3, s1.sy + 3, curX + 3, curY + 3);   // s1에서 지금 지점까지만 그려짐
 				}
 				
 				g2.setColor(Color.red);
@@ -126,7 +124,7 @@ public class Maps extends CFrame{
 					g2.fillOval(s.sx, s.sy, 6, 6);
 				}
 				g2.setColor(Color.cyan);
-				g2.drawImage(new ImageIcon("datafiles/logo/start.png").getImage(), start.sx - 17, start.sy - 37, 40, 40, null);
+				g2.drawImage(new ImageIcon("datafiles/logo/start.png").getImage(), startStation.sx - 17, startStation.sy - 37, 40, 40, null);
 				
 				g2.drawImage(new ImageIcon("datafiles/logo/destination.png").getImage(), userStation.sx - 22, userStation.sy - 37, 50, 50, null);
 				
@@ -141,12 +139,13 @@ public class Maps extends CFrame{
 							productLine = 0;
 							productStation++;
 						}
+					}else {
+						//끝 액션
 					}
 					SwingUtilities.invokeLater(() -> label.repaint());
 					Thread.sleep(30);
 				}
 			} catch (Exception e2) {
-				
 			}
 		}).start();
 		label.setBorder(getter.line(Color.LIGHT_GRAY));
