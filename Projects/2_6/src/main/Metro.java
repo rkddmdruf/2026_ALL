@@ -4,18 +4,30 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import orms.stationEntity;
@@ -49,10 +61,13 @@ public class Metro extends CFrame{
 	
 	List<stationEntity> stations = stationEntity.findAll();
 	Image img = new ImageIcon("datafiles/metro.png").getImage();
-	
-	
-	List<Ellipse2D> ovals = new ArrayList<>();
-	
+	Map<Integer, Ellipse2D> map = new LinkedHashMap<>();
+	Map<Integer, List<Integer>> node = new LinkedHashMap<>();
+	JPopupMenu menu = new JPopupMenu();
+
+	JButton startB = bt("출발", HOA(JButton.LEFT));
+	JButton endB = bt("도착", HOA(JButton.LEFT));
+
 	final double imgX = img.getWidth(null);
 	final double imgY = img.getHeight(null);
 	double maxX = stations.stream().sorted((a, b) -> Integer.compare(b.x, a.x)).findFirst().get().x;
@@ -60,7 +75,9 @@ public class Metro extends CFrame{
 	double minX = stations.stream().sorted((a, b) -> Integer.compare(a.x, b.x)).findFirst().get().x;
 	double minY = stations.stream().sorted((a, b) -> Integer.compare(a.y, b.y)).findFirst().get().y;
 	
+	int start = -1, end = -1, selectN = -1;
 	public Metro() {
+		System.out.println(bfs(34, 38));
 		bLabel.setBorder(getter.em(2, 0, 2, 0));
 		bLabel.setFont(getter.font.deriveFont(13f));
 		bLabel.setOpaque(false);
@@ -70,11 +87,19 @@ public class Metro extends CFrame{
 
 	@Override
 	protected void desing() {
+		startB.setBorderPainted(false);
+		startB.setMargin(new Insets(0, 0, 0, 10));
+		
+		endB.setBorderPainted(false);
+		endB.setMargin(new Insets(0, 0, 0, 10));
+		
+		menu.add(startB);
+		menu.add(endB);
+		
 		label = new JLabel() {
 		    int r = 12;
 		    @Override
 		    protected void paintComponent(Graphics g) {
-		    	ovals.clear();
 		        super.paintComponent(g);
 		        Graphics2D g2 = (Graphics2D) g;
 		        g2.drawImage(new ImageIcon("datafiles/metro.png").getImage(), 0, 0, getWidth(), getHeight(), null);
@@ -87,8 +112,7 @@ public class Metro extends CFrame{
 		        	double x = e.x * scaleX;
 		        	double y = e.y * scaleY;
 		            Ellipse2D.Double oval = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
-		            ovals.add(oval);
-		            g2.fill(oval);
+		            map.put(e.sno, oval);
 		        });
 		    }
 		};
@@ -97,18 +121,57 @@ public class Metro extends CFrame{
 
 	@Override
 	protected void action() {
-		new Thread(() -> {
-			try {
-				while(true) {
-					System.out.println(ovals.size());
-					Thread.sleep(100);
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getButton() == MouseEvent.BUTTON3) {
+					start = -1;
+					end = -1;
+					repaint();
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
+				map.keySet().forEach(c -> {
+					if(map.get(c).contains(e.getPoint())) {
+						System.out.println(c);
+						selectN = c;
+						menu.setVisible(true);
+						menu.show(label, e.getX(), e.getY());
+					};
+				});
 			}
-		}).start();
+		});
+		startB.addActionListener(e -> {
+			start = selectN;
+			selectN = -1;
+			menu.setVisible(false);
+			if(end != -1) {
+				System.out.println(bfs(start, end));
+			}
+			repaint();
+		});
+		endB.addActionListener(e -> {
+			end = selectN;
+			menu.setVisible(false);
+			selectN = -1;
+			if(start != -1) {
+				System.out.println(bfs(start, end));
+			}
+			repaint();
+		});
 	}
 	
+	public List<Integer> bfs(int start, int end){
+		Queue<Integer> q = new LinkedList<>();
+		Map<Integer, Integer> map = new LinkedHashMap<Integer, Integer>();
+		List<Integer> visit = new ArrayList<>();
+		
+		List<Integer> list = new ArrayList<>();
+		Integer cur = end;
+		while(cur != null) {
+			list.add(cur);
+			cur = map.get(cur);
+		}
+		return list;
+	}
 	public static void main(String[] args) {
 		Util.start(new Metro());
 	}
