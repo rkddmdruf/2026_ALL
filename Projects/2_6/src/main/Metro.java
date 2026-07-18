@@ -1,23 +1,30 @@
 package main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
@@ -60,9 +67,9 @@ public class Metro extends CFrame{
 	};
 	
 	List<stationEntity> stations = stationEntity.findAll();
+	List<Integer> bfs = new ArrayList<>();
 	Image img = new ImageIcon("datafiles/metro.png").getImage();
-	Map<Integer, Ellipse2D> map = new LinkedHashMap<>();
-	Map<Integer, List<Integer>> node = new LinkedHashMap<>();
+	Map<Integer, Ellipse2D> ovalMap = new LinkedHashMap<>();
 	JPopupMenu menu = new JPopupMenu();
 
 	JButton startB = bt("출발", HOA(JButton.LEFT));
@@ -70,14 +77,13 @@ public class Metro extends CFrame{
 
 	final double imgX = img.getWidth(null);
 	final double imgY = img.getHeight(null);
-	double maxX = stations.stream().sorted((a, b) -> Integer.compare(b.x, a.x)).findFirst().get().x;
-	double maxY = stations.stream().sorted((a, b) -> Integer.compare(b.y, a.y)).findFirst().get().y;
-	double minX = stations.stream().sorted((a, b) -> Integer.compare(a.x, b.x)).findFirst().get().x;
-	double minY = stations.stream().sorted((a, b) -> Integer.compare(a.y, b.y)).findFirst().get().y;
 	
 	int start = -1, end = -1, selectN = -1;
+	double step = 0;
+	int stationNumber = 0;
+	List<Integer> totalPix = Arrays.asList(0);
+	
 	public Metro() {
-		System.out.println(bfs(34, 38));
 		bLabel.setBorder(getter.em(2, 0, 2, 0));
 		bLabel.setFont(getter.font.deriveFont(13f));
 		bLabel.setOpaque(false);
@@ -112,26 +118,94 @@ public class Metro extends CFrame{
 		        	double x = e.x * scaleX;
 		        	double y = e.y * scaleY;
 		            Ellipse2D.Double oval = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
-		            map.put(e.sno, oval);
+		            ovalMap.put(e.sno, oval);
 		        });
+		        g2.setStroke(new BasicStroke(6f));
+		        
+		        for(int i = 0; i < bfs.size() - 1; i++) {
+		        	stationEntity s = stationEntity.findById(bfs.get(i)).get();
+		        	stationEntity e = stationEntity.findById(bfs.get(i + 1)).get();
+		        	Line2D.Double line = new Line2D.Double(s.x * scaleX, s.y * scaleY, e.x * scaleX, e.y * scaleY);
+		        	Ellipse2D.Double ellipse = new Ellipse2D.Double(s.x * scaleX - 3, s.y * scaleY - 3, 6, 6);
+		        	g2.setColor(Color.red);
+		        	g2.draw(line);
+		        	g2.setColor(Color.orange);
+		        	g2.fill(ellipse);
+		        }
+		        
+		        if(start != -1) drawStartEnd(g2, "출", start);
+		        if(end != -1) drawStartEnd(g2, "도", end);
+		        
+		        
+		        
+		        if(!bfs.isEmpty() && stationNumber < bfs.size() - 1) {
+		            stationEntity s1 = stationEntity.findById(bfs.get(stationNumber)).get();
+		            stationEntity s2 = stationEntity.findById(bfs.get(stationNumber + 1)).get();
+
+		            double x = (s1.x + (s2.x - s1.x) * step) * scaleX;
+		            double y = (s1.y + (s2.y - s1.y) * step) * scaleY;
+
+		            // 🔥 방향 계산
+		            double angle = Math.atan2(s2.y - s1.y, s2.x - s1.x);
+
+		            Graphics2D g2d = (Graphics2D) g2.create();
+
+		            g2d.translate(x, y);
+		            g2d.rotate(angle + Math.PI / 2);
+
+		            int w = 8;
+		            int h = 40;
+		            g2d.drawImage(Util.train, -w/2, -h/2, w, h, null);
+		            g2d.dispose();
+		        }
+		    }
+		    
+		    private void drawStartEnd(Graphics2D g2, String str, int n) {
+		    	g2.setStroke(new BasicStroke(2f));
+		        g2.setFont(getter.font.deriveFont(17f));
+		    	FontMetrics fm = getFontMetrics(getFont());
+	        	int textWidth = fm.stringWidth(str);
+	        	int textHeight = fm.getAscent();
+	        	
+	        	Ellipse2D e = ovalMap.get(n);
+	        	
+	        	double centerX = e.getX() + r;
+	        	double centerY = e.getY() + r;
+
+	        	// 중앙 좌표 계산
+	        	int x = (int) (centerX - textWidth / 2);
+	        	int y = (int) (centerY + textHeight / 2);
+	        	
+	        	g2.setColor(Color.white);
+	        	g2.fill(e);
+	        	g2.setColor(str.equals("출") ? getter.color : Color.red);
+	        	g2.draw(e);
+	        	g2.drawString(str, x - 2, y + 2);
 		    }
 		};
 		add(col(0, f(label), fw(bLabel)));
 	}
 
+	private void init() {
+		start = -1;
+		end = -1;
+		bfs = new ArrayList<>();
+		stationNumber = 0;
+		step = 0;
+		totalPix.set(0, null);
+		repaint();
+	}
 	@Override
 	protected void action() {
 		label.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(e.getButton() == MouseEvent.BUTTON3) {
-					start = -1;
-					end = -1;
-					repaint();
+				if(e.getButton() != MouseEvent.BUTTON3) {
+					init();
+					return;
 				}
-				map.keySet().forEach(c -> {
-					if(map.get(c).contains(e.getPoint())) {
-						System.out.println(c);
+				ovalMap.keySet().forEach(c -> {
+					if(ovalMap.get(c).contains(e.getPoint())) {
 						selectN = c;
 						menu.setVisible(true);
 						menu.show(label, e.getX(), e.getY());
@@ -139,39 +213,56 @@ public class Metro extends CFrame{
 				});
 			}
 		});
-		startB.addActionListener(e -> {
-			start = selectN;
-			selectN = -1;
-			menu.setVisible(false);
-			if(end != -1) {
-				System.out.println(bfs(start, end));
+		ActionListener ac = e -> {
+			if(e.getSource() == startB) {
+				start = selectN;
+				bLabel.setText("출발: " + stationEntity.findById(start).get().name + " | 역을 우클릭하여 도착역을 선택하세요");
 			}
-			repaint();
-		});
-		endB.addActionListener(e -> {
-			end = selectN;
+			else {
+				end = selectN;
+				bLabel.setText("도착: " + stationEntity.findById(end).get().name + " | 역을 우클릭하여 출발역을 선택하세요");
+			}
 			menu.setVisible(false);
 			selectN = -1;
-			if(start != -1) {
-				System.out.println(bfs(start, end));
+			if(start != -1 && end != -1) {
+				bfs = Util.bfs(start, end, totalPix);
+				List<Integer> bfsCopy = List.copyOf(bfs);
+				for(String s : "석남,부평구청,인천시청".split(",")) {
+					List<Integer> list = stationEntity.findBy(sta -> sta.name.equals(s)).stream().map(sta -> sta.sno).collect(Collectors.toList());
+					if(bfs.contains(list.get(0)) && bfs.contains(list.get(1))) {
+						bfs.remove(bfs.indexOf(list.get(0)));
+					}
+				}
+				double dist = (totalPix.get(0) * 0.05);
+				bLabel.setText("출발: " + stationEntity.findById(start).get().name + " → 도착: " + stationEntity.findById(start).get().name + 
+						" ( " + (bfs.size() - 1) + "구간 ) 약 " + dist + " km | 약 " + (int) Math.ceil(dist / 40*60)+ " 분");
+				bfs = bfsCopy;
+				new Thread(() -> {
+					try {
+						while(true) {
+						    step += 0.02; // 속도
+						    if(step >= 1) {
+						        step = 0;
+						        stationNumber++;
+						        if(stationNumber >= bfs.size() - 1) {
+						            break;
+						        }
+						    }
+						    label.repaint();
+						    Thread.sleep(16); // 60fps 느낌
+						}
+						System.out.println("끝");
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}).start();
 			}
 			repaint();
-		});
+		};
+		startB.addActionListener(ac);
+		endB.addActionListener(ac);
 	}
-	
-	public List<Integer> bfs(int start, int end){
-		Queue<Integer> q = new LinkedList<>();
-		Map<Integer, Integer> map = new LinkedHashMap<Integer, Integer>();
-		List<Integer> visit = new ArrayList<>();
-		
-		List<Integer> list = new ArrayList<>();
-		Integer cur = end;
-		while(cur != null) {
-			list.add(cur);
-			cur = map.get(cur);
-		}
-		return list;
-	}
+
 	public static void main(String[] args) {
 		Util.start(new Metro());
 	}
