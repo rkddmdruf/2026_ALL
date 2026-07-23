@@ -1,4 +1,4 @@
-package test;
+package test.test4;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,7 +27,7 @@ import static utils.BoxPanel.*;
 import utils.*;
 import static utils.Properties.*;
 
-public class r3 extends CFrame{
+public class R4 extends CFrame{
 	double rand = Math.random() * 360;
 	List<chanceitemEntity> items = chanceitemEntity.findAll();
 	List<Color> color = IntStream.range(0, 5).mapToObj(e -> new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256))).collect(Collectors.toList());
@@ -34,8 +35,10 @@ public class r3 extends CFrame{
 	JButton b = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
 	JLabel label;
 	Point point = new Point();
+	javax.swing.Timer timer;
 	
-	public r3() {
+	double speed = 10;
+	public R4() {
 		setFrame("경품", 600, 500, () -> {});
 	}
 
@@ -101,40 +104,29 @@ public class r3 extends CFrame{
 
 	@Override
 	protected void action() {
-		b.addActionListener(e -> {
+		b.addActionListener(ac -> {
 			b.setEnabled(false);
-			new Thread(() -> {
-				try {
-					double speed = 0.000000001;
-					double max = (Math.random() * 3 + 1) / 100.0;
-					while(speed < max) {
-						long millis = (long)(speed * 1000);
-			            int nanos = (int)((speed * 1_000_000_000) % 1_000_000);
-
-			            rand--;
-			            SwingUtilities.invokeLater(() -> label.repaint());
-			            Thread.sleep(millis, nanos);
-			            rand--;
-			            SwingUtilities.invokeLater(() -> label.repaint());
-			            speed *= 1.01;
-					}
-					SwingUtilities.invokeLater(() -> {
-						int n = arcs.indexOf(arcs.stream().filter(c -> c.contains(point)).findFirst().get());
-						getter.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
-						getter.user.chance -= 1;
-						getter.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
-						getter.user.save();
-						b.setEnabled(true);
-					});
-				} catch (Exception e2) {
-					// TODO: handle exception
+			speed = (Math.random() * 20) + 30;
+			timer = new javax.swing.Timer(1, e -> {
+				rand -= speed;
+				speed *= 0.994;
+				label.repaint();
+				if(speed < 0.1) {
+					timer.stop();
+					int n = arcs.indexOf(arcs.stream().filter(c -> c.contains(point)).findFirst().get());
+					getter.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
+					getter.user.chance -= 1;
+					getter.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
+					getter.user.save();
+					b.setEnabled(true);
 				}
-			}).start();;
+			});
+			timer.start();
 		});
 	}
 	
 	public static void main(String[] args) {
-		Util.start(new r3());
+		Util.start(new R4());
 	}
 
 }

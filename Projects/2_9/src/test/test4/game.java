@@ -1,4 +1,4 @@
-package main;
+package test.test4;
 
 import utils.*;
 import static utils.BoxPanel.*;
@@ -21,83 +21,57 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.*;
 
-public class Game extends CFrame{
+import main.Util;
+
+public class game extends CFrame{
 	final int SIZE = 15;
 	int[][] grid = new int[15][15];
 	boolean[][] visit = new boolean[15][15];
 	int[] dx = {0,0,2,-2}, dy = {2,-2,0,0};
 	List<Color> colors = Arrays.asList(new Color(64, 64, 64), Color.white);
 	List<List<JLabel>> labels = new ArrayList<>();
-	
-	List<Point> testLines = new ArrayList<>();
-	List<Point> testLines2 = new ArrayList<>();
-	List<Point> test = new ArrayList<>();
 	JTextField tf = comp(JTextField::new, SIZE(0, 0));
-	
+	List<ac> ps = new ArrayList<>();
 	Point user = new Point(1, 1);
-
-	/** 트레일에 있는 점 하나. alpha는 이 점만의 고유한 밝기라서, 다른 점이 지워져도 안 바뀜. */
-	private static class TrailDot {
-		Point p;
-		float alpha;
-		TrailDot(Point p, float alpha) { this.p = p; this.alpha = alpha; }
-	}
-	List<TrailDot> gaidTrail = new CopyOnWriteArrayList<>();
-
 	// 0 벽, 1 길 2 도착지, 3 시작점
-	public Game() {
+	class ac {
+		public Color c;
+		public Point p = new Point();
+		
+		public ac() {}
+		public ac(Color c, Point p) {
+			this.c = c;
+			this.p = p;
+		}
+	}
+	public game() {
 		dfs(1, 1);
 		setFrame("미로", 600, 650, () -> {});
-		Point p1 = testLines2.get(0);
-		test.add(p1);
-		for(int i = 1; i < testLines2.size(); i++) {
-			Point p2 = testLines2.get(i);
-			test.add(new Point(p1.x + ((p2.x - p1.x) / 2), p1.y + ((p2.y - p1.y) / 2)));
-			p1 = new Point(p2.x, p2.y);
-			test.add(p2);
-		}
 		new Thread(() -> {
 			try {
 				while (true) {
-					Point start = new Point(user.x, user.y);
+					Thread.sleep(1000); // 다 사라지고 나서 1초 뒤 다시 시작
+					Point start = new Point(user);
 					Point end = new Point(13, 13);
 					List<Point> path = bfsPath(start, end);
-
-					List<TrailDot> dots = new ArrayList<>();
-					int pathIndex = 0;
-					List<Point> prevVisible = new ArrayList<>();
-
-					// 아직 갈 길이 남아있거나(pathIndex < path.size()), 아직 안 사라진 dot이 있는 동안 계속
-					while (pathIndex < path.size() || !dots.isEmpty()) {
-
-						// 1) 있던 dot들 전부 한 단계씩 옅어짐
-						for (TrailDot d : dots) d.alpha -= 0.2f;
-						dots.removeIf(d -> d.alpha <= 0.01f);
-						
-						// 2) 길이 남아있으면 맨 앞에 새 dot(가장 진한 색)을 추가
-						if (pathIndex < path.size()) {
-							dots.add(0, new TrailDot(path.get(pathIndex), 1.0f));
-							pathIndex++;
+					for(int s = 0; s < path.size(); s++) {
+						ps.clear();
+						for(int i = 0; i < 5; i++) {
+							int befn = s - i;
+							if(befn < 0) befn = 0;
+							Point p = new Point(path.get(befn));
+							ps.add(0, new ac(new Color(130, 190, 250, 200 - i * 40), p));
 						}
-
-						gaidTrail.clear();
-						gaidTrail.addAll(dots);
-
-						List<Point> nowVisible = new ArrayList<>();
-						for (TrailDot d : dots) nowVisible.add(d.p);
-
-						// 방금까지 보이던 칸 + 지금 보이는 칸 다 repaint (안 그러면 잔상 남음)
-						List<Point> toRepaint = new ArrayList<>(prevVisible);
-						toRepaint.addAll(nowVisible);
-						SwingUtilities.invokeLater(() -> {
-							for (Point pt : toRepaint) labels.get(pt.x).get(pt.y).repaint();
-						});
-
-						prevVisible = nowVisible;
-						Thread.sleep(20);
+						path.forEach(e -> SwingUtilities.invokeLater(() -> labels.get(e.x).get(e.y).repaint()));
+						Thread.sleep(40);
 					}
-
-					Thread.sleep(1000); // 다 사라지고 나서 1초 뒤 다시 시작
+					for(int i = ps.size(); i > 0; i--) {
+						Color c = ps.get(0).c;
+						ps.get(ps.size() - 1).c = new Color(c.getRed(), c.getGreen(), c.getBlue(), ps.get(ps.size() - (i == 1 ? 1 : 2)).c.getAlpha());
+						ps.remove(0);
+						path.forEach(e -> labels.get(e.x).get(e.y).repaint());
+						Thread.sleep(40);
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -122,7 +96,7 @@ public class Game extends CFrame{
 			for (int d = 0; d < 4; d++) {
 				int nx = cur.x + dr[d];
 				int ny = cur.y + dc[d];
-				if (nx < 0 || ny < 0 || nx >= SIZE || ny >= SIZE) continue;
+				if (nx <= 0 || ny <= 0 || nx >= 14 || ny >= 14) continue;
 				if (visited[nx][ny] || grid[nx][ny] == 0) continue;
 				visited[nx][ny] = true;
 				parent[nx][ny] = cur;
@@ -154,22 +128,18 @@ public class Game extends CFrame{
 					@Override
 					protected void paintComponent(Graphics g) {
 						super.paintComponent(g);
+						Point p = new Point(index, jndex);
+						ps.stream().filter(e -> e.p.equals(p)).forEach(e -> {
+							g.setColor(e.c);
+							g.fillRect(0, 0, getWidth(), getHeight());
+						});
 						if(user.x == index && user.y == jndex) {
-								g.setColor(Color.red);
-								g.fillOval((getWidth() / 2) - (getWidth() / 3), (getHeight() / 2) - (getHeight() / 3), (getWidth() / 3) * 2, (getHeight() / 3) * 2);
+							g.setColor(Color.red);
+							g.fillOval((getWidth() / 2) - (getWidth() / 3), (getHeight() / 2) - (getHeight() / 3), (getWidth() / 3) * 2, (getHeight() / 3) * 2);
 						}
 						if(index == 13 && jndex == 13) {
 							g.setColor(Color.green);
 							g.fillOval((getWidth() / 2) - (getWidth() / 3), (getHeight() / 2) - (getHeight() / 3), (getWidth() / 3) * 2, (getHeight() / 3) * 2);
-						}
-						// 트레일 그리기: 각 dot이 자기 고유 alpha로 그려짐 (남은 개수와 무관)
-						List<TrailDot> snapshot = gaidTrail;
-						for (TrailDot d : snapshot) {
-							if (d.p.x == index && d.p.y == jndex) {
-								g.setColor(new Color(120, 190, 255, (int) (255 * d.alpha)));
-								g.fillRect(0, 0, getWidth(), getHeight());
-								break;
-							}
 						}
 					}
 				};
@@ -206,8 +176,9 @@ public class Game extends CFrame{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(user.equals(new Point(13, 13))) {
-					getter.infor("탈출 성고!\n" + testLines2.size() + "원이 적립되었습니다.");
-					getter.user.point += testLines2.size();
+					List<Point> bfs = bfsPath(new Point(1, 1), new Point(13, 13));
+					getter.infor("탈출 성고!\n" + bfs.size() + "원이 적립되었습니다.");
+					getter.user.point += bfs.size();
 					getter.user.save();
 					dispose();
 				}
@@ -218,13 +189,8 @@ public class Game extends CFrame{
     private void dfs(int x, int y) {
         visit[x][y] = true;
         grid[x][y] = 1;
-        testLines.add(new Point(x, y));
         List<Integer> dirs = Arrays.asList(0, 1, 2, 3);
         Collections.shuffle(dirs);
-        
-        if (x == SIZE - 2 && y == SIZE - 2) {
-            testLines2 = new ArrayList<>(testLines);
-        }
         
         for (int d : dirs) {
             int nx = x + dx[d];
@@ -235,11 +201,10 @@ public class Game extends CFrame{
                 dfs(nx, ny);
             }
         }
-        testLines.remove(testLines.size() - 1);
     }
 	
 
 	public static void main(String[] args) {
-		Util.start(new Game());
+		Util.start(new game());
 	}
 }

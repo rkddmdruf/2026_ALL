@@ -44,7 +44,7 @@ public class Maps extends CFrame{
 	int nowStation;
 	int productStation = 0;      // 지금 몇 번째 구간(sted[i] -> sted[i+1])을 그리는 중인지
 	int productLine = 0;         // 그 구간 안에서 몇 스텝째인지 (0 ~ STEPS)
-	final int STEPS = 40; 
+	final int STEPS = 40;
 	
 	public Maps(int pno) {
 		startStation = sub_areaEntity.findById(productEntity.findById(pno).get().sno).get();

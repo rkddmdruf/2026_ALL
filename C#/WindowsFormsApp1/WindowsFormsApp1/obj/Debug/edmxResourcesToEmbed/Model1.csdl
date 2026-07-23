@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="festivaldbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AppUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Booth">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="X" Type="Int32" Nullable="false" />
+    <Property Name="Y" Type="Int32" Nullable="false" />
+    <Property Name="W" Type="Int32" Nullable="false" />
+    <Property Name="H" Type="Int32" Nullable="false" />
+    <Property Name="VendorId" Type="Int32" />
+    <Property Name="StageId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Memo" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__Booth__FestivalI__628FA481" FromRole="Booth" ToRole="Festival" />
+    <NavigationProperty Name="Stage" Relationship="Self.FK__Booth__StageId__656C112C" FromRole="Booth" ToRole="Stage" />
+    <NavigationProperty Name="BoothType" Relationship="Self.FK__Booth__TypeCode__6383C8BA" FromRole="Booth" ToRole="BoothType" />
+    <NavigationProperty Name="Vendor" Relationship="Self.FK__Booth__VendorId__6477ECF3" FromRole="Booth" ToRole="Vendor" />
+  </EntityType>
+  <EntityType Name="BoothType">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CodePrefix" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DefaultW" Type="Int32" Nullable="false" />
+    <Property Name="DefaultH" Type="Int32" Nullable="false" />
+    <Property Name="ColorHex" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Booth" Relationship="Self.FK__Booth__TypeCode__6383C8BA" FromRole="BoothType" ToRole="Booth" />
+  </EntityType>
+  <EntityType Name="EventItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="StageId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartHour" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="EndHour" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__EventItem__Festi__6A30C649" FromRole="EventItem" ToRole="Festival" />
+    <NavigationProperty Name="Stage" Relationship="Self.FK__EventItem__Stage__6B24EA82" FromRole="EventItem" ToRole="Stage" />
+  </EntityType>
+  <EntityType Name="Festival">
+    <Key>
+      <PropertyRef Name="FestivalId" />
+    </Key>
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SaleSeq" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Booth" Relationship="Self.FK__Booth__FestivalI__628FA481" FromRole="Festival" ToRole="Booth" />
+    <NavigationProperty Name="EventItem" Relationship="Self.FK__EventItem__Festi__6A30C649" FromRole="Festival" ToRole="EventItem" />
+    <NavigationProperty Name="Performer" Relationship="Self.FK__Performer__Festi__52593CB8" FromRole="Festival" ToRole="Performer" />
+    <NavigationProperty Name="Sale" Relationship="Self.FK__Sale__FestivalId__7F2BE32F" FromRole="Festival" ToRole="Sale" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__FestivalI__6FE99F9F" FromRole="Festival" ToRole="Staff" />
+    <NavigationProperty Name="Structure" Relationship="Self.FK__Structure__Festi__5BE2A6F2" FromRole="Festival" ToRole="Structure" />
+    <NavigationProperty Name="TicketType" Relationship="Self.FK__TicketTyp__Festi__787EE5A0" FromRole="Festival" ToRole="TicketType" />
+    <NavigationProperty Name="Vendor" Relationship="Self.FK__Vendor__Festival__49C3F6B7" FromRole="Festival" ToRole="Vendor" />
+  </EntityType>
+  <EntityType Name="Performer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Genre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Members" Type="Int32" Nullable="false" />
+    <Property Name="Fee" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__Performer__Festi__52593CB8" FromRole="Performer" ToRole="Festival" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="SaleTime" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Buyer" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TicketTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="Pay" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SoldAt" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__Sale__FestivalId__7F2BE32F" FromRole="Sale" ToRole="Festival" />
+    <NavigationProperty Name="TicketType" Relationship="Self.FK__Sale__TicketType__00200768" FromRole="Sale" ToRole="TicketType" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Zone" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StartHour" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="EndHour" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__Staff__FestivalI__6FE99F9F" FromRole="Staff" ToRole="Festival" />
+  </EntityType>
+  <EntityType Name="Stage">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Booth" Relationship="Self.FK__Booth__StageId__656C112C" FromRole="Stage" ToRole="Booth" />
+    <NavigationProperty Name="EventItem" Relationship="Self.FK__EventItem__Stage__6B24EA82" FromRole="Stage" ToRole="EventItem" />
+  </EntityType>
+  <EntityType Name="Structure">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="X" Type="Int32" Nullable="false" />
+    <Property Name="Y" Type="Int32" Nullable="false" />
+    <Property Name="W" Type="Int32" Nullable="false" />
+    <Property Name="H" Type="Int32" Nullable="false" />
+    <Property Name="Label" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__Structure__Festi__5BE2A6F2" FromRole="Structure" ToRole="Festival" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="Sold" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__TicketTyp__Festi__787EE5A0" FromRole="TicketType" ToRole="Festival" />
+    <NavigationProperty Name="Sale" Relationship="Self.FK__Sale__TicketType__00200768" FromRole="TicketType" ToRole="Sale" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FestivalId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Kind" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Owner" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Rent" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BizNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Booth" Relationship="Self.FK__Booth__VendorId__6477ECF3" FromRole="Vendor" ToRole="Booth" />
+    <NavigationProperty Name="Festival" Relationship="Self.FK__Vendor__Festival__49C3F6B7" FromRole="Vendor" ToRole="Festival" />
+  </EntityType>
+  <Association Name="FK__Booth__FestivalI__628FA481">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="Booth" Type="Self.Booth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="Booth">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booth__StageId__656C112C">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
+    <End Role="Booth" Type="Self.Booth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Booth">
+        <PropertyRef Name="StageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booth__TypeCode__6383C8BA">
+    <End Role="BoothType" Type="Self.BoothType" Multiplicity="1" />
+    <End Role="Booth" Type="Self.Booth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BoothType">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Booth">
+        <PropertyRef Name="TypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booth__VendorId__6477ECF3">
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+    <End Role="Booth" Type="Self.Booth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Booth">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventItem__Festi__6A30C649">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="EventItem" Type="Self.EventItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="EventItem">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventItem__Stage__6B24EA82">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1" />
+    <End Role="EventItem" Type="Self.EventItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="EventItem">
+        <PropertyRef Name="StageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Performer__Festi__52593CB8">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="Performer" Type="Self.Performer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="Performer">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sale__FestivalId__7F2BE32F">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__FestivalI__6FE99F9F">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Structure__Festi__5BE2A6F2">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="Structure" Type="Self.Structure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="Structure">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TicketTyp__Festi__787EE5A0">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="TicketType" Type="Self.TicketType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="TicketType">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vendor__Festival__49C3F6B7">
+    <End Role="Festival" Type="Self.Festival" Multiplicity="1" />
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Festival">
+        <PropertyRef Name="FestivalId" />
+      </Principal>
+      <Dependent Role="Vendor">
+        <PropertyRef Name="FestivalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sale__TicketType__00200768">
+    <End Role="TicketType" Type="Self.TicketType" Multiplicity="1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="TicketTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="festivaldbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AppUser" EntityType="Self.AppUser" />
+    <EntitySet Name="Booth" EntityType="Self.Booth" />
+    <EntitySet Name="BoothType" EntityType="Self.BoothType" />
+    <EntitySet Name="EventItem" EntityType="Self.EventItem" />
+    <EntitySet Name="Festival" EntityType="Self.Festival" />
+    <EntitySet Name="Performer" EntityType="Self.Performer" />
+    <EntitySet Name="Sale" EntityType="Self.Sale" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" />
+    <EntitySet Name="Stage" EntityType="Self.Stage" />
+    <EntitySet Name="Structure" EntityType="Self.Structure" />
+    <EntitySet Name="TicketType" EntityType="Self.TicketType" />
+    <EntitySet Name="Vendor" EntityType="Self.Vendor" />
+    <AssociationSet Name="FK__Booth__FestivalI__628FA481" Association="Self.FK__Booth__FestivalI__628FA481">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="Booth" EntitySet="Booth" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booth__StageId__656C112C" Association="Self.FK__Booth__StageId__656C112C">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="Booth" EntitySet="Booth" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booth__TypeCode__6383C8BA" Association="Self.FK__Booth__TypeCode__6383C8BA">
+      <End Role="BoothType" EntitySet="BoothType" />
+      <End Role="Booth" EntitySet="Booth" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booth__VendorId__6477ECF3" Association="Self.FK__Booth__VendorId__6477ECF3">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="Booth" EntitySet="Booth" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventItem__Festi__6A30C649" Association="Self.FK__EventItem__Festi__6A30C649">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="EventItem" EntitySet="EventItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventItem__Stage__6B24EA82" Association="Self.FK__EventItem__Stage__6B24EA82">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="EventItem" EntitySet="EventItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Performer__Festi__52593CB8" Association="Self.FK__Performer__Festi__52593CB8">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="Performer" EntitySet="Performer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sale__FestivalId__7F2BE32F" Association="Self.FK__Sale__FestivalId__7F2BE32F">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__FestivalI__6FE99F9F" Association="Self.FK__Staff__FestivalI__6FE99F9F">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Structure__Festi__5BE2A6F2" Association="Self.FK__Structure__Festi__5BE2A6F2">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="Structure" EntitySet="Structure" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TicketTyp__Festi__787EE5A0" Association="Self.FK__TicketTyp__Festi__787EE5A0">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="TicketType" EntitySet="TicketType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vendor__Festival__49C3F6B7" Association="Self.FK__Vendor__Festival__49C3F6B7">
+      <End Role="Festival" EntitySet="Festival" />
+      <End Role="Vendor" EntitySet="Vendor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sale__TicketType__00200768" Association="Self.FK__Sale__TicketType__00200768">
+      <End Role="TicketType" EntitySet="TicketType" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

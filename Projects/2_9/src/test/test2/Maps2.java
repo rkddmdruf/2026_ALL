@@ -1,4 +1,4 @@
-package test;
+package test.test2;
 
 import main.Util;
 import orms.areaEntity;

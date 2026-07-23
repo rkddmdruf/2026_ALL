@@ -1,4 +1,4 @@
-package test;
+package test.test2;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

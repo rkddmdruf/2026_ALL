@@ -1,4 +1,4 @@
-package test;
+package test.test3;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -47,7 +47,7 @@ public class Map3 extends CFrame{
 		endStation = getter.user.sno;
 		setting();
 		bfs = dijkstra(startStation, endStation);
-		selectStation = sub_areaEntity.findById(bfs.get(productStation)).get().ano;
+		selectStation = sub_areaEntity.findById(bfs.get(0)).get().ano;
 		setFrame("배송", 800 + 20, 800 + 20, () -> {});
 	}
 	
