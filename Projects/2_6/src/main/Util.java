@@ -56,6 +56,7 @@ public class Util {
 			map.get(s1.get(0).sno).add(new int[] {s1.get(1).sno, (int) Math.sqrt(Math.pow(s1.get(0).x - s1.get(1).x, 2) + Math.pow(s1.get(0).y - s1.get(1).y, 2))});
 			map.get(s1.get(1).sno).add(new int[] {s1.get(0).sno, (int) Math.sqrt(Math.pow(s1.get(0).x - s1.get(1).x, 2) + Math.pow(s1.get(0).y - s1.get(1).y, 2))});
 		}
+		
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
 		dist.put(start, 0);
 		pq.add(new int[] {start, 0});
@@ -66,7 +67,6 @@ public class Util {
 			if(d > dist.getOrDefault(p, Integer.MAX_VALUE)) continue;
 			if(p == end) break;
 			for (int[] edge : map.getOrDefault(p, new ArrayList<>())) {
-				
 	            int next = edge[0], weight = edge[1];
 	            int newDist = d + weight;
 	            if (newDist < dist.getOrDefault(next, Integer.MAX_VALUE)) {
