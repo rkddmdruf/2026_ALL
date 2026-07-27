@@ -68,7 +68,7 @@ public class DoctorSelect extends CFrame{
 				setOpaque(false);
 				setBorder(getter.em(10, 20, 10, 20));
 				add(lb("진료횟수" + ordersEntity.findBy(e -> e.dno == d.dno).size() + "번", FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(1))));
-				add(lb("휴일 : " + dayNames[d.day_off], FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(1))));
+				add(lb("휴일 : " + dayNames[d.day_off -1 ] + "요일", FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(1))));
 				add(lb("더블 클릭으로 선택하세요", FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(11f))));
 				setVisible(false);
 			}});

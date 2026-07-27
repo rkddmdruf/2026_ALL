@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.AWTEvent;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
@@ -24,6 +25,10 @@ public class Util {
 				}
 			}
 		});
+	}
+	
+	public static Color setAlpha(Color color, int n) {
+		return new Color(color.getRed(), color.getGreen(), color.getBlue(), n);
 	}
 	
 	public static void handle(Throwable t) {

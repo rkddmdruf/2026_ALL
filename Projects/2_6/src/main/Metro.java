@@ -93,6 +93,7 @@ public class Metro extends CFrame{
 
 	@Override
 	protected void desing() {
+		
 		startB.setBorderPainted(false);
 		startB.setMargin(new Insets(0, 0, 0, 10));
 		
@@ -108,7 +109,7 @@ public class Metro extends CFrame{
 		    protected void paintComponent(Graphics g) {
 		        super.paintComponent(g);
 		        Graphics2D g2 = (Graphics2D) g;
-		        g2.drawImage(new ImageIcon("datafiles/metro.png").getImage(), 0, 0, getWidth(), getHeight(), null);
+		        g2.drawImage(img, 0, 0, getWidth(), getHeight(), null);
 		        
 		        g2.setColor(Color.RED);
 		        
@@ -148,15 +149,14 @@ public class Metro extends CFrame{
 		            // 🔥 방향 계산
 		            double angle = Math.atan2(s2.y - s1.y, s2.x - s1.x);
 
-		            Graphics2D g2d = (Graphics2D) g2.create();
 
-		            g2d.translate(x, y);
-		            g2d.rotate(angle + Math.PI / 2);
+		            g2.translate(x, y);
+		            g2.rotate(angle + Math.PI / 2);
 
 		            int w = 8;
 		            int h = 40;
-		            g2d.drawImage(Util.train, -w/2, -h/2, w, h, null);
-		            g2d.dispose();
+		            g2.drawImage(Util.train, -w/2, -h/2, w, h, null);
+		            g2.dispose();
 		        }
 		    }
 		    
@@ -226,17 +226,9 @@ public class Metro extends CFrame{
 			selectN = -1;
 			if(start != -1 && end != -1) {
 				bfs = Util.bfs(start, end, totalPix);
-				List<Integer> bfsCopy = List.copyOf(bfs);
-				for(String s : "석남,부평구청,인천시청".split(",")) {
-					List<Integer> list = stationEntity.findBy(sta -> sta.name.equals(s)).stream().map(sta -> sta.sno).collect(Collectors.toList());
-					if(bfs.contains(list.get(0)) && bfs.contains(list.get(1))) {
-						bfs.remove(bfs.indexOf(list.get(0)));
-					}
-				}
 				double dist = (totalPix.get(0) * 0.05);
 				bLabel.setText("출발: " + stationEntity.findById(start).get().name + " → 도착: " + stationEntity.findById(start).get().name + 
 						" ( " + (bfs.size() - 1) + "구간 ) 약 " + dist + " km | 약 " + (int) Math.ceil(dist / 40*60)+ " 분");
-				bfs = bfsCopy;
 				new Thread(() -> {
 					try {
 						while(true) {

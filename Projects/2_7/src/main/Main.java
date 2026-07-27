@@ -123,7 +123,8 @@ public class Main extends CFrame{
 				}
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println(index);
+					new DoctorSelect(index + 1).setVisible(true);
+					dispose();
 				}
 			});
 		}

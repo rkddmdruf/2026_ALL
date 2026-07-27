@@ -16,7 +16,14 @@ public abstract class CFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) { r.run(); }
+			public void windowClosing(WindowEvent e) { 
+				r.run(); 
+			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				super.windowClosed(e);
+				System.out.println("fsdf");
+			}
 		});
 		desing();
 		action();

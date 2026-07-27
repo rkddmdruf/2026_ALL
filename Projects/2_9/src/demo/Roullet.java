@@ -14,6 +14,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class Roullet extends CFrame{
 	JButton b = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
 	JLabel label;
 	Point point = new Point();
+	PieChart pcs;
 	javax.swing.Timer timer;
 	
 	double speed = 10;
@@ -53,7 +56,7 @@ public class Roullet extends CFrame{
 		items.forEach(e -> {
 			pies.add(new Pie(PieChart.generateRandomColor(), e.ciname, e.chance));
 		});
-		PieChart pcs = new PieChart(pies, 300);
+		pcs = new PieChart(pies, 150);
 		
 		label = new JLabel() {
 			@Override
@@ -110,12 +113,17 @@ public class Roullet extends CFrame{
 		label.setBackground(Color.white);
 		label.setOpaque(true);
 		label.setBorder(getter.line(Color.LIGHT_GRAY));
-		add(set(col(0, fill(label), fillWidth(b)), BORDER(getter.em(10, 10, 10, 10))));
+		add(set(col(0, fill(pcs), fillWidth(b)), BORDER(getter.em(10, 10, 10, 10))));
 	}
 
 	@Override
 	protected void action() {
-		
+		pcs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(pcs.pies.get(0).arc.contains(e.getPoint()));
+			}
+		});
 		
 		b.addActionListener(ac -> {
 			b.setEnabled(false);

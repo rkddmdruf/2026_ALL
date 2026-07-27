@@ -19,26 +19,32 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import orms.doctorEntity;
+
 public class Moment extends CFrame{
 	LocalDate now = LocalDate.now();
 	LocalDate date = LocalDate.now();
+	LocalDate selectDate = LocalDate.now();
+	
 	JPanel daysPanel = set(new JPanel(new GridLayout(6, 7)), BG(Color.white));
 	
 	JLabel dateLabel 	= lb("" , HOA(JLabel.CENTER), VEA(JLabel.CENTER), FONT(getter.font.deriveFont(14f).deriveFont(1)));
 	JLabel left 		= lb("<", HOA(JLabel.CENTER), VEA(JLabel.CENTER));
 	JLabel right 		= lb(">", HOA(JLabel.CENTER), VEA(JLabel.CENTER));
-	
+	JButton button = bt("선택", BG(getter.color), SIZE(0, 40), FG(Color.white), FONT(getter.font.deriveFont(13f)));
 	List<JLabel> labels = new ArrayList<>();
 	
-	public Moment() {
+	doctorEntity doctor;
+	
+	public Moment(int dno) {
+		doctor = doctorEntity.findById(dno).get();
 		setDate(0);
 		setFrame("달력", 350, 350, () -> {});
 	}
 	@Override
 	public void desing() {
 		JPanel panel = col(0, setP1(), setP2(), f(daysPanel));
-		JButton button = bt("선택", BG(getter.color), SIZE(0, 40), FG(Color.white), FONT(getter.font.deriveFont(13f)));
-		add(col(10, 0, 0, f(panel), fw(set(row(0, f(button)), BORDER(getter.em(15, 30, 15, 30))))).setBackColor(Color.white));
+		add(col(10, 0, 0, f(panel), fw(set(row(0, f(button)).setBackColor(Color.white), BORDER(getter.em(15, 30, 15, 30))))).setBackColor(Color.white));
 	}
 
 	@Override
@@ -54,6 +60,11 @@ public class Moment extends CFrame{
 			public void mouseClicked(MouseEvent e) {
 				setDate(1);
 			}
+		});
+		
+		button.addActionListener(e -> {
+			if(selectDate.getDayOfWeek().getValue() % 7 == doctor.day_off - 1)
+				throw new RuntimeException("의사 휴무일입니다.");
 		});
 	}
 	
@@ -80,6 +91,7 @@ public class Moment extends CFrame{
 	private void setDaysPanel() {
 		daysPanel.removeAll();
 		LocalDate date = LocalDate.of(this.date.getYear(), this.date.getMonthValue(), this.date.getDayOfMonth());
+		selectDate = null;
 		date = date.minusDays(date.getDayOfMonth() - 1);
 		int n = date.getDayOfWeek().getValue() % 7;
 		for(int i = 0; i < n; i++) {
@@ -91,8 +103,22 @@ public class Moment extends CFrame{
 			l.setOpaque(true);
 			daysPanel.add(l);
 			if(now.isAfter(date)) l.setEnabled(false);
-			else labels.add(l);
-			if(now.equals(date)) l.setBackground(Color.orange);
+			else {
+				LocalDate d = date;
+				l.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						labels.forEach(ll -> ll.setBackground(Color.white));
+						l.setBackground(Color.orange);
+						selectDate = d;
+					}
+				});
+				labels.add(l);
+			}
+			if(now.equals(date)) {
+				selectDate = date;
+				l.setBackground(Color.orange);
+			}
 			date = date.plusDays(1);
 		}
 		int size = 42 - daysPanel.getComponentCount();
@@ -110,7 +136,7 @@ public class Moment extends CFrame{
 	}
 	
 	public static void main(String[] args) {
-		Util.start(new Moment());
+		Util.start(new Moment(1));
 	}
 
 }

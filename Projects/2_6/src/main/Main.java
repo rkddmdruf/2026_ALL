@@ -23,8 +23,8 @@ import uitls.*;
 
 public class Main extends CFrame{
 	JLabel timeLabel = lb("현재시간: " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), FONT(getter.font.deriveFont(1).deriveFont(16f)));
-	JTextField tf1 = tf("출발지");
-	JTextField tf2 = tf("도착지");
+	JTextField tf1 = tf("출발지", TEXT("서구청"));
+	JTextField tf2 = tf("도착지", TEXT("경입교대입구"));
 	CButton search  = comp(CButton::new, TEXT("경로검색"), FG(Color.white));
 	CButton login = set(new CButton("로그인", getter.getImage("icon/login", 40, 40)));
 	CButton myHome = set(new CButton("마이페이지", getter.getImage("icon/user", 40, 40)));

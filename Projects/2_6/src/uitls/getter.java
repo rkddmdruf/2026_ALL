@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 import orms.userEntity;
 
 public class getter {
-	public static userEntity user;
+	public static userEntity user = userEntity.findById(1).get();
 	public static Color color = new Color(30, 90, 200);
 	public static Font font = new Font("맑은 고딕", 0, 12);
 	public static DecimalFormat df = new DecimalFormat("###,###");
