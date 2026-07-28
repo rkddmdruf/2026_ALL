@@ -40,7 +40,7 @@ public class PieChart extends JComponent {
 	
 		public void generateArc(double reduce, double total, int size) {
 			arc = new Arc2D.Double();
-			arc.setAngleStart(reduce * 360.0 / total + 90);
+			arc.setAngleStart(reduce * 360.0 / total);
 			arc.setAngleExtent(-(value * 360.0 / total));
 			setRadius(size);
 		}
@@ -57,14 +57,22 @@ public class PieChart extends JComponent {
 			g2.setStroke(new BasicStroke(1.5f));
 			g2.draw(arc);
 		}
+		
+		public void paintLabel(Graphics2D g2) {
+			g2.rotate(Math.toRadians((360.0 * value) / 2));
+			g2.drawString(label, 50, (g2.getFontMetrics(g2.getFont()).getHeight()) / 2);
+			g2.rotate(Math.toRadians((360.0 * value) / 2));
+		}
 	}
 	
 	public List<Pie> pies = new ArrayList<>();
-	
-	public PieChart(List<Pie> pies, int size) {
+	public double rand;
+	public PieChart(List<Pie> pies, int size, double rand) {
 		this.pies = pies;
+		this.rand = rand;
 		double total = pies.stream().mapToDouble(pie -> pie.value).sum();
-		this.pies.stream().reduce(new Pie(null, null, 0), (a, b) -> {
+		double randValue = rand / 360.0 * total;
+		this.pies.stream().reduce(new Pie(null, null, randValue), (a, b) -> {
 			b.generateArc(a.value, total, size);
 			return new Pie(null, null, a.value - b.value);
 		});
@@ -74,8 +82,19 @@ public class PieChart extends JComponent {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		AffineTransform old = g2.getTransform();
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, getWidth(), getHeight());
+		g2.setColor(Color.gray);
+		g2.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		pies.forEach(pie -> pie.paint(g2, getWidth(), getHeight()));
+		g2.translate(getWidth() / 2, getHeight() / 2);
+		g2.rotate(Math.toRadians(-rand));
+		g2.setColor(Color.white);
+		pies.forEach(pie -> pie.paintLabel(g2));
+		g2.rotate(0);
+		g2.setTransform(old);
 	}
 	
 	public static Color generateRandomColor() {
@@ -98,34 +117,5 @@ public class PieChart extends JComponent {
 		return new Color(new Random().nextInt(0x1000000));
 		
 
-	}
-	
-	public static void main(String[] args) {
-		
-		List<Pie> data = new ArrayList<>();
-		data.add(new Pie(generateRandomColor(), "1", 10));
-		data.add(new Pie(generateRandomColor(), "2", 10));
-		data.add(new Pie(generateRandomColor(), "3", 6));
-		data.add(new Pie(generateRandomColor(), "4", 20));
-		data.add(new Pie(generateRandomColor(), "5", 10));
-		data.add(new Pie(generateRandomColor(), "6", 2));
-		data.add(new Pie(generateRandomColor(), "7", 5));
-		data.add(new Pie(generateRandomColor(), "8", 3));
-		
-		JFrame frame = new JFrame();
-		PieChart chart = new PieChart(data, 300);
-		chart.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				chart.pies.forEach(pie -> pie.setRadius(pie.arc.contains(e.getPoint()) ? 120 : 100));
-				frame.repaint();
-			}
-		});
-		
-		frame.add(chart);
-		frame.setSize(500, 500);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 	}
 }

@@ -39,7 +39,6 @@ public class Roullet extends CFrame{
 	List<Color> color = IntStream.range(0, 5).mapToObj(e -> new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256))).collect(Collectors.toList());
 	List<Arc2D.Double> arcs = Arrays.asList(null, null, null, null, null);
 	JButton b = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
-	JLabel label;
 	Point point = new Point();
 	PieChart pcs;
 	javax.swing.Timer timer;
@@ -56,63 +55,19 @@ public class Roullet extends CFrame{
 		items.forEach(e -> {
 			pies.add(new Pie(PieChart.generateRandomColor(), e.ciname, e.chance));
 		});
-		pcs = new PieChart(pies, 150);
-		
-		label = new JLabel() {
+		pcs = new PieChart(pies, 150, rand) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				Graphics2D g2 = (Graphics2D) g;
-				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-				int os = 300;
-				int w = getWidth(), h = getHeight(), sx = w / 2 - os / 2, sy = h / 2 - os / 2;
-				g2.setColor(Color.LIGHT_GRAY);
-				g2.fillOval(sx - 3, sy - 3, os + 6, os + 6);
-				double start = rand;
-				for(int i = 0; i < items.size(); i++) {
-					double angle = -360.0 * items.get(i).chance;
-					Arc2D.Double a = new Arc2D.Double(sx, sy, os, os, start, angle, Arc2D.PIE);
-					g2.setColor(color.get(i));
-					g2.fill(a);
-					arcs.set(i, a);
-					start += angle;
-				}
-				
-				start = rand;
-				int cx = w / 2, cy = h / 2, r = os / 2;
-				g2.setColor(Color.white);
-				for(int i = 0; i < items.size(); i++) {
-					double angle = -360.0 * items.get(i).chance;
-					
-					double rad = Math.toRadians(start);
-					int x = (int) (cx + r * Math.cos(rad));
-					int y = (int) (cy - r * Math.sin(rad));
-					g2.drawLine(cx, cy, x, y);
-					start += angle;
-				}
-				
-				start = rand;
-				AffineTransform old = g2.getTransform();
-				g2.translate(cx, cy);
-				g2.rotate(Math.toRadians(-rand));
-				g2.setFont(getter.font.deriveFont(15f).deriveFont(1));
-				for(int i = 0; i < items.size(); i++) {
-					double angle = 360.0 * items.get(i).chance;
-					g2.rotate(Math.toRadians(angle / 2));
-					g2.drawString(items.get(i).ciname, 50, getFontMetrics(getFont()).getHeight() / 2);
-					g2.rotate(Math.toRadians(angle / 2));
-					start += angle;
-				}
-				g2.setTransform(old);
-				int[] x = {cx - 12, cx, cx + 12}, y = {sy - 10, sy + 20, sy - 10};
-				g2.setColor(Color.red);
-				g2.fillPolygon(x, y, 3);
-				point.x = x[1];point.y = y[1];
+				int sx = getWidth() / 2, sy = getHeight() / 2 - 150;
+				int[] x = {sx - 12, sx, sx + 12}, y = {sy - 10, sy + 20, sy - 10};
+				g.setColor(Color.red);
+				g.fillPolygon(x, y, 3);
+				point = new Point(x[1], y[1]);
 			}
 		};
-		label.setBackground(Color.white);
-		label.setOpaque(true);
-		label.setBorder(getter.line(Color.LIGHT_GRAY));
+		pcs.setBackground(Color.white);
+		pcs.setOpaque(true);
 		add(set(col(0, fill(pcs), fillWidth(b)), BORDER(getter.em(10, 10, 10, 10))));
 	}
 
@@ -129,12 +84,20 @@ public class Roullet extends CFrame{
 			b.setEnabled(false);
 			speed = (Math.random() * 20) + 30;
 			timer = new javax.swing.Timer(1, e -> {
-				rand -= speed;
 				speed *= 0.994;
-				label.repaint();
+				pcs.rand -= speed;
+				pcs.pies.forEach(a -> {
+					a.arc.setAngleStart(a.arc.getAngleStart() - speed);
+				});
+				pcs.repaint();
 				if(speed < 0.1) {
 					timer.stop();
-					int n = arcs.indexOf(arcs.stream().filter(c -> c.contains(point)).findFirst().get());
+					int n = -1;
+					for(int i = 0; i < 5; i++)
+						if(pcs.pies.get(i).arc.contains(point)) {
+							n = i;
+							break;
+						}
 					getter.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
 					getter.user.chance -= 1;
 					getter.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
