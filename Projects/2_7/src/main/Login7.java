@@ -179,9 +179,8 @@ public class Login7 extends CFrame{
 				g2.scale(1, 1);
 				g2.setTransform(old);
 				g2.setFont(getter.font.deriveFont(20f).deriveFont(1));
-				g2.drawString(selectLocation
-						, s.getBounds().x + s.getBounds().width / 2 - getFontMetrics(g2.getFont()).stringWidth(selectLocation) / 2
-						, s.getBounds().y + getFontMetrics(g2.getFont()).getHeight() / 2 + s.getBounds().height / 2);
+				FontMetrics fm = g2.getFontMetrics();
+				g2.drawString(selectLocation, (getWidth() - fm.stringWidth(selectLocation)) / 2, getHeight() / 2 -fm .getHeight());
 			}
 		};
 		

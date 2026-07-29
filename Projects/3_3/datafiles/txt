@@ -1,0 +1,15 @@
+써야 효율적이지만 내가 안만들어서 못쓸거 같은 코드 또는 내가 이해하지 못한 코드
+		/*List<Integer> following = Util.myFollowing().getOrDefault(sp.user.u_no, new ArrayList<>());
+		Map<Integer, Long> recCount = following.stream()
+				.flatMap(u -> Util.myFollowing().getOrDefault(u, List.of()).stream())
+				.filter(u -> !u.equals(sp.user.u_no) && !following.contains(u))
+				.collect(Collectors.groupingBy(u -> u, LinkedHashMap::new, Collectors.counting()));
+		List<Integer> list = recCount.entrySet().stream()
+				.sorted((a, b) -> {
+					int cmp = b.getValue().compareTo(a.getValue());
+					if (cmp != 0) return cmp;
+					return Util.myFollow().getOrDefault(b.getKey(), List.of()).size() - Util.myFollow().getOrDefault(a.getKey(), List.of()).size();
+				})
+				.map(Map.Entry::getKey)
+				.limit(5)
+				.collect(Collectors.toList());*/
