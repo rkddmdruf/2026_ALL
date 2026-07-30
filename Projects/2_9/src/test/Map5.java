@@ -44,7 +44,6 @@ public class Map5 extends CFrame{
 	public Map5(int pno) {
 		product = productEntity.findById(pno).get();
 		System.out.println(bfs = dijkstar(product.sno, getter.user.sno));
-		System.out.println(bfs.size());
 		setting();
 		setFrame("배송", 820, 820, () -> {});
 	}
@@ -184,6 +183,7 @@ public class Map5 extends CFrame{
 	    while (!stack.isEmpty()) {
 	        Point p = stack.pop();
 	        int x = p.x, y = p.y;
+	        System.out.println(p);
 	        if (x < 0 || y < 0 || x >= img.getWidth() || y >= img.getHeight()) continue;
 	        if (img.getRGB(x, y) != targetRGB) continue; // 경계선(검은색)이거나 이미 채워짐
 

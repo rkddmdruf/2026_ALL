@@ -87,7 +87,6 @@ public class BoxPanel extends JPanel{
     
     public BoxPanel addz(JComponent c) {
     	this.add(c);
-    	this.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getPreferredSize().height));
     	if(inner != 0)
     		this.add(alignment == R ? Box.createHorizontalStrut(inner) : Box.createVerticalStrut(inner));
     	return this;
