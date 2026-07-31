@@ -29,17 +29,18 @@ public class EntityGenerator {
 		String s = mst.toLowerCase();
 		if(s.contains("int")) return "Integer";
 		if(s.contains("var") || s.contains("text")) return "String";
-		if(s.contains("deci") || s.contains("double")) return "Double";
+		if(s.contains("deci") || s.contains("double") || s.contains("float")) return "Double";
 		if(s.contains("datetime")) return "LocalDateTime";
 		if(s.contains("date")) return "LocalDate";
 		if(s.contains("time")) return "LocalTime";
 		return mst;
 	}
+	
 	static String sqlTypeToJava(String mst) {
 		String s = mst.toLowerCase();
 		if(s.contains("int")) return "Int";
 		if(s.contains("var") || s.contains("text")) return "String";
-		if(s.contains("deci") || s.contains("double")) return "Double";
+		if(s.contains("deci") || s.contains("double") || s.contains("float")) return "Double";
 		if(s.contains("datetime")) return "Timestamp";
 		if(s.contains("time")) return "Time";
 		if(s.contains("date")) return "Date";
@@ -81,6 +82,7 @@ public class EntityGenerator {
 			Files.writeString(outDir.resolve(class_name + "Entity.java"), result);
 		}
 	}
+	
 	public static void main(String[] args) throws IOException {
 		initData();
 		template = Files.readString(Path.of("src/orms/et.txt"));

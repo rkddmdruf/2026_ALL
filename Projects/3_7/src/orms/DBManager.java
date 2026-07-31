@@ -3,28 +3,26 @@ package orms;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
-	
-	private static final String url = "jdbc:mysql://localhost/itgram?serverTimezone=Asia/Seoul";
+
+	private static final String url = "jdbc:mysql://localhost/skillmall?serverTimezone=Asia/Seoul";
 	private static final String id = "root";
 	private static final String pw = "1234";
 	
-	private static Connection c;
+	static Connection c;
 	static {
 		try {
-			c = DriverManager.getConnection(url, id, pw);
-		} catch (SQLException e) {
+			c = DriverManager.getConnection(url, id ,pw);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static PreparedStatement execute(String str, Object...val) throws SQLException{
-		PreparedStatement ps = c.prepareStatement(str, Statement.RETURN_GENERATED_KEYS);
+	public static PreparedStatement execute(String str, Object...val) throws Exception{
+		PreparedStatement ps = c.prepareStatement(str);
 		for(int i = 0; i < val.length; i++) {
 			ps.setObject(i + 1, val[i]);
 		}
@@ -33,12 +31,12 @@ public class DBManager {
 	
 	public static List<List<String>> select(String str, Object...val){
 		List<List<String>> list = new ArrayList<>();
-		try (var rs = execute(str, val); var re = rs.executeQuery()){
+		try (var re = execute(str, val).executeQuery()){
 			while(re.next()) {
-				List<String> l = new ArrayList<>();
+				List<String> data = new ArrayList<>();
+				list.add(data);
 				for(int i = 0; i < re.getMetaData().getColumnCount(); i++)
-					l.add(re.getObject(i + 1).toString());
-				list.add(l);
+					data.add(re.getObject(i + 1).toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

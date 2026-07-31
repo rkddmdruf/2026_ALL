@@ -1,5 +1,6 @@
 package test.test5;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -32,9 +33,15 @@ public class Maps extends CFrame{
 	BufferedImage img; 
 	productEntity product;
 	List<Integer> dik = new ArrayList<>();
+	
+	int nowArea = 0;
+	double step = 0;
+	
 	public Maps(int pno) {
 		product = productEntity.findById(pno).get();
 		dik.addAll(dijkstar(product.sno, getter.user.sno));
+		System.out.println(product.sno + ", " + getter.user.sno);
+		System.out.println(dik);
 		setImage();
 		setFrame("배송", 820, 820, () -> {});
 	}
@@ -64,24 +71,30 @@ public class Maps extends CFrame{
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				g2.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-				lines.forEach(e -> {
-					sub_areaEntity s1 = sub_areaEntity.findById(e.u).get();
-					sub_areaEntity s2 = sub_areaEntity.findById(e.v).get();
-					g2.setColor(Color.red);
-					g2.fillOval(s1.sx - 2, s1.sy - 2, 4, 4);
-					g2.fillOval(s2.sx - 2, s2.sy - 2, 4, 4);
-				});			
 				
+				g2.setColor(Color.blue); 
 				lines.forEach(e -> {
 					sub_areaEntity s1 = sub_areaEntity.findById(e.u).get();
 					sub_areaEntity s2 = sub_areaEntity.findById(e.v).get();
-					g2.setColor(Color.blue);
 					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
 				});
-				sub_areaEntity sp = sub_areaEntity.findById(product.sno).get();
+				
+				g2.setColor(Color.green);
+				g2.setStroke(new BasicStroke(3f));
+				
+				for(int i = 0; i < nowArea; i++) {
+					sub_areaEntity s1 = sub_areaEntity.findById(dik.get(i)).get();
+					sub_areaEntity s2 = sub_areaEntity.findById(dik.get(i + 1)).get();
+					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
+				}
+				
+				g2.setColor(Color.red);
+				sub_areaEntity.findAll().forEach(e -> g2.fillOval(e.sx - 2, e.sy - 2, 4, 4));
+				
+				sub_areaEntity sp = sub_areaEntity.findById(product.pno).get();
 				sub_areaEntity su = sub_areaEntity.findById(getter.user.sno).get();
-				g2.drawImage(new ImageIcon("logo/destination.png").getImage(), sp.sx -27, sp.sy- 37, 40, 40, null);
-				g2.drawImage(new ImageIcon("logo/start.png").getImage(), 0, 0, 50, 50, null);
+				g2.drawImage(new ImageIcon("datafiles/logo/start.png").getImage(), sp.sx - 20, sp.sy- 40,  40, 40, null);
+				g2.drawImage(new ImageIcon("datafiles/logo/destination.png").getImage(), su.sx - 25, su.sy - 40, 50, 50, null);
 			}
 		};
 		add(l);
@@ -89,7 +102,21 @@ public class Maps extends CFrame{
 
 	@Override
 	protected void action() {
-		
+		new Thread(() -> {
+			try {
+				while(dik.size() - 1 != nowArea) {
+					if(step >= 1) {
+						step = 0;
+						nowArea++;
+					}
+					else step += 0.05;
+					Thread.sleep(100);
+					repaint();
+				}
+			} catch (Exception e) {
+				
+			}
+		}).start();
 	}
 
 	private List<Integer> dijkstar(int start, int end){
@@ -100,8 +127,8 @@ public class Maps extends CFrame{
 			sub_areaEntity s1 = sub_areaEntity.findById(e.u).get();
 			sub_areaEntity s2 = sub_areaEntity.findById(e.v).get();
 			
-			map.computeIfAbsent(s1.sno, k -> new ArrayList<>()).add(new int[] {s2.sno, (int) Math.sqrt(Math.pow(s1.sx - s2.sy, 2) + Math.pow(s1.sx - s2.sy, 2))});
-			map.computeIfAbsent(s2.sno, k -> new ArrayList<>()).add(new int[] {s1.sno, (int) Math.sqrt(Math.pow(s1.sx - s2.sy, 2) + Math.pow(s1.sx - s2.sy, 2))});
+			map.computeIfAbsent(s1.sno, k -> new ArrayList<>()).add(new int[] {s2.sno, (int) Math.sqrt(Math.pow(s1.sx - s2.sx, 2) + Math.pow(s1.sy - s2.sy, 2))});
+			map.computeIfAbsent(s2.sno, k -> new ArrayList<>()).add(new int[] {s1.sno, (int) Math.sqrt(Math.pow(s1.sx - s2.sx, 2) + Math.pow(s1.sy - s2.sy, 2))});
 		});
 		
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
