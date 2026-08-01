@@ -2,7 +2,6 @@ package test;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -10,7 +9,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -18,11 +16,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 import main.Util;
 import orms.areaEntity;
@@ -40,10 +38,11 @@ public class Map5 extends CFrame{
 	int nowArea = 0;
 	double step = 0;
 	
-	List<Integer> bfs;
+	List<sub_areaEntity> bfs;
+	
 	public Map5(int pno) {
 		product = productEntity.findById(pno).get();
-		System.out.println(bfs = dijkstar(product.sno, getter.user.sno));
+		bfs = dijkstar(124, getter.user.sno);
 		setting();
 		setFrame("배송", 820, 820, () -> {});
 	}
@@ -56,11 +55,12 @@ public class Map5 extends CFrame{
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				
-				g2.setColor(Color.blue);
 				g2.drawImage(img, 0, 0, null);
+				
 				linelistEntity.findAll().forEach(e -> {
 					var s1 = sub_areaEntity.findById(e.u).get();
 					var s2 = sub_areaEntity.findById(e.v).get();
+					g2.setColor(Color.blue);
 					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
 				});
 				
@@ -68,13 +68,13 @@ public class Map5 extends CFrame{
 				g2.setStroke(new BasicStroke(2f));
 				
 				for(int i = 0; i < nowArea; i++) {
-					var s1 = sub_areaEntity.findById(bfs.get(i)).get();
-					var s2 = sub_areaEntity.findById(bfs.get(i + 1)).get();
+					var s1 = bfs.get(i);
+					var s2 = bfs.get(i + 1);
 					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
 				}
 				
-				var s1 = sub_areaEntity.findById(bfs.get(nowArea)).get();
-				var s2 = sub_areaEntity.findById(bfs.get(nowArea + 1)).get();
+				var s1 = bfs.get(nowArea);
+				var s2 = bfs.get(nowArea + 1);
 				int curX = (int) (s1.sx + (s2.sx - s1.sx) * step);
 				int curY = (int) (s1.sy + (s2.sy - s1.sy) * step);
 				g2.drawLine(s1.sx, s1.sy, curX, curY);
@@ -84,10 +84,12 @@ public class Map5 extends CFrame{
 				sub_areaEntity.findAll().forEach(e -> g2.fillOval(e.sx - r, e.sy - r, r*2, r*2) );
 				sub_areaEntity imgS1 = sub_areaEntity.findById(product.sno).get();
 				sub_areaEntity imgS2 = sub_areaEntity.findById(getter.user.sno).get();
-				g2.drawImage(new ImageIcon("datafiles/logo/start.png").getImage(), imgS1.sx-20, imgS1.sy - 40, 40, 40, null);
-				g2.drawImage(new ImageIcon("datafiles/logo/destination.png").getImage(), imgS2.sx-24, imgS2.sy - 40, 50, 50, null);
+				g2.drawImage(getter.getImage("logo/start.png", 40, 40).getImage(), imgS1.sx-20, imgS1.sy - 40, 40, 40, null);
+				g2.drawImage(getter.getImage("logo/destination.png", 50, 50).getImage(), imgS2.sx-24, imgS2.sy - 40, 50, 50, null);
+				
 			};
 		};
+		
 		label.setBorder(getter.line(Color.LIGHT_GRAY));
 		label.setBackground(Color.white);
 		label.setOpaque(true);
@@ -99,33 +101,35 @@ public class Map5 extends CFrame{
 		new Thread(() -> {
 			try {
 				while(true) {
-					if(step >= 1) { 
-						areaEntity a1 = areaEntity.findById(sub_areaEntity.findById(bfs.get(nowArea)).get().ano).get();
+					if(step >= 1) {
+						areaEntity a1 = areaEntity.findById(bfs.get(nowArea).ano).get();
 						changeColor(img, a1.ax, a1.ay,Color.gray.darker().darker().getRGB());
 						nowArea++; 
 						step = 0;
-						areaEntity a2 = areaEntity.findById(sub_areaEntity.findById(bfs.get(nowArea)).get().ano).get();
+						areaEntity a2 = areaEntity.findById(bfs.get(nowArea).ano).get();
 						changeColor(img, a2.ax, a2.ay,Color.yellow.getRGB());
 					}
-					else step += 0.1;
+					else step += 0.01;
 					if(nowArea >= bfs.size() - 1) break;
 					repaint();
-					Thread.sleep(100);
+					Thread.sleep(16);
 				}
-				getter.infor("배송이 완료되었습니다.");
-				dispose();
+				SwingUtilities.invokeLater(() -> {
+					getter.infor("배송이 완료되었습니다.");
+					dispose();
+				});
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}).start();;
+		}).start();
 	}
 	
-	private List<Integer> dijkstar(Integer start, Integer end){
-		Map<Integer, List<int[]>> map = new LinkedHashMap<>();
+	private List<sub_areaEntity> dijkstar(Integer start, Integer end){
+		Map<Integer, List<int[]>> map = new HashMap<>();
 		linelistEntity.findAll().forEach(e -> {
 			sub_areaEntity s1 = sub_areaEntity.findById(e.u).get();
 			sub_areaEntity s2 = sub_areaEntity.findById(e.v).get();
-			int n = (int) (Math.sqrt(Math.pow(s1.sx - s2.sx, 2) + Math.pow(s1.sy - s2.sy, 2)));
+			int n = (int) Math.hypot(s1.sx - s2.sx, s1.sy - s2.sy);
 			map.computeIfAbsent(e.u, k -> new ArrayList<>()).add(new int[] {e.v, n});
 			map.computeIfAbsent(e.v, k -> new ArrayList<>()).add(new int[] {e.u, n});
 		});
@@ -140,7 +144,7 @@ public class Map5 extends CFrame{
 			int p = cur[0], d = cur[1];
 			if(d > dist.getOrDefault(p, Integer.MAX_VALUE)) continue;
 			if(p == end) break;
-			for(int[] curs : map.getOrDefault(p, new ArrayList<>())) {
+			for(int[] curs : map.getOrDefault(p, List.of())) {
 				int next = curs[0], weight = curs[1];
 				int newDist = d + weight;
 				if(newDist < dist.getOrDefault(next, Integer.MAX_VALUE)) {
@@ -150,8 +154,9 @@ public class Map5 extends CFrame{
 				}
 			}
 		}
-		return Stream.iterate(end, n -> n!=null, n -> n.equals(start) ? null : parents.get(n))
-				.collect(LinkedList::new, LinkedList::addFirst, (a, b) -> a.addAll(b));
+		LinkedList<sub_areaEntity> path = new LinkedList<>();
+		for(Integer n = end; n != null; n = parents.getOrDefault(n, null)) path.addFirst(sub_areaEntity.findById(n).get());
+		return path;
 	}
 	
 	private void setting() {
@@ -183,7 +188,6 @@ public class Map5 extends CFrame{
 	    while (!stack.isEmpty()) {
 	        Point p = stack.pop();
 	        int x = p.x, y = p.y;
-	        System.out.println(p);
 	        if (x < 0 || y < 0 || x >= img.getWidth() || y >= img.getHeight()) continue;
 	        if (img.getRGB(x, y) != targetRGB) continue; // 경계선(검은색)이거나 이미 채워짐
 

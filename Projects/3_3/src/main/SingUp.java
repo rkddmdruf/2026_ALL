@@ -7,6 +7,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import utils.*;
 import static utils.BoxPanel.*;
@@ -80,7 +81,7 @@ public class SingUp extends CFrame{
 	protected void action() {
 		photoBt.addActionListener(e -> {
 			JFileChooser fc = new JFileChooser();
-			fc.setFileFilter(new FileNameExtensionFilter("이미지 파일", "jpg", "jpeg", "png", "gif"));
+			fc.setFileFilter(new FileNameExtensionFilter("이미지 파일", "jpg"));
 			if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 				photoFile = fc.getSelectedFile();
 				photo.setIcon(new ImageIcon(new ImageIcon(photoFile.getPath()).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
@@ -99,7 +100,7 @@ public class SingUp extends CFrame{
 			} catch (Exception ex) {
 				throw new RuntimeException("생년월일 형식이 올바르지 않습니다.");
 			}
-			boolean phoneOk = phone.getText().matches("\\d{2,3}-\\d{3,4}-\\d{4}");
+			boolean phoneOk = phone.getText().matches("\\d{3}-\\d{4}-\\d{4}");
 			if (date == null || !phoneOk)
 				throw new RuntimeException("전화번호 형식이 올바르지 않습니다.");
 
@@ -116,7 +117,6 @@ public class SingUp extends CFrame{
 			u.u_email = email.getText();
 			u.u_intro = intro.getText();
 			u.u_follow = "";
-			u.save();
 
 			sp.info("회원가입이 완료되었습니다.");
 			new Login();

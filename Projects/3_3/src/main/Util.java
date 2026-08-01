@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import orms.userEntity;
@@ -76,6 +77,6 @@ public class Util {
 	
 	private static void handle(Throwable t) {
 		t.printStackTrace();
-		sp.err(t.getMessage());
+		JOptionPane.showMessageDialog(null, t.getMessage(), "경고", JOptionPane.ERROR_MESSAGE);
 	}
 }

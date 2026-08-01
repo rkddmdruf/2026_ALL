@@ -3,6 +3,7 @@ package utils;
 import java.awt.Color;
 import java.awt.Font;
 import java.nio.ByteOrder;
+import java.text.DecimalFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -12,10 +13,13 @@ import javax.swing.border.Border;
 import orms.userEntity;
 
 public class sp {
-	public static userEntity user;
+	public static userEntity user = userEntity.findById(1).get();
+	public static Color orange = new Color(255, 100, 0);
 	public static Color blue = new Color(65, 100, 235);
 	public static Color red = new Color(255, 90, 90);
 	public static Font font = new Font("맑은 고딕", 0, 12);
+	public static DecimalFormat df = new DecimalFormat("###,###");
+	
 	public static Border line = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
 	
 	public static Border line(Color color) {

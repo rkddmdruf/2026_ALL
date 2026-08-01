@@ -26,7 +26,7 @@ public class sp {
 	public static userEntity user = userEntity.findById(1).get();
 	public static Color color = new Color(0, 150, 250);
 	public static Color lineColor = new Color(255, 30, 80);
-	public static Border line = BorderFactory.createLineBorder(Color.black);
+	public static Border line = BorderFactory.createLineBorder(Color.lightGray);
 
 	public static ImageIcon circleImage(int uno, int size) {
 		File file = new File("datafiles/profile/" + uno + ".jpg");
@@ -78,6 +78,9 @@ public class sp {
 		return BorderFactory.createCompoundBorder(b1, b2);
 	}
 	
+	public static void errs(String s) throws RuntimeException{
+		throw new RuntimeException(s);
+	}
 	public static void err(String s) {
 		JOptionPane.showMessageDialog(null, s, "경고", JOptionPane.ERROR_MESSAGE);
 	}
