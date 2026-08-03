@@ -34,6 +34,11 @@ public class Util {
 		});
 	}
 	
+	public static Graphics2D ANTI(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		return g2;
+	}
 	public static Image getSearch() {
 		Image img = new ImageIcon("datafiles/search.png").getImage();
 		try {
