@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DBManager {
 	
-	private static final String url = "jdbc:mysql://localhost/itgram?serverTimezone=Asia/Seoul";
+	private static final String url = "jdbc:mysql://localhost/smartdb?serverTimezone=Asia/Seoul";
 	private static final String id = "root";
 	private static final String pw = "1234";
 	
