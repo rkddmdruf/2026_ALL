@@ -1,12 +1,16 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Arc2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +48,7 @@ public class Chart extends CFrame{
 	List<Color> cs3 = new ArrayList<>();
 	
 	String[] str = "카테고리별 판매 분석,상품 판매 분석,리뷰 분석".split(",");
+	String[] str2 = "1 / 3,2 / 3,3 / 3".split(",");
 	int n = 0;
 	
 	JLabel label;
@@ -53,17 +58,19 @@ public class Chart extends CFrame{
 	int n2 = -1;
 	
 	int nx = 0;
-	Timer moveT = new Timer(15, e -> {
-		nx -= 1;
-		repaint();
-	});
+	Timer moveT;
 	public Chart() {
+		moveT = new Timer(5, e -> {
+			nx -= n2 * 2;
+			if(nx % 500 == 0) moveT.stop();
+			repaint();
+		});
+		
 		for(int i = 0; i < m1.size(); i++) rColor(cs1);
 		for(int i = 0; i < m2.size(); i++) rColor(cs2);
 		for(int i = 0; i < m3.size(); i++) rColor(cs3);
-		setFrame("분석", 500, 500);
+		setFramed("분석", 500, 500, () -> moveT.stop());
 		setResizable(true);
-		moveT.start();
 	}
 	
 	private void rColor(List<Color> colors) {
@@ -80,7 +87,7 @@ public class Chart extends CFrame{
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				
-				double r = getHeight() / 2.5;
+				double r = getHeight() / 3;
 				double sx = getWidth() / 2 - r, sy = getHeight() / 2 - r;
 				double start = 0;
 				paintz(0, g2, sx, sy, start, r, m1, cs1);
@@ -89,11 +96,22 @@ public class Chart extends CFrame{
 			}
 			
 			private void paintz(int n, Graphics2D g2,double sx, double sy, double start, double r, List<Entry<String, Long>> ms, List<Color> cs) {
-				sx += nx;
+				sx += nx + n * getWidth();
+				double cx = getWidth() / 2 + nx + n * getWidth(), cy = getHeight() / 2;
+				Font font = g2.getFont();
+				
+				g2.setFont(sp.font.deriveFont(16f));
+				FontMetrics fm = g2.getFontMetrics();
+				g2.drawString(str[n], (int) cx - fm.stringWidth(str[n]) / 2, (int) fm.getHeight() + 10);
+				
+				g2.setFont(font);
+				fm = g2.getFontMetrics();
+				g2.drawString(str2[n], (int) cx - fm.stringWidth(str2[n]) / 2, (int) getHeight() - fm.getHeight() - 10);
+				
 				for(Entry<String, Long> m : ms) {
 					double angle = (360.0 / ms.stream().mapToInt(c -> c.getValue().intValue()).sum()) * m.getValue();
-					int x = (int) (Math.cos(Math.toRadians(-start - angle / 2)) * r / 2) + getWidth() / 2;
-					int y = (int) (Math.sin(Math.toRadians(-start - angle / 2)) * r / 2) + getHeight() / 2;
+					int x = (int) ((Math.cos(Math.toRadians(-start - angle / 2)) * r / 2) + cx);
+					int y = (int) ((Math.sin(Math.toRadians(-start - angle / 2)) * r / 2) + cy);
 					
 					Arc2D.Double arc = new Arc2D.Double(sx, sy, r * 2, r * 2, start, angle, Arc2D.PIE);
 					g2.setColor(cs.get(ms.indexOf(m)));
@@ -108,40 +126,39 @@ public class Chart extends CFrame{
 				start = 0;
 			}
 		};
-		add(col(10, 10, 25, titleL, f(label), numberL).setBackColor(Color.white));
+		set(label, BG(Color.white)).setOpaque(true);
+		add(label);
 	}
 
-	Timer timer = new Timer(100, e -> {
-		n = n + n2;
-		System.out.println(n);
-	});
+	
 	@Override
 	protected void action() {
-		timer.setRepeats(false);
 		MouseAdapter mac = new MouseAdapter() {
 			int x = 0;
-			int value = 0;
+			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				x = e.getX();
+				
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if(value <= 50) timer.stop();
+				moveT.stop();
+				if(Math.abs(x - e.getX()) > 100) {
+					n += n2;
+					if(n < 0) n = 0;
+					if(n > 2) n = 2;
+					System.out.println(n);
+					moveT.start();
+					repaint();
+				}
 			}
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if(e.getX() > 0 && x - e.getX() > 0) {
-					timer.stop();
-					timer.start();
-					n2 = 1;
-				}
-				if(e.getX() < getWidth() && x - e.getX() < 0) {
-					timer.stop();
-					timer.start();
-					n2 = -1;
-				}
+				if(e.getX() < 0 || e.getX() > 500) return;
+				if(x - e.getX() > 0) n2 = 1;
+				else n2 = -1;
 			}
 		};
 		label.addMouseMotionListener(mac);

@@ -126,7 +126,8 @@ public class Main extends CFrame{
 		l.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("new MyPage();");
+				new MyPage();
+				dispose();
 			}
 		});
 		p.add(l);

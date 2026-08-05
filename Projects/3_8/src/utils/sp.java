@@ -15,6 +15,7 @@ import orms.userEntity;
 
 public class sp {
 	public static userEntity user;
+	public static Integer pno; // 마이페이지에서 리뷰작성으로 넘길 제품 번호
 	public static Color color = new Color(0, 120, 0);
 	public static Font font = new Font("맑은 고딕", 0, 12);
 	public static DecimalFormat df = new DecimalFormat("###,###");

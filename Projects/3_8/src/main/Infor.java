@@ -121,7 +121,9 @@ public class Infor extends CFrame{
 			return lb(e <= scope ? "★" : "☆", FONT(sp.font.deriveFont(14f)), FG(Color.orange));
 		}).toArray(JComponent[]::new)).setBackColor(Color.white);
 		
-		
+		starPanel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) { new Review(project.pno); dispose(); };
+		});
 		return col(10, 
 				fw(lb(product.pname, FONT(sp.font.deriveFont(16f).deriveFont(1)))),
 				fw(row(50, lb("별점 : "), fw(starPanel))).setBackColor(Color.white),
@@ -141,6 +143,12 @@ public class Infor extends CFrame{
 	}
 	@Override
 	protected void action() {
+		button.addActionListener(e -> {
+			if(ratep == null) throw new RuntimeException("요금제를 선택해주세요.");
+			new Pay(project, ratep, Integer.parseInt(storege.getSelectedItem().toString().replace("GB", "")), 
+					company.getSelectedItem().toString(), Integer.parseInt(moment.getSelectedItem().toString()));
+			dispose();
+		});
 		planSelect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -173,21 +181,22 @@ public class Infor extends CFrame{
 									set(col(10, 0, 10, f(ta)), BG(Color.white), BORDER(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY)))
 								);
 						set(p, BORDER(sp.com(sp.line(sp.color), sp.em(10, 10, 10, 10))), BG(Color.white));
-						p.addMouseListener(new MouseAdapter() {
+						MouseAdapter mac = new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 								ratep = r;
 								set(planLabel, HOA(JLabel.CENTER), TEXT(r.rname));
+								setPriceLabel();
 								dispose();
 							}
-						});
+						};
+						p.addMouseListener(mac);
+						ta.addMouseListener(mac);
 						return p;
 					}
 					
 					@Override
-					protected void action() {
-						
-					}
+					protected void action() { }
 					
 				}
 				new test();
@@ -195,6 +204,7 @@ public class Infor extends CFrame{
 		});
 		ItemListener ac = e -> {
 			if(e.getStateChange() != ItemEvent.SELECTED) return;
+			setPriceLabel();
 			
 		};
 		storege.addItemListener(ac);
@@ -219,7 +229,8 @@ public class Infor extends CFrame{
 	        }
 	    };
 
-	    zoom.setSize(90, 90);
+	    int size = 125;
+	    zoom.setSize(size + 5, size);
 	    zoom.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 	    zoom.setVisible(false);
 
@@ -235,7 +246,7 @@ public class Infor extends CFrame{
 	                    Math.min(image.getHeight() - 30, e.getY() - 15));
 
 	            Image enlarged = shown.getSubimage(x, y, 30, 30)
-	                    .getScaledInstance(90, 90, Image.SCALE_FAST);
+	                    .getScaledInstance(size + 5, size, Image.SCALE_FAST);
 
 	            zoom.setIcon(new ImageIcon(enlarged));
 	            zoom.setLocation(
@@ -254,9 +265,9 @@ public class Infor extends CFrame{
 	    image.addMouseListener(mouse);
 	}
 	private void setPriceLabel() {
-		project.capacities.get(storege.getSelectedIndex()).price = 10;
-		System.out.println(project.find2(i -> i.type.equals(company.getSelectedObjects().toString())));
-		priceLabel.setText( "원 / 월");
+		int price = project.capacities.get(storege.getSelectedIndex()).price + project.find2(i -> i.type.equals(company.getSelectedItem().toString())).get().price;
+		int mp = price / project.installments.get(moment.getSelectedIndex()).month + (ratep != null ? ratep.price : 0);
+		priceLabel.setText(sp.df.format(mp) + "원 / 월");
 	}
 	public static void main(String[] args) {
 		Util.start(new Infor(1));

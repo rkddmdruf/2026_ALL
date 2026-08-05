@@ -2,6 +2,7 @@ package orms;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -33,14 +34,14 @@ public class ProjectEntity {
 		public Integer month;
 	}
 	
-	public void find1(Predicate<Capacity> pre) {
-		capacities.stream().filter(pre).collect(Collectors.toList());
+	public Optional<Capacity> find1(Predicate<Capacity> pre) {
+		return capacities.stream().filter(pre).findFirst();
 	}
 	public Optional<CarrierItem> find2(Predicate<CarrierItem> pre) {
 		return items.stream().filter(pre).findFirst();
 	}
-	public void find3(Predicate<Installment> pre) {
-		installments.stream().filter(pre).collect(Collectors.toList());
+	public Optional<Installment> find3(Predicate<Installment> pre) {
+		return installments.stream().filter(pre).findFirst();
 	}
 	
 	public static final Map<Integer, ProjectEntity> cache = new HashMap<>();

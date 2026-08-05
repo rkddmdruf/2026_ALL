@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="study_cafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="outing">
+    <Key>
+      <PropertyRef Name="ono" />
+    </Key>
+    <Property Name="ono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uno" Type="int" Nullable="false" />
+    <Property Name="rno" Type="int" Nullable="false" />
+    <Property Name="out_time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="in_time" Type="time" Precision="7" />
+    <Property Name="out_day" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservation">
+    <Key>
+      <PropertyRef Name="rno" />
+    </Key>
+    <Property Name="rno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uno" Type="int" Nullable="false" />
+    <Property Name="sno" Type="int" Nullable="false" />
+    <Property Name="r_date" Type="date" Nullable="false" />
+    <Property Name="cafe_date" Type="date" />
+    <Property Name="start_time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="end_time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="r_time" Type="int" Nullable="false" />
+    <Property Name="floor" Type="int" Nullable="false" />
+    <Property Name="pay" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="seat">
+    <Key>
+      <PropertyRef Name="sno" />
+    </Key>
+    <Property Name="sno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sname" Type="int" Nullable="false" />
+    <Property Name="s_x" Type="int" Nullable="false" />
+    <Property Name="s_y" Type="int" Nullable="false" />
+    <Property Name="s_w" Type="int" Nullable="false" />
+    <Property Name="s_h" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="uno" />
+    </Key>
+    <Property Name="uno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="pw" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="card" Type="varchar" MaxLength="30" />
+    <Property Name="point" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="study_cafeModelStoreContainer">
+    <EntitySet Name="outing" EntityType="Self.outing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservation" EntityType="Self.reservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="seat" EntityType="Self.seat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
