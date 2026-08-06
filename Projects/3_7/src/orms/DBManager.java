@@ -3,6 +3,7 @@ package orms;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class DBManager {
 	}
 	
 	public static PreparedStatement execute(String str, Object...val) throws Exception{
-		PreparedStatement ps = c.prepareStatement(str);
+		PreparedStatement ps = c.prepareStatement(str, Statement.RETURN_GENERATED_KEYS);
 		for(int i = 0; i < val.length; i++) {
 			ps.setObject(i + 1, val[i]);
 		}

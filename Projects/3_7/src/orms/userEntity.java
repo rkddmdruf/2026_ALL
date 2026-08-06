@@ -90,6 +90,7 @@ public class userEntity {
 	}
 	
 	public boolean isAdmin() {
+		if(this == null) return false;
 		return uid.equals("admin");
 	}
 }

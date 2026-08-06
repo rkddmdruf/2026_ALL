@@ -38,7 +38,7 @@ public class Roullet extends CFrame {
 	List<Color> colors = Arrays.asList(new Color(255, 99, 132), new Color(54, 162, 235), new Color(255, 206, 86),
 			new Color(75, 192, 192), new Color(153, 102, 255));
 	CButton button = set(new CButton("룰렛 돌리기"), BG(colors.get(2)), FONT(sp.font.deriveFont(25f).deriveFont(1)));
-	JLabel statusLabel = lb("START", FONT(sp.font.deriveFont(25f).deriveFont(1)));
+	JLabel statusLabel = lb("START", FONT(sp.font.deriveFont(25f).deriveFont(1)), HOA(JLabel.CENTER));
 	
 	Map<Integer, Arc2D.Double> arcs = new LinkedHashMap<>();
 	Point point = new Point();
@@ -49,11 +49,14 @@ public class Roullet extends CFrame {
 		for(int i = 0; i < key.size(); i++) {
 			int k = key.get(i);
 			System.out.println(arcs.get(key.get(i)).contains(point));
-//			if(arcs.get(k).contains(point)) {
-//				System.out.println(k);
-//				System.out.println(i);
-//				sp.infor((i + 1) + "등 축하합니다");
-//			}
+			if(arcs.get(k).contains(point)) {
+				couponEntity c = new couponEntity();
+				c.cpdate = LocalDate.now();
+				c.uno = sp.user.uno;
+				c.reno = list.get(i).reno;
+				c.save();
+				sp.infor((i + 1) + "등 축하합니다");
+			}
 		}
 	});
 	
@@ -79,8 +82,9 @@ public class Roullet extends CFrame {
 				for (int i = 0; i < 5; i++) {
 					double angle = -360.0 / 5;
 					Arc2D.Double arc = new Arc2D.Double();
-					arc.setArcByCenter(getWidth() / 2, getHeight() / 2, r, start += angle, angle, Arc2D.PIE);
+					arc.setArcByCenter(getWidth() / 2, getHeight() / 2, r, start, angle, Arc2D.PIE);
 					g2.setColor(colors.get(i));
+					start += angle;
 					g2.fill(arc);
 					arcs.put(i, arc);
 				}
@@ -128,7 +132,7 @@ public class Roullet extends CFrame {
 				
 			}
 		};
-		add(col(0, 10, 30, f(label), button, statusLabel).setBackColor(Color.white));
+		add(col(0, 10, 30, f(label), button, fw(statusLabel)).setBackColor(Color.white));
 	}
 
 	double speed = Math.random() * 30 + 20;
@@ -138,7 +142,7 @@ public class Roullet extends CFrame {
 			if(!couponEntity.findBy(c -> c.cpdate.equals(LocalDate.now()) && c.uno.equals(sp.user.uno)).isEmpty()) {
 				throw new RuntimeException("오늘은 이미 룰렛을 돌리셨습니다. 내일 돌아와주세요.");
 			}
-			statusLabel.setText("룰렛회원중");
+			statusLabel.setText("룰렛회전중");
 			t1 = new Timer(1, t -> {
 				theta -= speed;
 				speed *= 0.985;
@@ -147,6 +151,8 @@ public class Roullet extends CFrame {
 			t1.start();
 			t2.start();
 			t2.setRepeats(false);
+			revalidate();
+			repaint();
 		});
 		
 	}

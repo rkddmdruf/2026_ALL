@@ -46,7 +46,7 @@ public class ReviewInsert extends CFrame{
 
 	public ReviewInsert() {
 		ta.setLineWrap(true);
-		setFramed("리뷰작성", 450, 395, () -> {
+		setFramed("리뷰작성", 450, 400, () -> {
 			if(!move) new MyPage();
 		});
 	}

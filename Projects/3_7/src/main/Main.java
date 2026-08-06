@@ -73,7 +73,7 @@ public class Main extends CFrame{
 		detailEntity.findAll().forEach(e -> category.computeIfAbsent(categoryEntity.findById(e.cno).get().cname, k -> new ArrayList<>()).add(e.dname));
 		key.addAll(category.keySet());
 		
-		setFrame("메인", 1111, 700);
+		setFrame("메인", 1125, 700);
 	}
 	//▶▼
 	@Override
@@ -122,7 +122,7 @@ public class Main extends CFrame{
 					Point size = new Point((getWidth() / 4) * 3, 30);
 					RoundRectangle2D.Double rr = new RoundRectangle2D.Double((getWidth() - size.x) / 2, (getHeight() - size.y) / 2, size.x, size.y, 15, 15);
 					
-					if(sp.user.isAdmin()) return;
+					if(Util.isAdmin(sp.user)) return;
 					if(p.pcount == 0) {
 						Rectangle r = rr.getBounds();
 						g2.setColor(Color.lightGray);
@@ -156,15 +156,18 @@ public class Main extends CFrame{
 			JLabel change = lb("수정", FG(Color.white), BG(sp.blue), FONT(sp.font), HOA(JLabel.CENTER));
 			JLabel delete = lb("삭제", FG(Color.white), BG(sp.red), FONT(sp.font), HOA(JLabel.CENTER));
 			change.setOpaque(true); delete.setOpaque(true);
-			JPanel Panel = new BoxPanel(sp.user.isAdmin() ? C : R, 0, 10, sp.user.isAdmin() ? 10 : 40, 
+			
+			BoxPanel Panel = new BoxPanel(C, 0, 10, 10, 
 					fw(lb(sp.df.format(p.pprice) + "원", FG(sp.red))), 
-					fw(lb(p.pcount == 0 ? "품절" : "재고 " + p.pcount + "개", FG(p.pcount == 0 ? sp.red : Color.LIGHT_GRAY), FONT(sp.font.deriveFont(11f)))),
-					fw(row(15, fw(change), fw(delete)).setBackColor(Color.white))
+					fw(lb(p.pcount == 0 ? "품절" : "재고 " + p.pcount + "개", FG(p.pcount == 0 ? sp.red : Color.LIGHT_GRAY), FONT(sp.font.deriveFont(11f))))
 					).setBackColor(Color.white);
+			if(Util.isAdmin(sp.user)) {
+				Panel.addz(fw(row(15, fw(change), fw(delete)).setBackColor(Color.white)));
+			}
 			JLabel nameLabel = lb(p.pname, FONT(sp.font.deriveFont(1)), HOA(JLabel.LEFT), SIZE(100, 20));
 			
-			
-			mainPanel.add(set(col(10, f(img), fw(nameLabel),fw(Panel)).setBackColor(Color.white), BORDER(sp.com(sp.line(Color.LIGHT_GRAY), sp.em(10, 10, 0, 10)))));
+			System.out.println(Util.isAdmin(sp.user) );
+			mainPanel.add(set(col(10, f(img), fw(nameLabel),fw(Panel)).setBackColor(Color.white), BORDER(sp.com(sp.line(Color.LIGHT_GRAY), sp.em(10, 10, 10, 10)))));
 		}
 		
 		
@@ -238,7 +241,7 @@ public class Main extends CFrame{
 			});
 		});
 		
-		if(sp.user.isAdmin()) return;
+		if(Util.isAdmin(sp.user)) return;
 		for(int i : psLabels.keySet()) {
 			int index = i;
 			psLabels.get(index).addMouseListener(new MouseAdapter() {
@@ -257,9 +260,9 @@ public class Main extends CFrame{
 				};
 				
 				private void change(boolean b) {
-					if(sp.user.isAdmin()) return;
+					if(Util.isAdmin(sp.user)) return;
 					mouseOvers.put(index, b);
-					((JComponent) psLabels.get(index).getParent()).setBorder(sp.com(sp.line(b ? sp.red : Color.LIGHT_GRAY), sp.em(10, 10, 40, 10)));
+					((JComponent) psLabels.get(index).getParent()).setBorder(sp.com(sp.line(b ? sp.red : Color.LIGHT_GRAY), sp.em(10, 10, 10, 10)));
 					revalidate();
 					repaint();
 				}

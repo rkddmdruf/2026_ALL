@@ -1,72 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _1_6 {
-    internal class RoundButton : Button {
-        Color color = Color.White;
-        internal int arc = 20;
-        internal int imgSize = 48;   // 이미지 한 변 크기
-        internal int gap = 6;        // 이미지와 글씨 사이 간격
-        public RoundButton(Image img, String text, Color color) {
-            this.color = color;
-            SetStyle(ControlStyles.Opaque, false);
-
-            BackColor = Color.Transparent;
+    internal class RoundButton : Button{
+        public RoundButton(Image img, string text, Color color) {
+            Dock = DockStyle.Fill;
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
+            Region = null;
 
-            FlatAppearance.MouseOverBackColor = Color.Transparent;
-            FlatAppearance.MouseDownBackColor = Color.Transparent;
+            Font = sp.f(10);
+            ForeColor = Color.White;
 
-            Dock = DockStyle.Fill;
-            Image = img;
+            if(img == null) Image = new Bitmap(Properties.Resources._1, new Size(1, 1));
+            else Image = new Bitmap(img, new Size(60, 60));
             Text = text;
-            Font = sp.f(12);
+            BackColor = color;
+
+            TextImageRelation = TextImageRelation.ImageAboveText;
+            ImageAlign = ContentAlignment.TopCenter;
+            TextAlign = ContentAlignment.BottomCenter;
+
+            Resize += (s, e) => {
+                int height = (int)(Font.Size * 1.4 + 10 + Image.Height);
+                Padding = new Padding(0, (Height - height) / 2, 0, 0);
+
+                var path = new System.Drawing.Drawing2D.GraphicsPath();
+                int r = 20, w = Width, h = Height;
+                path.AddArc(0, 0, r, r, 180, 90);
+                path.AddArc(w - r, 0, r, r, 270, 90);
+                path.AddArc(w - r, h - r, r, r, 0, 90);
+                path.AddArc(0, h - r, r, r, 90, 90);
+                path.CloseFigure();
+                Region = new Region(path);
+            };
         }
 
-        protected override void OnPaint(PaintEventArgs e) {
-            if(DesignMode) {
-                base.OnPaint(e);
-                return;
-            }
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            using(Brush brush = new SolidBrush(color)) {
-                RoundRectagle(g, brush, 0, 0, Width, Height, arc);
-            }
 
-            // 글씨 높이를 재서 [이미지 + 간격 + 글씨] 덩어리의 전체 높이를 구한다
-            SizeF textSize = g.MeasureString(Text, Font);
-            float totalH = imgSize + gap + textSize.Height;
-            float startY = (Height - totalH) / 2f;      // 덩어리를 세로 가운데로
-
-            if(Image != null) {
-                g.DrawImage(Image, (Width - imgSize) / 2f, startY, imgSize, imgSize);
-            }
-
-            var sf = new StringFormat { Alignment = StringAlignment.Center };
-            g.DrawString(Text, Font, Brushes.White,
-                         new RectangleF(0, startY + imgSize + gap, Width, textSize.Height), sf);
-
-        }
-
-        private void RoundRectagle(Graphics g, Brush brush, int x, int y, int w, int h, int r) {
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(x, y, r, r, 180, 90);
-            path.AddArc(x + w - r, y, r, r, 270, 90);
-            path.AddArc(x + w - r, y + h - r, r, r, 0, 90);
-            path.AddArc(x, y + h - r, r, r, 90, 90);
-            path.CloseFigure();
-            g.FillPath(brush, path);
-            path.Dispose();
-        }
     }
 }

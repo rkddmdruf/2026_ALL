@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import orms.userEntity;
 import utils.sp;
 
 public class Util {
@@ -32,6 +33,10 @@ public class Util {
 				}
 			}
 		});
+	}
+	
+	public static boolean isAdmin(userEntity user) {
+		return user == null ? false : user.uid.equals("admin");
 	}
 	
 	public static Graphics2D ANTI(Graphics g) {

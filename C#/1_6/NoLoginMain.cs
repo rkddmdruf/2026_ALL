@@ -14,8 +14,8 @@ namespace _1_6 {
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
         static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wp, string lp);
 
-        Button button1 = new RoundButton(Properties.Resources.login, "로그인", sp.colors[sp.Login]);
-        Button button2 = new RoundButton(Properties.Resources.login, "예약현황", sp.colors[sp.ReservationDetail]);
+        internal Button button1 = new RoundButton(Properties.Resources.login, "로그인", sp.colors[sp.Login]);
+        internal Button button2 = new RoundButton(Properties.Resources.login, "예약현황", sp.colors[sp.ReservationDetail]);
         TextBox tb1 = new TextBox();
         public NoLoginMain() {
             InitializeComponent();
@@ -27,10 +27,9 @@ namespace _1_6 {
 
             SendMessage(tb1.Handle, 0x1501, 0, "이름을 입력하세요");
             button1.Click += (s, e) => {
-
+                sp.Show("login");
+                sp.action.Push("nologinmain");
             };
         }
-
-
     }
 }

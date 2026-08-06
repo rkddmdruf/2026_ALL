@@ -38,11 +38,11 @@ public class Map5 extends CFrame{
 	int nowArea = 0;
 	double step = 0;
 	
-	List<sub_areaEntity> bfs;
+	List<sub_areaEntity> path;
 	
 	public Map5(int pno) {
 		product = productEntity.findById(pno).get();
-		bfs = dijkstar(124, getter.user.sno);
+		path = dijkstar(124, getter.user.sno);
 		setting();
 		setFrame("배송", 820, 820, () -> {});
 	}
@@ -57,24 +57,15 @@ public class Map5 extends CFrame{
 				
 				g2.drawImage(img, 0, 0, null);
 				
-				linelistEntity.findAll().forEach(e -> {
-					var s1 = sub_areaEntity.findById(e.u).get();
-					var s2 = sub_areaEntity.findById(e.v).get();
-					g2.setColor(Color.blue);
-					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
-				});
+				g2.setColor(Color.blue);
+				linelistEntity.findAll().forEach(e -> line(g2, sub_areaEntity.findById(e.u).get(), sub_areaEntity.findById(e.v).get()));
 				
 				g2.setColor(Color.green);
 				g2.setStroke(new BasicStroke(2f));
+				for(int i = 0; i < nowArea; i++) line(g2, path.get(i), path.get(Math.min(i + 1, path.size() - 1)));
 				
-				for(int i = 0; i < nowArea; i++) {
-					var s1 = bfs.get(i);
-					var s2 = bfs.get(i + 1);
-					g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
-				}
-				
-				var s1 = bfs.get(nowArea);
-				var s2 = bfs.get(nowArea + 1);
+				var s1 = path.get(nowArea);
+				var s2 = path.get(Math.min(nowArea + 1, path.size() - 1));
 				int curX = (int) (s1.sx + (s2.sx - s1.sx) * step);
 				int curY = (int) (s1.sy + (s2.sy - s1.sy) * step);
 				g2.drawLine(s1.sx, s1.sy, curX, curY);
@@ -84,10 +75,13 @@ public class Map5 extends CFrame{
 				sub_areaEntity.findAll().forEach(e -> g2.fillOval(e.sx - r, e.sy - r, r*2, r*2) );
 				sub_areaEntity imgS1 = sub_areaEntity.findById(product.sno).get();
 				sub_areaEntity imgS2 = sub_areaEntity.findById(getter.user.sno).get();
-				g2.drawImage(getter.getImage("logo/start.png", 40, 40).getImage(), imgS1.sx-20, imgS1.sy - 40, 40, 40, null);
-				g2.drawImage(getter.getImage("logo/destination.png", 50, 50).getImage(), imgS2.sx-24, imgS2.sy - 40, 50, 50, null);
-				
+				g2.drawImage(getter.getImage("logo/start.png", 40, 40).getImage(), imgS1.sx-20, imgS1.sy - 40, null);
+				g2.drawImage(getter.getImage("logo/destination.png", 50, 50).getImage(), imgS2.sx-24, imgS2.sy - 40, null);
 			};
+			
+			private void line(Graphics2D g2, sub_areaEntity s1, sub_areaEntity s2) {
+				g2.drawLine(s1.sx, s1.sy, s2.sx, s2.sy);
+			}
 		};
 		
 		label.setBorder(getter.line(Color.LIGHT_GRAY));
@@ -102,15 +96,15 @@ public class Map5 extends CFrame{
 			try {
 				while(true) {
 					if(step >= 1) {
-						areaEntity a1 = areaEntity.findById(bfs.get(nowArea).ano).get();
+						areaEntity a1 = areaEntity.findById(path.get(nowArea).ano).get();
 						changeColor(img, a1.ax, a1.ay,Color.gray.darker().darker().getRGB());
 						nowArea++; 
 						step = 0;
-						areaEntity a2 = areaEntity.findById(bfs.get(nowArea).ano).get();
+						areaEntity a2 = areaEntity.findById(path.get(nowArea).ano).get();
 						changeColor(img, a2.ax, a2.ay,Color.yellow.getRGB());
 					}
 					else step += 0.01;
-					if(nowArea >= bfs.size() - 1) break;
+					if(nowArea >= path.size() - 1) break;
 					repaint();
 					Thread.sleep(16);
 				}
