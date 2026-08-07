@@ -20,3 +20,4 @@ C:\Users\user\Desktop\응결임\2026전국\C#\1_6\obj\Debug\_1_6.LoginMain.resou
 C:\Users\user\Desktop\응결임\2026전국\C#\1_6\obj\Debug\_1_6.DaySelect.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_6\obj\Debug\_1_6.CardUpdate.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_6\obj\Debug\_1_6.Moment.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6\obj\Debug\_1_6.SeatMap.resources

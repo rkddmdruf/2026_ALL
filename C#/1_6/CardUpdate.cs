@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace _1_6 {
     public partial class CardUpdate : UserControl {
         List<TextBox> list = new List<TextBox>();
-        string[] str = { "","","","" };
+        public string[] str = { "","","","" };
         RoundButton rb;
         public CardUpdate() {
             InitializeComponent();
@@ -35,8 +35,8 @@ namespace _1_6 {
                     }
                 });
                 sp.user.card = String.Join("", list.Select(l => l.Text).ToArray());
-
                 sp.entity.SaveChanges();
+                sp.Show("메인2");
             };
 
             list.ForEach(t => {
@@ -89,17 +89,11 @@ namespace _1_6 {
                     int len = Math.Min(4, text.Length - i);
                     parts.Add(text.Substring(i, len));
                 }
-                parts.ForEach(p => list[parts.IndexOf(p)].Text = p.ToString());
+                parts.ForEach(p => { list[parts.IndexOf(p)].Text = p.ToString(); str[parts.IndexOf(p)] = p.ToString(); });
                 list.ForEach(t => t.Parent.BackColor = Color.Transparent);
             } else rb.Text = "등록";
-
-            var bit = new Bitmap(panel1.BackgroundImage, new Size(panel1.Width, panel1.Height));
-            for(int y = 0; y < panel1.Height; y++) {
-                for(int x = 0; x < panel1.Width; x++) {
-                    if (sp.isBlacked(bit.GetPixel(x, y))) bit.SetPixel(x, y, color);
-                }
-            }
-            panel1.BackgroundImage = bit;
+            rb.Refresh();
+            panel1.BackgroundImage = sp.changeImageColor(Properties.Resources.card, new Size(panel1.Width, panel1.Height), color);
         }
     }
 }

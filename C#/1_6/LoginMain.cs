@@ -20,21 +20,34 @@ namespace _1_6 {
             button1.ImageAlign = ContentAlignment.MiddleCenter;
             button1.TextAlign = ContentAlignment.MiddleCenter;*/
 
-            tableLayoutPanel1.Controls.Add(new RoundButton(Properties.Resources.login, "입실", sp.colors[sp.Login]) {
+            Button b1 = new RoundButton(Properties.Resources.login, "입실", sp.colors[sp.Login]) {
                 Dock = DockStyle.Fill,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom,
-            }, 0, 0);
-            tableLayoutPanel1.Controls.Add(new RoundButton(Properties.Resources.login, "예약", sp.colors[sp.Reservation]) {
+            };
+            Button b2 = new RoundButton(Properties.Resources.cal, "예약", sp.colors[sp.Reservation]) {
                 Dock = DockStyle.Fill,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom,
-            }, 2, 0);
-            tableLayoutPanel1.Controls.Add(new RoundButton(Properties.Resources.login, "외출/재입장", sp.colors[sp.Out]) {
+            };
+            Button b3 = new RoundButton(Properties.Resources.walk, "외출/재입장", sp.colors[sp.Out]) {
                 Dock = DockStyle.Fill,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom,
-            }, 0, 2);
-            tableLayoutPanel1.Controls.Add(new RoundButton(Properties.Resources.login, "퇴실", sp.colors[sp.GetOut]) {
-                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom,
-            }, 2, 2);
+            };
+            Button b4 = new RoundButton(Properties.Resources.login, "퇴실", sp.colors[sp.GetOut]) {
+                Dock = DockStyle.Fill,
+            };
+
+            tableLayoutPanel1.Controls.Add(b1, 0, 0);
+            tableLayoutPanel1.Controls.Add(b2, 2, 0);
+            tableLayoutPanel1.Controls.Add(b3, 0, 2);
+            tableLayoutPanel1.Controls.Add(b4, 2, 2);
+
+            label1.Text = sp.grade();
+            b1.Click += (s, e) => {
+                sp.Show("기간선택");
+            };
+            b2.Click += (s, e) => {
+                sp.Show("달력");
+            };
+            pictureBox1.Click += (s, e) => {
+                sp.Show("카드번호등록/수정");
+            };
         }
     }
 }

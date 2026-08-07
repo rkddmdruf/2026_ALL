@@ -28,17 +28,18 @@
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.point = new System.Windows.Forms.Label();
+            this.pointLabel = new System.Windows.Forms.Label();
             this.seatSelect = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pointLabel = new System.Windows.Forms.Label();
-            this.cardLabel = new System.Windows.Forms.Label();
-            this.point = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.priceLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.priceLabel = new System.Windows.Forms.Label();
+            this.cardLabel = new System.Windows.Forms.Label();
+            this.dateLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -62,7 +63,7 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Location = new System.Drawing.Point(19, 19);
+            this.panel1.Location = new System.Drawing.Point(19, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(379, 127);
             this.panel1.TabIndex = 1;
@@ -71,7 +72,7 @@
             // 
             this.rb1.AutoSize = true;
             this.rb1.ForeColor = System.Drawing.Color.White;
-            this.rb1.Location = new System.Drawing.Point(90, 160);
+            this.rb1.Location = new System.Drawing.Point(90, 165);
             this.rb1.Name = "rb1";
             this.rb1.Size = new System.Drawing.Size(87, 16);
             this.rb1.TabIndex = 2;
@@ -83,7 +84,7 @@
             // 
             this.rb2.AutoSize = true;
             this.rb2.ForeColor = System.Drawing.Color.White;
-            this.rb2.Location = new System.Drawing.Point(243, 160);
+            this.rb2.Location = new System.Drawing.Point(243, 165);
             this.rb2.Name = "rb2";
             this.rb2.Size = new System.Drawing.Size(75, 16);
             this.rb2.TabIndex = 3;
@@ -97,10 +98,39 @@
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.point);
             this.panel2.Controls.Add(this.pointLabel);
-            this.panel2.Location = new System.Drawing.Point(19, 189);
+            this.panel2.Location = new System.Drawing.Point(19, 194);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(379, 85);
             this.panel2.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(13, 33);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(352, 21);
+            this.textBox1.TabIndex = 2;
+            // 
+            // point
+            // 
+            this.point.AutoSize = true;
+            this.point.BackColor = System.Drawing.Color.Black;
+            this.point.ForeColor = System.Drawing.Color.White;
+            this.point.Location = new System.Drawing.Point(234, 8);
+            this.point.Name = "point";
+            this.point.Size = new System.Drawing.Size(133, 12);
+            this.point.TabIndex = 1;
+            this.point.Text = "포인트 보유량: 20,000pt";
+            // 
+            // pointLabel
+            // 
+            this.pointLabel.AutoSize = true;
+            this.pointLabel.BackColor = System.Drawing.Color.Black;
+            this.pointLabel.ForeColor = System.Drawing.Color.White;
+            this.pointLabel.Location = new System.Drawing.Point(11, 8);
+            this.pointLabel.Name = "pointLabel";
+            this.pointLabel.Size = new System.Drawing.Size(69, 12);
+            this.pointLabel.TabIndex = 0;
+            this.pointLabel.Text = "포인트 결제";
             // 
             // seatSelect
             // 
@@ -127,45 +157,33 @@
             this.panel3.Size = new System.Drawing.Size(379, 85);
             this.panel3.TabIndex = 6;
             // 
-            // pointLabel
+            // textBox5
             // 
-            this.pointLabel.AutoSize = true;
-            this.pointLabel.BackColor = System.Drawing.Color.Black;
-            this.pointLabel.ForeColor = System.Drawing.Color.White;
-            this.pointLabel.Location = new System.Drawing.Point(11, 8);
-            this.pointLabel.Name = "pointLabel";
-            this.pointLabel.Size = new System.Drawing.Size(69, 12);
-            this.pointLabel.TabIndex = 0;
-            this.pointLabel.Text = "포인트 결제";
+            this.textBox5.Location = new System.Drawing.Point(288, 33);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(77, 21);
+            this.textBox5.TabIndex = 6;
             // 
-            // cardLabel
+            // textBox4
             // 
-            this.cardLabel.AutoSize = true;
-            this.cardLabel.BackColor = System.Drawing.Color.Black;
-            this.cardLabel.ForeColor = System.Drawing.Color.White;
-            this.cardLabel.Location = new System.Drawing.Point(17, 9);
-            this.cardLabel.Name = "cardLabel";
-            this.cardLabel.Size = new System.Drawing.Size(81, 12);
-            this.cardLabel.TabIndex = 1;
-            this.cardLabel.Text = "카드번호 입력";
+            this.textBox4.Location = new System.Drawing.Point(196, 33);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(77, 21);
+            this.textBox4.TabIndex = 5;
             // 
-            // point
+            // textBox3
             // 
-            this.point.AutoSize = true;
-            this.point.BackColor = System.Drawing.Color.Black;
-            this.point.ForeColor = System.Drawing.Color.White;
-            this.point.Location = new System.Drawing.Point(234, 8);
-            this.point.Name = "point";
-            this.point.Size = new System.Drawing.Size(131, 12);
-            this.point.TabIndex = 1;
-            this.point.Text = "포인트 보유량: 20, 00pt";
+            this.textBox3.Location = new System.Drawing.Point(103, 33);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(77, 21);
+            this.textBox3.TabIndex = 4;
             // 
-            // textBox1
+            // textBox2
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(352, 21);
-            this.textBox1.TabIndex = 2;
+            this.textBox2.Location = new System.Drawing.Point(10, 33);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(77, 21);
+            this.textBox2.TabIndex = 3;
             // 
             // priceLabel
             // 
@@ -178,38 +196,32 @@
             this.priceLabel.TabIndex = 2;
             this.priceLabel.Text = "가격: 4,500원";
             // 
-            // textBox2
+            // cardLabel
             // 
-            this.textBox2.Location = new System.Drawing.Point(10, 33);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(77, 21);
-            this.textBox2.TabIndex = 3;
+            this.cardLabel.AutoSize = true;
+            this.cardLabel.BackColor = System.Drawing.Color.Black;
+            this.cardLabel.ForeColor = System.Drawing.Color.White;
+            this.cardLabel.Location = new System.Drawing.Point(17, 9);
+            this.cardLabel.Name = "cardLabel";
+            this.cardLabel.Size = new System.Drawing.Size(81, 12);
+            this.cardLabel.TabIndex = 1;
+            this.cardLabel.Text = "카드번호 입력";
             // 
-            // textBox3
+            // dateLabel
             // 
-            this.textBox3.Location = new System.Drawing.Point(103, 33);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(77, 21);
-            this.textBox3.TabIndex = 4;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(196, 33);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(77, 21);
-            this.textBox4.TabIndex = 5;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(288, 33);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(77, 21);
-            this.textBox5.TabIndex = 6;
+            this.dateLabel.AutoSize = true;
+            this.dateLabel.ForeColor = System.Drawing.Color.White;
+            this.dateLabel.Location = new System.Drawing.Point(195, 2);
+            this.dateLabel.Name = "dateLabel";
+            this.dateLabel.Size = new System.Drawing.Size(199, 12);
+            this.dateLabel.TabIndex = 7;
+            this.dateLabel.Text = "선택날짜: 2026-09-23(일요일) 23:00";
             // 
             // DaySelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.seatSelect);
             this.Controls.Add(this.panel2);
@@ -218,6 +230,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "DaySelect";
             this.Size = new System.Drawing.Size(416, 315);
+            this.VisibleChanged += new System.EventHandler(this.DaySelect_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -246,5 +259,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label dateLabel;
     }
 }

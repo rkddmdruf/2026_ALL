@@ -13,20 +13,31 @@ namespace _1_6 {
 
         public  Dictionary<string, UserControl> controls = new Dictionary<string, UserControl>();
         public Label leftLabel;
-
+        public Panel topPanel;
         public Form1() {
             InitializeComponent();
             sp.main = this;
+            topPanel = panel2;
+            panel2.Padding = new Padding(5);
 
-            controls.Add("nologinmain", new NoLoginMain());
-            controls.Add("loginmain", new LoginMain());
-            controls.Add("login", new Login());
-            controls.Add("dayselect", new DaySelect());
-            controls.Add("seatselect", new SeatSelect());
-            controls.Add("cardupdate", new CardUpdate());
-            controls.Add("moment", new Moment());
+            controls.Add("메인1", new NoLoginMain());
+            controls.Add("메인2", new LoginMain());
+            controls.Add("로그인", new Login());
+            controls.Add("기간선택", new DaySelect());
+            controls.Add("좌석배치도", new SeatSelect());
+            controls.Add("카드번호등록/수정", new CardUpdate());
+            controls.Add("달력", new Moment());
             sp.panels = controls;
 
+            List<Seat> testList = new List<Seat>();
+            foreach (var item in sp.entity.seat.ToList()) {
+                testList.Add(new Seat {
+                    No = item.sno,
+                    Name = item.sname,
+                    Rect = new Rectangle(item.s_x, item.s_y, item.s_w, item.s_h)
+                });
+            };
+            ((SeatSelect)controls["좌석배치도"]).SetMap(Properties.Resources._1, testList, new List<int>(), 1);
 
             this.Icon = Icon.FromHandle(Properties.Resources.logo.GetHicon());
             this.Text = "메인";
@@ -56,12 +67,13 @@ namespace _1_6 {
             foreach (var value in controls.Values)
                 mainPanel.Controls.Add(value);
             if (sp.user == null) {
-                sp.Show("nologinmain");
-            } else sp.Show("loginmain");
-            sp.Show("moment");
+                sp.Show("메인1");
+            } else sp.Show("메인2");
              
             label3.Click += (s, e) => {
-                sp.Show(sp.action.Pop());
+                topPanel.Controls.RemoveAt(topPanel.Controls.Count - 1);
+                topPanel.Controls.RemoveAt(topPanel.Controls.Count - 1);
+                sp.Show(sp.action.Pop(), false);
             };
 
 

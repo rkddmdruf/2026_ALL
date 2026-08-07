@@ -18,8 +18,7 @@ namespace _1_6 {
             Font = sp.f(10);
             ForeColor = Color.White;
 
-            if(img == null) Image = new Bitmap(Properties.Resources._1, new Size(1, 1));
-            else Image = new Bitmap(img, new Size(60, 60));
+            if(img != null) Image = sp.changeImageColor(img, new Size(60, 60), Color.White);
             Text = text;
             BackColor = color;
 
@@ -28,7 +27,7 @@ namespace _1_6 {
             TextAlign = ContentAlignment.BottomCenter;
 
             Resize += (s, e) => {
-                int height = (int)(Font.Size * 1.4 + 10 + Image.Height);
+                int height = (int)(Font.Size * 1.4 + 10 + Image?.Height ?? 30);
                 Padding = new Padding(0, (Height - height) / 2, 0, 0);
 
                 var path = new System.Drawing.Drawing2D.GraphicsPath();

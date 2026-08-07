@@ -159,6 +159,12 @@
     <Compile Include="seat.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="SeatMap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SeatMap.Designer.cs">
+      <DependentUpon>SeatMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="SeatSelect.cs" />
     <Compile Include="sp.cs" />
     <Compile Include="user.cs">
@@ -195,6 +201,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SeatMap.resx">
+      <DependentUpon>SeatMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>

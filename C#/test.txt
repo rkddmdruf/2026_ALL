@@ -1,2 +1,0 @@
-심각도	코드	설명	프로젝트	파일	줄	비표시 오류(Suppression) 상태
-경고		"obj\Debug\1_6.exe"을(를) "bin\Debug\1_6.exe"(으)로 복사할 수 없습니다. 1000ms 안에 재시도 10을(를) 시작합니다. 'bin\Debug\1_6.exe' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다. 파일이 "Visual Studio 2022 Remote Debugger (13520)"에 의해 잠겨 있습니다.	1_6			

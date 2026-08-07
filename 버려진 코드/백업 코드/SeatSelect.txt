@@ -6,7 +6,8 @@ using System.Windows.Forms;
 
 public class Seat { public int No, Name; public Rectangle Rect; }
 
-public class SeatSelect : UserControl {
+public class SeatSelect : UserControl
+{
     const int W = 380, H = 300;
     readonly Point start = new Point(131, 141);
     readonly Timer timer = new Timer { Interval = 20 };
@@ -32,7 +33,8 @@ public class SeatSelect : UserControl {
     }
 
     public void SetMap(Image map, IEnumerable<Seat> data,
-                       IEnumerable<int> reservedNos, int selectedFloor) {
+                       IEnumerable<int> reservedNos, int selectedFloor)
+    {
         image = new Bitmap(map, W, H);
         seats = data.ToList();
         reserved = new HashSet<int>(reservedNos);
@@ -44,7 +46,8 @@ public class SeatSelect : UserControl {
         Invalidate();
     }
 
-    protected override void OnPaint(PaintEventArgs e) {
+    protected override void OnPaint(PaintEventArgs e)
+    {
         if (image == null) return;
         e.Graphics.DrawImageUnscaled(image, 0, 0);
 
@@ -53,27 +56,31 @@ public class SeatSelect : UserControl {
             using (Pen p = new Pen(Color.DodgerBlue, 4))
                 e.Graphics.DrawLines(p, line.ToArray());
 
-        foreach (Seat s in seats) {
+        foreach (Seat s in seats)
+        {
             using (Brush b = new SolidBrush(reserved.Contains(s.No) ? Color.Gray :
                                             s == selected ? Color.OrangeRed : Color.SaddleBrown))
                 e.Graphics.FillRectangle(b, s.Rect);
             e.Graphics.DrawRectangle(Pens.Black, s.Rect);
         }
         int r = 7;
-        e.Graphics.FillEllipse(Brushes.Red, user.X - r, user.Y - r, r * 2, r * 2);
+        e.Graphics.FillEllipse(Brushes.Red, user.X - r, user.Y - r, r*2, r*2);
     }
 
-    protected override void OnMouseMove(MouseEventArgs e) {
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
         Seat s = At(e.Location);
         if (s == over) return;
         over = s;
         tip.SetToolTip(this, s == null ? "" : Code(s));
     }
 
-    protected override void OnMouseClick(MouseEventArgs e) {
+    protected override void OnMouseClick(MouseEventArgs e)
+    {
         Seat s = At(e.Location);
         if (s == null || s == selected) return;
-        if (reserved.Contains(s.No)) {
+        if (reserved.Contains(s.No))
+        {
             MessageBox.Show("예약된 좌석입니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -86,7 +93,8 @@ public class SeatSelect : UserControl {
         Invalidate();
     }
 
-    public void ResetToStart() {
+    public void ResetToStart()
+    {
         if (state != 0 || trail.Count == 1) return;
         selected = next = null;
         Buttons(false);
@@ -94,14 +102,16 @@ public class SeatSelect : UserControl {
         timer.Start();
     }
 
-    void Go(Seat target) {
+    void Go(Seat target)
+    {
         next = null;
         path.Clear(); path.AddRange(FindPath(target));
         Home(); index = 1; state = 1;
         timer.Start();
     }
 
-    void MoveUser() {
+    void MoveUser()
+    {
         for (int speed = 0; speed < 4; speed++)
             if (state == 1) // 목적지로 한 칸 전진
             {
@@ -112,8 +122,9 @@ public class SeatSelect : UserControl {
                 MessageBox.Show(Code(selected) + "위치에 도착하였습니다.", "정보",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 break;
-            } else // 왔던 길을 되짚어 한 칸 후퇴
-              {
+            }
+            else // 왔던 길을 되짚어 한 칸 후퇴
+            {
                 trail.RemoveAt(trail.Count - 1);
                 user = trail[trail.Count - 1];
                 if (trail.Count > 1) continue;
@@ -125,7 +136,8 @@ public class SeatSelect : UserControl {
         Invalidate();
     }
 
-    List<Point> FindPath(Seat target) {
+    List<Point> FindPath(Seat target)
+    {
         Rectangle r = target.Rect;
         bool[,] block = (bool[,])wall.Clone();
         foreach (Seat s in seats) if (s != target) Fill(block, s.Rect, true, 2);
@@ -142,9 +154,11 @@ public class SeatSelect : UserControl {
         Queue<Point> q = new Queue<Point>();
         q.Enqueue(start); seen[start.X, start.Y] = true;
 
-        while (!seen[goal.X, goal.Y]) {
+        while (!seen[goal.X, goal.Y])
+        {
             Point p = q.Dequeue();
-            foreach (Point d in dirs) {
+            foreach (Point d in dirs)
+            {
                 Point n = new Point(p.X + d.X, p.Y + d.Y);
                 if (n.X < 0 || n.Y < 0 || n.X >= W || n.Y >= H ||
                     block[n.X, n.Y] || seen[n.X, n.Y]) continue;
@@ -161,17 +175,20 @@ public class SeatSelect : UserControl {
         return result;
     }
 
-    void MakeWall() {
+    void MakeWall()
+    {
         wall = new bool[W, H];
         for (int y = 0; y < H; y++)
-            for (int x = 0; x < W; x++) {
+            for (int x = 0; x < W; x++)
+            {
                 Color c = image.GetPixel(x, y);
                 if (c.R < 100 && c.G < 100 && c.B < 100)
                     Fill(wall, new Rectangle(x, y, 1, 1), true, 2);
             }
     }
 
-    static void Fill(bool[,] a, Rectangle r, bool value, int margin) {
+    static void Fill(bool[,] a, Rectangle r, bool value, int margin)
+    {
         for (int y = Math.Max(0, r.Top - margin); y < Math.Min(H, r.Bottom + margin); y++)
             for (int x = Math.Max(0, r.Left - margin); x < Math.Min(W, r.Right + margin); x++)
                 a[x, y] = value;

@@ -12,17 +12,27 @@ using System.Windows.Forms;
 namespace _1_6 {
     public partial class DaySelect : UserControl {
         Point pointPoint, cardPoint;
+        List<RadioButton> rbs = new List<RadioButton>();
+        int[] times = { 1, 3, 5, 8, 12 };
         public DaySelect() {
             InitializeComponent();
             pointPoint = panel2.Location;
             cardPoint = panel3.Location;
 
+            int n = 0;
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 3; j++) {
-                    tableLayoutPanel1.Controls.Add(new Button() {
+                    RadioButton rb = new RadioButton() {
+                        Text = times[n] + "시간",
+                        Appearance = Appearance.Button,
+                        TextAlign = ContentAlignment.MiddleCenter,
                         Dock = DockStyle.Fill,
                         Margin = new Padding(10)
-                    }, j, i);
+                    };
+                    rbs.Add(rb);
+                    tableLayoutPanel1.Controls.Add(rb, j, i);
+                    n++;
+                    if (times.Length == n) break;
                 }
             }
             rb1.Select();
@@ -35,8 +45,8 @@ namespace _1_6 {
             priceLabel.BackColor = Color.Transparent;
 
 
-            pointLabel.Text = "포인트 보유량: " + sp.user.point.ToString() + "pt";
-
+            pointLabel.Text = "포인트 결제";
+            point.Text = "포인트 보유량: " + sp.user.point.ToString("N0") +"pt";
 
             EventHandler onClick = (s, e) => {
                 if((RadioButton) s ==  rb1) { 
@@ -87,6 +97,14 @@ namespace _1_6 {
             rb2.Click += onClick;
         }
 
-        protected override void OnLoad(EventArgs e) { }
+        private void DaySelect_VisibleChanged(object sender, EventArgs e) {
+            if(this.Visible) {
+                dateLabel.Visible = sp.momentFormToSelectDate != null;
+                if(sp.momentFormToSelectDate != null) {
+                    dateLabel.Text = sp.momentFormToSelectDate.Value.ToString("선택날짜: yyyy-MM-dd(dddd) hh:00");
+                }
+            }
+        }
+
     }
 }
