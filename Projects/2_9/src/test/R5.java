@@ -106,6 +106,7 @@ public class R5 extends CFrame{
 				repaint();
 				if(speed < 0.1) {
 					button.setEnabled(true);
+					System.out.println(items.get(arcs.indexOf(arcs.stream().filter(t -> t.contains(point)).findFirst().get())).ciname);
 					timer.stop();
 				}
 			});

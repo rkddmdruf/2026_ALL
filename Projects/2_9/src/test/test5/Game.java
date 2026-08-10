@@ -145,7 +145,6 @@ public class Game extends CFrame{
 				if(maze[r][c] != wall){
 					posR = posR + dirs.get(k)[0];
 					posC = posC + dirs.get(k)[1];
-					System.out.println(posR + ", " + posC);
 				}
 				repaint();
 			}

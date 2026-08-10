@@ -16,4 +16,6 @@ C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\1_5.exe
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\1_5.pdb
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.Form1.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.Login.resources
-C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.Main1.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.userMain.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.adminMain.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.Search.resources

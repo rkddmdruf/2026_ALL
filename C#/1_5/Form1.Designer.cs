@@ -29,14 +29,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.topPanel1 = new _1_5.topPanel();
             this.img3 = new System.Windows.Forms.Panel();
             this.imgLabel3 = new System.Windows.Forms.Label();
             this.img2 = new System.Windows.Forms.Panel();
             this.imgLabel2 = new System.Windows.Forms.Label();
             this.img1 = new System.Windows.Forms.Panel();
             this.imgLabel1 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.userMain1 = new _1_5.userMain();
+            this.topPanel1 = new _1_5.topPanel();
+            this.adminMain1 = new _1_5.adminMain();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.img3.SuspendLayout();
@@ -96,15 +98,6 @@
             this.label1.Size = new System.Drawing.Size(65, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
-            // 
-            // topPanel1
-            // 
-            this.topPanel1.BackColor = System.Drawing.Color.Black;
-            this.topPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel1.Location = new System.Drawing.Point(0, 0);
-            this.topPanel1.Name = "topPanel1";
-            this.topPanel1.Size = new System.Drawing.Size(684, 53);
-            this.topPanel1.TabIndex = 0;
             // 
             // img3
             // 
@@ -167,16 +160,38 @@
             this.imgLabel1.TabIndex = 0;
             this.imgLabel1.Text = "label10";
             // 
-            // label9
+            // label3
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(33, 330);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(166, 30);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "•인기 호텔 top3";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(187, 61);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(271, 32);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Seoul Booking System";
+            // 
+            // userMain1
+            // 
+            this.userMain1.Location = new System.Drawing.Point(0, 103);
+            this.userMain1.Name = "userMain1";
+            this.userMain1.Size = new System.Drawing.Size(684, 257);
+            this.userMain1.TabIndex = 30;
+            // 
+            // topPanel1
+            // 
+            this.topPanel1.BackColor = System.Drawing.Color.Black;
+            this.topPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topPanel1.Location = new System.Drawing.Point(0, 0);
+            this.topPanel1.Name = "topPanel1";
+            this.topPanel1.Size = new System.Drawing.Size(684, 53);
+            this.topPanel1.TabIndex = 0;
+            // 
+            // adminMain1
+            // 
+            this.adminMain1.Location = new System.Drawing.Point(0, 103);
+            this.adminMain1.Name = "adminMain1";
+            this.adminMain1.Size = new System.Drawing.Size(684, 257);
+            this.adminMain1.TabIndex = 32;
             // 
             // Form1
             // 
@@ -184,10 +199,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(684, 539);
+            this.Controls.Add(this.adminMain1);
+            this.Controls.Add(this.userMain1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.img3);
             this.Controls.Add(this.img2);
             this.Controls.Add(this.img1);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.login);
             this.Controls.Add(this.topPanel1);
@@ -223,7 +240,9 @@
         private System.Windows.Forms.Label imgLabel2;
         private System.Windows.Forms.Panel img1;
         private System.Windows.Forms.Label imgLabel1;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label3;
+        private userMain userMain1;
+        private adminMain adminMain1;
     }
 }
 

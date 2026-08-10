@@ -6,6 +6,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -37,23 +40,32 @@ public class Map5 extends CFrame{
 	productEntity product;
 	int nowArea = 0;
 	double step = 0;
+	boolean zoom = false;
+	List<sub_areaEntity> path = new LinkedList<>();
 	
-	List<sub_areaEntity> path;
-	
+	JLabel l;
 	public Map5(int pno) {
 		product = productEntity.findById(pno).get();
-		path = dijkstar(124, getter.user.sno);
+		path.addAll(dijkstar(product.sno, getter.user.sno));
 		setting();
 		setFrame("배송", 820, 820, () -> {});
 	}
 	
 	@Override
 	protected void desing() {
-		JLabel label = new JLabel() {
+		l = new JLabel() {
 			protected void paintComponent(java.awt.Graphics g) {
 				super.paintComponent(g);
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				
+				AffineTransform old = g2.getTransform();
+				if(zoom) {
+					areaEntity a = areaEntity.findById(path.get(nowArea).ano).get();
+					g2.translate(getWidth() / 2, getHeight() / 2);
+					g2.scale(2, 2);
+					g2.translate(-a.ax, -a.ay);
+				}
 				
 				g2.drawImage(img, 0, 0, null);
 				
@@ -77,6 +89,8 @@ public class Map5 extends CFrame{
 				sub_areaEntity imgS2 = sub_areaEntity.findById(getter.user.sno).get();
 				g2.drawImage(getter.getImage("logo/start.png", 40, 40).getImage(), imgS1.sx-20, imgS1.sy - 40, null);
 				g2.drawImage(getter.getImage("logo/destination.png", 50, 50).getImage(), imgS2.sx-24, imgS2.sy - 40, null);
+				
+				g2.setTransform(old);
 			};
 			
 			private void line(Graphics2D g2, sub_areaEntity s1, sub_areaEntity s2) {
@@ -84,14 +98,20 @@ public class Map5 extends CFrame{
 			}
 		};
 		
-		label.setBorder(getter.line(Color.LIGHT_GRAY));
-		label.setBackground(Color.white);
-		label.setOpaque(true);
-		add(set(col(0, fill(label)), BORDER(getter.em(10, 10, 10, 10))));
+		l.setBorder(getter.line(Color.LIGHT_GRAY));
+		l.setBackground(Color.white);
+		l.setOpaque(true);
+		add(set(col(0, fill(l)), BORDER(getter.em(10, 10, 10, 10))));
 	}
 
 	@Override
 	protected void action() {
+		l.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				zoom = !zoom;
+			}
+		});
 		new Thread(() -> {
 			try {
 				while(true) {
@@ -155,21 +175,17 @@ public class Map5 extends CFrame{
 	
 	private void setting() {
 		Image img = getter.getImage("map.png", 800, 800).getImage();
-		try {
-			BufferedImage bf = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
-			Graphics2D g2 = bf.createGraphics();
-			g2.drawImage(img, 0, 0, null);
-			g2.dispose();
-			
-			this.img = bf;
-			areaEntity.findAll().forEach(a -> {
-				changeColor(bf, a.ax, a.ay, Color.gray.darker().darker().getRGB());
-			});
-			areaEntity a = areaEntity.findById(sub_areaEntity.findById(product.sno).get().ano).get();
-			changeColor(bf, a.ax, a.ay,Color.yellow.getRGB());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		BufferedImage bf = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics2D g2 = bf.createGraphics();
+		g2.drawImage(img, 0, 0, null);
+		g2.dispose();
+		
+		this.img = bf;
+		areaEntity.findAll().forEach(a -> {
+			changeColor(bf, a.ax, a.ay, Color.gray.darker().darker().getRGB());
+		});
+		areaEntity a = areaEntity.findById(sub_areaEntity.findById(product.sno).get().ano).get();
+		changeColor(bf, a.ax, a.ay,Color.yellow.getRGB());
 	}
 	
 	public static void changeColor(BufferedImage img, int startX, int startY, int newRGB) {

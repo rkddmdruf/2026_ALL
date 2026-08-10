@@ -60,10 +60,11 @@ namespace _1_6 {
         public void chageMoment() {
             DateTime changeDate = new DateTime(now.Year, now.Month, 1);
             momentLabel.Text = now.Month + "월";
+            tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel1.Controls.Clear();
 
             int sx = 0;
-            for(int i = 0; i < ((int)changeDate.DayOfWeek + 1) % 7; i++) {
+            for (int i = 0; i < ((int)changeDate.DayOfWeek + 1) % 7; i++) {
                 tableLayoutPanel1.Controls.Add(new Label(), i, 0);
                 sx++;
             }
@@ -104,7 +105,7 @@ namespace _1_6 {
                 sx = 0;
                 if (changeDate.Month != now.Month) break;
             }
-
+            tableLayoutPanel1.ResumeLayout();
         }
 
         private void selectAction(DateTime newDate) {

@@ -1,0 +1,9 @@
+ct + e -> 열려있는 파일 이동
+ct + sh + (위, 아래) -> 메서드, 전역변수 단위 이동
+ct + f7 -> Package Explorer, Editer 이동
+alt + sh + n -> 우클릭 추가대신 -> c, p 앞 글자 따면 생성
+ct + 1 <- 지역 변수 생성시 사용, 메서드 생성시 사용, 에러시 사용
+
+temple 
+nc -> new comp
+lb, bt, tf -> 이름 그대로 생성

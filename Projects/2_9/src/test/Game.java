@@ -67,7 +67,7 @@ public class Game extends JFrame {
 					while(maze[13][13] != 0) {
 						for (int[] row : maze)
 							for (int j = 0; j < row.length; ++j)
-								if (row[j] > 0 && row[j] != WALL) --row[j];
+								if (row[j] > 0 && row[j] < 1_000) --row[j];
 						repaint();
 						Thread.sleep(50);
 					}
@@ -95,9 +95,10 @@ public class Game extends JFrame {
 			protected void paintComponent(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
 				Arc2D.Double arc = new Arc2D.Double();
-				arc.setArcByCenter(getWidth() / 2.0, getWidth() / 2.0, (getWidth() / 3) * 2, 0, 360, Arc2D.PIE);
+				double ra = getWidth() / 3;
+				arc.setArcByCenter(getWidth() / 2, getHeight() / 2, ra, 0, 360, Arc2D.PIE);
 				int value = maze[r][c];
-				if (value == WALL) {
+				if (value > 1_000) {
 					g2.setColor(Color.black);
 					g2.fillRect(0, 0, getWidth(), getHeight());
 				} else if (value <= 5){
@@ -120,7 +121,6 @@ public class Game extends JFrame {
 	private int[][] generateMaze() {
 		int[][] maze = new int[15][15];
 		for (var row : maze) Arrays.fill(row, WALL);
-		dfs(1, 1, maze);
 		return maze;
 	}
 	

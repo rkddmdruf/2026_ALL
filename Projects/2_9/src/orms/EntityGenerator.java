@@ -3,9 +3,12 @@ package orms;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +20,22 @@ public class EntityGenerator {
 	static String template = "";
 	
 	public static void initData() {
+		
+		try (var ps = DBManager.execute("select table_name, column_name, column_type, extra \r\n"
+				+ "from information_schema.COLUMNS \r\n"
+				+ "where table_schema = database()\r\n"
+				+ "order by table_name, ordinal_position"); var re = ps.executeQuery();){
+			while(re.next()) {
+				List<String> list = new LinkedList<>();
+				for(int i = 0; i < re.getMetaData().getColumnCount(); i++) {
+					list.add(re.getObject(i + 1).toString());
+				}
+				data.add(list);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		for(List<String> l : DBManager.select("select table_name, column_name, column_type, extra \r\n"
 				+ "from information_schema.COLUMNS \r\n"
 				+ "where table_schema = database()\r\n"

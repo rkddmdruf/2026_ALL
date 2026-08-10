@@ -57,6 +57,7 @@ public class Maps extends CFrame{
 			areaEntity.findAll().forEach(a -> {
 				repaintColor(img, a.ax, a.ay, Color.gray.darker().darker().getRGB());
 			});
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
