@@ -28,10 +28,10 @@ public class Moment extends CFrame{
 	
 	JPanel daysPanel = set(new JPanel(new GridLayout(6, 7)), BG(Color.white));
 	
-	JLabel dateLabel 	= lb("" , HOA(JLabel.CENTER), VEA(JLabel.CENTER), FONT(getter.font.deriveFont(14f).deriveFont(1)));
+	JLabel dateLabel 	= lb("" , HOA(JLabel.CENTER), VEA(JLabel.CENTER), FONT(sp.font.deriveFont(14f).deriveFont(1)));
 	JLabel left 		= lb("<", HOA(JLabel.CENTER), VEA(JLabel.CENTER));
 	JLabel right 		= lb(">", HOA(JLabel.CENTER), VEA(JLabel.CENTER));
-	JButton button = bt("선택", BG(getter.color), SIZE(0, 40), FG(Color.white), FONT(getter.font.deriveFont(13f)));
+	JButton button = bt("선택", BG(sp.color), SIZE(0, 40), FG(Color.white), FONT(sp.font.deriveFont(13f)));
 	List<JLabel> labels = new ArrayList<>();
 	
 	doctorEntity doctor;
@@ -44,7 +44,7 @@ public class Moment extends CFrame{
 	@Override
 	public void desing() {
 		JPanel panel = col(0, setP1(), setP2(), f(daysPanel));
-		add(col(10, 0, 0, f(panel), fw(set(row(0, f(button)).setBackColor(Color.white), BORDER(getter.em(15, 30, 15, 30))))).setBackColor(Color.white));
+		add(col(10, 0, 0, f(panel), fw(set(row(0, f(button)).setBackColor(Color.white), BORDER(sp.em(15, 30, 15, 30))))).setBackColor(Color.white));
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Moment extends CFrame{
 	
 	private JPanel setP1() {
 		JPanel p = new JPanel(new GridLayout(1, 3));
-		p.setBorder(BorderFactory.createCompoundBorder(getter.line, getter.em(10, 0, 10, 0)));
+		p.setBorder(BorderFactory.createCompoundBorder(sp.line, sp.em(10, 0, 10, 0)));
 		p.setBackground(Color.white);
 		p.add(left);
 		p.add(dateLabel);
@@ -80,7 +80,7 @@ public class Moment extends CFrame{
 	
 	private JPanel setP2() {
 		JPanel p = new JPanel(new GridLayout(1, 7));
-		p.setBorder(BorderFactory.createCompoundBorder(getter.line, getter.em(10, 0, 10, 0)));
+		p.setBorder(BorderFactory.createCompoundBorder(sp.line, sp.em(10, 0, 10, 0)));
 		p.setBackground(Color.white);
 		for(String s : "일,월,화,수,목,금,토".split(",")) {
 			p.add(lb(s, FG( s.equals("일") ? Color.red : s.equals("토") ? Color.blue : Color.black ), HOA(JLabel.CENTER), VEA(JLabel.CENTER)));
@@ -95,11 +95,11 @@ public class Moment extends CFrame{
 		date = date.minusDays(date.getDayOfMonth() - 1);
 		int n = date.getDayOfWeek().getValue() % 7;
 		for(int i = 0; i < n; i++) {
-			JLabel l = lb("",BORDER(getter.line(Color.LIGHT_GRAY)));
+			JLabel l = lb("",BORDER(sp.line(Color.LIGHT_GRAY)));
 			daysPanel.add(l);
 		}
 		for(int i = 1; i <= date.lengthOfMonth(); i++) {
-			JLabel l = lb(i + "",BORDER(getter.line(Color.LIGHT_GRAY)), HOA(JLabel.CENTER), VEA(JLabel.CENTER), BG(Color.white));
+			JLabel l = lb(i + "",BORDER(sp.line(Color.LIGHT_GRAY)), HOA(JLabel.CENTER), VEA(JLabel.CENTER), BG(Color.white));
 			l.setOpaque(true);
 			daysPanel.add(l);
 			if(now.isAfter(date)) l.setEnabled(false);
@@ -123,7 +123,7 @@ public class Moment extends CFrame{
 		}
 		int size = 42 - daysPanel.getComponentCount();
 		for(int i = 0; i < size; i++) {
-			JLabel l = lb("",BORDER(getter.line(Color.LIGHT_GRAY)));
+			JLabel l = lb("",BORDER(sp.line(Color.LIGHT_GRAY)));
 			daysPanel.add(l);
 		}
 		repaint();

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace _1_5 {
     internal class sp {
         public static Entity entity = new Entity();
-        public static user user;
+        public static user user = entity.user.First();
         public static owner owner;
 
         public static Font f(float size, FontStyle style = FontStyle.Regular) {

@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import utils.getter;
+import utils.sp;
 
 public class Util {
 
@@ -27,12 +27,12 @@ public class Util {
 		});
 	}
 	
-	public static Color setAlpha(Color color, int n) {
+	public static Color setA(Color color, int n) {
 		return new Color(color.getRed(), color.getGreen(), color.getBlue(), n);
 	}
 	
 	public static void handle(Throwable t) {
 		t.printStackTrace();
-		getter.err(t.getMessage());
+		sp.err(t.getMessage());
 	}
 }

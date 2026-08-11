@@ -27,19 +27,19 @@ public class DoctorSelect extends CFrame{
 	categoryEntity category;
 	List<doctorEntity> ds;
 	List<JPanel> panels = new ArrayList<>();
-	Border cardem = getter.em(10, 20, 10, 20);
+	Border cardem = sp.em(10, 20, 10, 20);
 	String[] dayNames = "일,월,화,수,목,금,토".split(",");
 	public DoctorSelect(int cno) {
 		category = categoryEntity.findById(cno).get();
-		ds = doctorEntity.findBy(e -> e.cno == cno && getter.user.lno == e.lno);
+		ds = doctorEntity.findBy(e -> e.cno == cno && sp.user.lno == e.lno);
 		setFrame("의사선택", 575, 300, () -> {});
 	}
 	
 	@Override
 	public void desing() {
-		JLabel label = lb("전문의를 선택해주세요", FG(Color.white), HOA(JLabel.CENTER), BG(getter.color), FONT(getter.font.deriveFont(20f).deriveFont(1)), BORDER(getter.em(10, 10, 10, 10)));
+		JLabel label = lb("전문의를 선택해주세요", FG(Color.white), HOA(JLabel.CENTER), BG(sp.color), FONT(sp.font.deriveFont(20f).deriveFont(1)), BORDER(sp.em(10, 10, 10, 10)));
 		label.setOpaque(true);
-		JPanel panel = set(new JPanel(new GridLayout(0, 2, 15, 10)), BG(Color.white), BORDER(getter.em(10, 30, 10, 5)));
+		JPanel panel = set(new JPanel(new GridLayout(0, 2, 15, 10)), BG(Color.white), BORDER(sp.em(10, 30, 10, 5)));
 		setPanel(panel);
 		JScrollPane sc = set(new JScrollPane(panel), BG(Color.white));
 		add(col(0, fw(label), f(sc)).setBackColor(Color.white));
@@ -48,7 +48,7 @@ public class DoctorSelect extends CFrame{
 	private void setPanel(JPanel panel) {
 		for(int i = 0; i < ds.size(); i++) {
 			doctorEntity d = ds.get(i);
-			JLabel name = lb(d.dname, FONT(getter.font.deriveFont(14f).deriveFont(1)), HOA(JLabel.CENTER));
+			JLabel name = lb(d.dname, FONT(sp.font.deriveFont(14f).deriveFont(1)), HOA(JLabel.CENTER));
 			JLabel img = new JLabel() {
 				@Override
 				protected void paintComponent(Graphics g) {
@@ -66,14 +66,14 @@ public class DoctorSelect extends CFrame{
 				}
 			{
 				setOpaque(false);
-				setBorder(getter.em(10, 20, 10, 20));
-				add(lb("진료횟수" + ordersEntity.findBy(e -> e.dno == d.dno).size() + "번", FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(1))));
-				add(lb("휴일 : " + dayNames[d.day_off -1 ] + "요일", FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(1))));
-				add(lb("더블 클릭으로 선택하세요", FG(Color.white), HOA(JLabel.CENTER), FONT(getter.font.deriveFont(11f))));
+				setBorder(sp.em(10, 20, 10, 20));
+				add(lb("진료횟수" + ordersEntity.findBy(e -> e.dno == d.dno).size() + "번", FG(Color.white), HOA(JLabel.CENTER), FONT(sp.font.deriveFont(1))));
+				add(lb("휴일 : " + dayNames[d.day_off -1 ] + "요일", FG(Color.white), HOA(JLabel.CENTER), FONT(sp.font.deriveFont(1))));
+				add(lb("더블 클릭으로 선택하세요", FG(Color.white), HOA(JLabel.CENTER), FONT(sp.font.deriveFont(11f))));
 				setVisible(false);
 			}});
 			img.setPreferredSize(new Dimension(0, 150));
-			JPanel p = set(new JPanel(new BorderLayout()), BORDER(BorderFactory.createCompoundBorder(getter.line(Color.LIGHT_GRAY), cardem)), BG(Color.white));
+			JPanel p = set(new JPanel(new BorderLayout()), BORDER(BorderFactory.createCompoundBorder(sp.line(Color.LIGHT_GRAY), cardem)), BG(Color.white));
 			p.add(img);
 			p.add(name, BorderLayout.SOUTH);
 			panel.add(p);
@@ -89,15 +89,15 @@ public class DoctorSelect extends CFrame{
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					((JLabel) p.getComponent(0)).getComponent(0).setVisible(true);
-					((JLabel) p.getComponent(1)).setForeground(getter.color);
-					p.setBorder(BorderFactory.createCompoundBorder(getter.line(getter.color), cardem));
+					((JLabel) p.getComponent(1)).setForeground(sp.color);
+					p.setBorder(BorderFactory.createCompoundBorder(sp.line(sp.color), cardem));
 				}
 				
 				@Override
 				public void mouseExited(MouseEvent e) {
 					((JLabel) p.getComponent(0)).getComponent(0).setVisible(false);
 					((JLabel) p.getComponent(1)).setForeground(Color.black);
-					p.setBorder(BorderFactory.createCompoundBorder(getter.line(Color.LIGHT_GRAY), cardem));
+					p.setBorder(BorderFactory.createCompoundBorder(sp.line(Color.LIGHT_GRAY), cardem));
 				}
 				
 				@Override

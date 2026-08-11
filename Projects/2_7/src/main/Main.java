@@ -35,7 +35,7 @@ public class Main extends CFrame{
 	List<Color> colors = Arrays.asList(rColor(), rColor(), rColor(), rColor(), rColor(), rColor());
 	List<Image> imgs = categorys.stream().map(e -> setImageAlhpa(e.cno)).collect(Collectors.toList());
 	List<JPanel> panels = new ArrayList<>();
-	Border cardBorder = getter.em(20, 45, 20, 45);
+	Border cardBorder = sp.em(20, 45, 20, 45);
 	
 	public Main() {
 		setFrame("메인", 600, 350, () -> {});
@@ -46,15 +46,15 @@ public class Main extends CFrame{
 	}
 	@Override
 	public void desing() {
-		JLabel my =  lb("Mypage", FONT(getter.font.deriveFont(1)));
+		JLabel my =  lb("Mypage", FONT(sp.font.deriveFont(1)));
 		JPanel panel = set(new JPanel(new GridLayout(2, 3, 10, 15)), BG(Color.white));
 		setGridPanel(panel);
 		JPanel mainPanel = col(15,
 				fw(row(10, hg() ,my).setBackColor(Color.white)),
-				lb("진료 선택", FONT(getter.font.deriveFont(20f).deriveFont(1)), FG(getter.color)),
+				lb("진료 선택", FONT(sp.font.deriveFont(20f).deriveFont(1)), FG(sp.color)),
 				f(panel)
 			);
-		mainPanel.setBorder(getter.em(15, 40, 15, 40));
+		mainPanel.setBorder(sp.em(15, 40, 15, 40));
 		mainPanel.setBackground(Color.white);
 		add(mainPanel);
 	}
@@ -74,7 +74,7 @@ public class Main extends CFrame{
 					g2.drawImage(imgs.get(index), 0, 0, getWidth(), getHeight(), null);
 				}
 			});
-			p.add(lb(categorys.get(index).cname, FONT(getter.font.deriveFont(1).deriveFont(13f)), HOA(JLabel.CENTER)), BorderLayout.SOUTH);
+			p.add(lb(categorys.get(index).cname, FONT(sp.font.deriveFont(1).deriveFont(13f)), HOA(JLabel.CENTER)), BorderLayout.SOUTH);
 			panel.add(p);
 			panels.add(p);
 		}
@@ -96,7 +96,7 @@ public class Main extends CFrame{
 					int b = rgb & 0xFF;
 					// "진짜 흰색에 가까운 것만 제거"
 					if (r > 240 && g > 240 && b > 240) {
-					    bf.setRGB(x, y, 0x00000000);
+					    bf.setRGB(x, y, 0);
 					}
 				}
 			return bf;
@@ -114,7 +114,7 @@ public class Main extends CFrame{
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					p.setBackground(Color.white);
-					p.setBorder(BorderFactory.createCompoundBorder(getter.line(getter.color), cardBorder));
+					p.setBorder(BorderFactory.createCompoundBorder(sp.line(sp.color), cardBorder));
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {

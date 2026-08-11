@@ -17,9 +17,17 @@ namespace _1_5 {
                 new Search().ShowDialog();
                 Parent.Show();
             };
-            label3.Click += (s, e) => { };
+            label3.Click += (s, e) => {
+                Parent.Hide();
+                new ReservationForm(1).ShowDialog();
+                Parent.Show();
+            };
             label4.Click += (s, e) => { };
-            label5.Click += (s, e) => { };
+            label5.Click += (s, e) => {
+                Parent.Hide();
+                new ReviewForm().ShowDialog();
+                Parent.Show();
+            };
         }
 
         public FlowLayoutPanel inforPanel { get => panel1; }

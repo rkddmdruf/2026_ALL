@@ -57,7 +57,7 @@ public class Login extends CFrame {
 	
 	String selectLocation;
 	
-	JLabel locationLabel = lb("", FONT(getter.font.deriveFont(19f).deriveFont(1)), HOA(JLabel.CENTER));
+	JLabel locationLabel = lb("", FONT(sp.font.deriveFont(19f).deriveFont(1)), HOA(JLabel.CENTER));
 	JTextField id = comp(JTextField::new, NAME("아이디"));
 	JPasswordField pw = comp(JPasswordField::new, NAME("비밀번호"));
 	JButton login = set(new JButton("로그인") {
@@ -71,7 +71,7 @@ public class Login extends CFrame {
 	        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
 	        super.paintComponent(g); // 👉 글씨 자동
 		};
-	}, FG(Color.white), BG(new Color(85, 80, 65)), FONT(getter.font.deriveFont(14f)));
+	}, FG(Color.white), BG(new Color(85, 80, 65)), FONT(sp.font.deriveFont(14f)));
 	JLabel text = lb("지도에서 지역을 선택한 후 로그인하세요.");
 	int hover = -1;
 	public Login() {
@@ -112,7 +112,7 @@ public class Login extends CFrame {
 				
 				key.forEach(e -> {
 					Point2D.Double p = getRegionCenter(map.get(e));
-					g2.setFont(getter.font.deriveFont(1).deriveFont(14f));
+					g2.setFont(sp.font.deriveFont(1).deriveFont(14f));
 					FontMetrics fm = g2.getFontMetrics();
 					g2.setColor(Color.black);
 					g2.drawString(strs.get(key.indexOf(e)), (int) p.x - fm.stringWidth(strs.get(key.indexOf(e))) / 2, (int) p.y);
@@ -120,7 +120,7 @@ public class Login extends CFrame {
 			}
 		};
 		JPanel p1 = new JPanel(new BorderLayout());
-		p1.setBorder(getter.em(30, 0, 0, 30));
+		p1.setBorder(sp.em(30, 0, 0, 30));
 		p1.setBackground(new Color(245,245,240));
 		p1.add(label);
 		
@@ -150,16 +150,16 @@ public class Login extends CFrame {
 				System.out.println(scale);
 				g2.scale(1, 1);
 				g2.setTransform(old);
-				g2.setFont(getter.font.deriveFont(20f).deriveFont(1));
+				g2.setFont(sp.font.deriveFont(20f).deriveFont(1));
 				FontMetrics fm = g2.getFontMetrics();
 				g2.drawString(selectLocation, (getWidth() - fm.stringWidth(selectLocation)) / 2, getHeight() / 2 -fm .getHeight());
 			}
 		};
 		
-		paintPanel.setBorder(getter.em(300, 300,300, 300));
+		paintPanel.setBorder(sp.em(300, 300,300, 300));
 
 		paintPanel.add(setPanel());
-		JLabel beforeLabel = lb("←이전", SIZE(100, 30), BORDER(getter.em(10, 40, 10, 0)));
+		JLabel beforeLabel = lb("←이전", SIZE(100, 30), BORDER(sp.em(10, 40, 10, 0)));
 		beforeLabel.addMouseListener(new MouseAdapter() { @Override public void mouseClicked(MouseEvent e) { card.show(cardP, "P1"); }});
 		
 		JPanel panel = col(0, fw(beforeLabel), f(paintPanel)).setBackColor(new Color(245, 245, 240));
@@ -179,7 +179,7 @@ public class Login extends CFrame {
 		                            RenderingHints.VALUE_ANTIALIAS_ON);
 
 		        int arc = 40;
-		        GradientPaint gp = new GradientPaint(0, 0, Util.setAlpha(color.get(strs.indexOf(selectLocation)), 150), 0, getHeight(), Util.setAlpha(Color.white, 150));
+		        GradientPaint gp = new GradientPaint(0, 0, Util.setA(color.get(strs.indexOf(selectLocation)), 150), 0, getHeight(), Util.setA(Color.white, 150));
 		        g2.setPaint(gp);
 		        g2.fillRoundRect(0, 0, getWidth(), getHeight(), arc, arc);
 		        g2.setPaint(gp);
@@ -190,7 +190,7 @@ public class Login extends CFrame {
 			}
 		};
 		panel.setOpaque(false);
-		panel.setBorder(getter.em(25, 25, 50 ,25));
+		panel.setBorder(sp.em(25, 25, 50 ,25));
 		
 		
 		JPanel mainPanel = col(15, fw(locationLabel), setTF(id), setTF(pw), f(login), text);
@@ -200,7 +200,7 @@ public class Login extends CFrame {
 	}
 	
 	private JPanel setTF(JTextField t) {
-		JPanel p = col(2, fw(lb(t.getName(), FONT(getter.font.deriveFont(13f)))), f(t));
+		JPanel p = col(2, fw(lb(t.getName(), FONT(sp.font.deriveFont(13f)))), f(t));
 		p.setOpaque(false);
 		return p;
 	}

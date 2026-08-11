@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Arc2D;
@@ -72,24 +73,18 @@ public class Game extends CFrame{
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				Graphics2D g2 = (Graphics2D) g;
-				Arc2D.Double arc = new Arc2D.Double();
-				arc.setArcByCenter(getWidth() / 2, getHeight() / 2, getWidth() / 3, 0, 360, Arc2D.PIE);
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				int value = maze[x][y];
-				if(value == wall) {
-					g2.setColor(Color.black.brighter());
-					g2.fillRect(0, 0, getWidth(), getHeight());
-				}else if(value <= 5) {
-					g2.setColor(new Color(158, 222, 253, value * 50));
+				
+				if(value == wall || value <= 5) {
+					g2.setColor(value == wall ? Color.black.brighter() : new Color(158, 222, 253, value * 50));
 					g2.fillRect(0, 0, getWidth(), getHeight());
 				}
 				
-				if(x == posR && y == posC) {
-					g2.setColor(Color.red);
-					g2.fill(arc);
-				}
-				if(x == 13 && y == 13) {
-					g2.setColor(Color.green);
-					g2.fill(arc);
+				if((x == posR && y == posC) || (x == 13 && y == 13)){
+					int r = getWidth() / 3;
+					g2.setColor(x == posR && y == posC ? Color.red : Color.green);
+					g2.fillOval(getWidth() / 2 - r, getHeight() / 2 - r, r * 2, r * 2);
 				}
 			}
 		};
@@ -133,19 +128,17 @@ public class Game extends CFrame{
 			dfs(nextR, nextC);
 		}
 	}
+	
 	@Override
 	protected void action() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				int k = e.getExtendedKeyCode() - KeyEvent.VK_LEFT;
+				int k = e.getKeyCode() - KeyEvent.VK_LEFT;
 				if(k < 0 || k >= dirs.size()) return;
-				int r = posR + dirs.get(k)[0];
-				int c = posC + dirs.get(k)[1];
-				if(maze[r][c] != wall){
-					posR = posR + dirs.get(k)[0];
-					posC = posC + dirs.get(k)[1];
-				}
+				int[] d = dirs.get(k).clone();
+				posR += d[0]; posC += d[1];
+				if(maze[posR][posC] == wall){ posR -= d[0]; posC -=d[1]; }
 				repaint();
 			}
 		});

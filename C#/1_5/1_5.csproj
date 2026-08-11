@@ -94,6 +94,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Moment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Moment.Designer.cs">
+      <DependentUpon>Moment.cs</DependentUpon>
+    </Compile>
     <Compile Include="owner.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -105,8 +111,26 @@
     <Compile Include="reservation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReservationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservationForm.Designer.cs">
+      <DependentUpon>ReservationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="review.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReviewForm.Designer.cs">
+      <DependentUpon>ReviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReviewUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReviewUpdate.Designer.cs">
+      <DependentUpon>ReviewUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="roomtype.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -142,6 +166,9 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Moment.resx">
+      <DependentUpon>Moment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -152,6 +179,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReservationForm.resx">
+      <DependentUpon>ReservationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReviewForm.resx">
+      <DependentUpon>ReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReviewUpdate.resx">
+      <DependentUpon>ReviewUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>

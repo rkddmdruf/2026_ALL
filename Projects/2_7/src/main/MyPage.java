@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class MyPage extends CFrame{
-	List<ordersEntity> orders = ordersEntity.findBy(e -> e.uno == getter.user.uno);
+	List<ordersEntity> orders = ordersEntity.findBy(e -> e.uno == sp.user.uno);
 	DefaultTableModel tModel = new DefaultTableModel("예약일,결제일,의사,시간,진료항목,금액,비고".split(","), 0) {
 		public boolean isCellEditable(int row, int column) {return false;};
 	};
@@ -63,7 +63,7 @@ public class MyPage extends CFrame{
 		}
 		
 		JTableHeader th = table.getTableHeader();
-		th.setBackground(getter.color);
+		th.setBackground(sp.color);
 		th.setForeground(Color.white);
 		th.setPreferredSize(new Dimension(0, 30));
 		th.setReorderingAllowed(false);
@@ -80,10 +80,10 @@ public class MyPage extends CFrame{
 	public void desing() {
 		init();
 		JPanel top = set(row(0, 
-				f(lb("     마이페이지", HOA(JLabel.CENTER), VEA(JLabel.CENTER), FG(getter.color), FONT(getter.font.deriveFont(24f).deriveFont(1)))),
-				fh(lb("<html>" + getter.user.name + "님<br>환영합니다.</html>", SIZE(100, 0), FONT(getter.font), VEA(JLabel.BOTTOM)))
-				), SIZE(0, 70), BG(Color.white), BORDER(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, getter.color), getter.em(3, 3, 3, 3))));
-		add(col(0, fw(top), f(set(col(0, f(sc)).setBackColor(Color.white), BORDER(getter.em(5, 10, 10, 10))))));
+				f(lb("     마이페이지", HOA(JLabel.CENTER), VEA(JLabel.CENTER), FG(sp.color), FONT(sp.font.deriveFont(24f).deriveFont(1)))),
+				fh(lb("<html>" + sp.user.name + "님<br>환영합니다.</html>", SIZE(100, 0), FONT(sp.font), VEA(JLabel.BOTTOM)))
+				), SIZE(0, 70), BG(Color.white), BORDER(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, sp.color), sp.em(3, 3, 3, 3))));
+		add(col(0, fw(top), f(set(col(0, f(sc)).setBackColor(Color.white), BORDER(sp.em(5, 10, 10, 10))))));
 	}
 
 	@Override

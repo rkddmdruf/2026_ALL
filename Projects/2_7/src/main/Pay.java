@@ -46,7 +46,7 @@ public class Pay extends CFrame{
 			g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
 			super.paintComponent(g);
 		};
-	}, FG(Color.gray), BG(Util.setAlpha(Color.LIGHT_GRAY, 100)), BORDER(null));
+	}, FG(Color.gray), BG(Util.setA(Color.LIGHT_GRAY, 100)), BORDER(null));
 	JButton close = set(new JButton("취소") {
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;
@@ -55,7 +55,7 @@ public class Pay extends CFrame{
 			g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
 			super.paintComponent(g);
 		};
-	}, FG(Color.white), BG(Util.setAlpha(getter.color, 100)), BORDER(null));
+	}, FG(Color.white), BG(Util.setA(sp.color, 100)), BORDER(null));
 	
 	public Pay(int ono) {
 		close.setContentAreaFilled(false);
@@ -73,10 +73,10 @@ public class Pay extends CFrame{
 
 	@Override
 	public void desing() {
-		JLabel tl = lb("결제", FG(Color.white	), BG(getter.color.darker()), FONT(getter.font.deriveFont(20f)), BORDER(getter.em(10, 10, 10, 10)));
+		JLabel tl = lb("결제", FG(Color.white	), BG(sp.color.darker()), FONT(sp.font.deriveFont(20f)), BORDER(sp.em(10, 10, 10, 10)));
 		tl.setOpaque(true);
 		
-		JPanel panel = set(new JPanel(new BorderLayout()), BORDER(getter.em(10, 15, 10, 10)));
+		JPanel panel = set(new JPanel(new BorderLayout()), BORDER(sp.em(10, 15, 10, 10)));
 		
 		JPanel p1 = new BoxPanel(C, 0, 10, 0, IntStream.range(0, 5).mapToObj(e -> setLabel(e)).toArray(JPanel[]::new)) {
 			@Override
@@ -101,8 +101,8 @@ public class Pay extends CFrame{
 		JPanel p3 = row(15, 15, 15, f(payB), f(close));
 		JPanel c = colF(10, p1, p2, p3);
 		
-		p1.setBorder(getter.em(10, 10, 10, 10));
-		p2.setBorder(getter.em(10, 10, 10, 10));
+		p1.setBorder(sp.em(10, 10, 10, 10));
+		p2.setBorder(sp.em(10, 10, 10, 10));
 		panel.add(c);
 		add(col(0, fw(tl), f(panel)));
 	}
@@ -116,11 +116,11 @@ public class Pay extends CFrame{
 		case 3 : { obj = categoryEntity.findById(o.cno).get().cname; break; }
 		case 4 : { obj = new DecimalFormat("###,###").format(categoryEntity.findById(o.cno).get().price) + "원"; break; }
 		}
-		JLabel l = lb(obj.toString(), HOA(JLabel.RIGHT), FONT(getter.font.deriveFont(1)));
+		JLabel l = lb(obj.toString(), HOA(JLabel.RIGHT), FONT(sp.font.deriveFont(1)));
 		if(n == 4) {
-			set(l, FONT(getter.font.deriveFont(16f).deriveFont(1)), FG(getter.color));
+			set(l, FONT(sp.font.deriveFont(16f).deriveFont(1)), FG(sp.color));
 		}
-		JPanel p = rowF(0, lb(str1[n], HOA(JLabel.LEFT), FONT(getter.font)), l).setBackColor(Color.white);
+		JPanel p = rowF(0, lb(str1[n], HOA(JLabel.LEFT), FONT(sp.font)), l).setBackColor(Color.white);
 		return p;
 	}
 	
@@ -145,16 +145,16 @@ public class Pay extends CFrame{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				super.keyReleased(e);
-				if(tfs.get(tfs.size() - 1).getText().length() < 4) set(payB, FG(Color.gray), BG(Util.setAlpha(Color.LIGHT_GRAY, 100)));
-				else set(payB, FG(Color.white), BG(Util.setAlpha(getter.color, 100)));
+				if(tfs.get(tfs.size() - 1).getText().length() < 4) set(payB, FG(Color.gray), BG(Util.setA(Color.LIGHT_GRAY, 100)));
+				else set(payB, FG(Color.white), BG(Util.setA(sp.color, 100)));
 			}
 		});
 		
 		payB.addActionListener(e -> {
-			if(!getter.user.card.equals(tfs.stream().map(t -> t.getText()).collect(Collectors.joining("-"))))
+			if(!sp.user.card.equals(tfs.stream().map(t -> t.getText()).collect(Collectors.joining("-"))))
 				throw new RuntimeException("카드번호를 확인해주세요.");
 			o.paydate = LocalDate.now();
-			getter.inf("결재가 완료되었습니다.");
+			sp.inf("결재가 완료되었습니다.");
 			o.save();
 			new Main().setVisible(true);;
 			dispose();
