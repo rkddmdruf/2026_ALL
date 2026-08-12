@@ -1,0 +1,16 @@
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\1_6Test.exe.config
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\1_6Test.exe
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\1_6Test.pdb
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\EntityFramework.dll
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\EntityFramework.xml
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\bin\Debug\ko\EntityFramework.resources.dll
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Form1.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Properties.Resources.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.csproj.GenerateResource.cache
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.csproj.CopyComplete
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.exe
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.pdb

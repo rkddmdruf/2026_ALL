@@ -15,7 +15,7 @@ import orms.userEntity;
 
 
 public class sp {
-	public static userEntity user;
+	public static userEntity user = userEntity.findAll().get(0);
 	public static doctorEntity doctor;
 	public static final Color color = new Color(30, 90, 200);
 	public static final Color imgBackColor = new Color(245, 245, 240);
@@ -32,6 +32,13 @@ public class sp {
 	}
 	public static Border em(int t, int l, int b, int r) {
 		return BorderFactory.createEmptyBorder(t, l, b, r);
+	}
+	
+	public static void tException(String s) {
+		throw new RuntimeException(s);
+	}
+	public static RuntimeException exception(String s) {
+		return new RuntimeException(s);
 	}
 	
 	public static void inf(String s) {

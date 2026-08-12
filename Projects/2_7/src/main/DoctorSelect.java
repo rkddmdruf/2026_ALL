@@ -32,7 +32,7 @@ public class DoctorSelect extends CFrame{
 	public DoctorSelect(int cno) {
 		category = categoryEntity.findById(cno).get();
 		ds = doctorEntity.findBy(e -> e.cno == cno && sp.user.lno == e.lno);
-		setFrame("의사선택", 575, 300, () -> {});
+		setFrame("의사선택", 575, 300);
 	}
 	
 	@Override

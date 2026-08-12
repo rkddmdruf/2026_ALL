@@ -19,7 +19,7 @@ public class sp {
 	public static Color black = new Color(230, 240, 250);
 	public static Integer fn = 0;
 	
-	public static userEntity user;
+	public static userEntity user = userEntity.findById(1).get();
 	public static Border line = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
 	public static Border line(Color color) {
 		return BorderFactory.createLineBorder(color);

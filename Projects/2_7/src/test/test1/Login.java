@@ -84,8 +84,7 @@ public class Login extends CFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setFrame("로그인", 797 + 81 + 30, 964 - 2 + 30, () -> {
-		});
+		setFrame("로그인", 797 + 81 + 30, 964 - 2 + 30);
 	}
 
 	@Override

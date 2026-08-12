@@ -45,7 +45,7 @@ public class R5 extends CFrame{
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				int w = getWidth() / 2, h = getHeight() / 2, r = 150;
+				int w = getWidth() / 2, h = getHeight() / 2, r = (int) (getWidth() / 3.5);
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				

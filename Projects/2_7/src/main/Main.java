@@ -38,7 +38,7 @@ public class Main extends CFrame{
 	Border cardBorder = sp.em(20, 45, 20, 45);
 	
 	public Main() {
-		setFrame("메인", 600, 350, () -> {});
+		setFrame("메인", 600, 350);
 	}
 
 	private Color rColor() {

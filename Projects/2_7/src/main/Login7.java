@@ -71,8 +71,7 @@ public class Login7 extends CFrame {
 	public Login7() {
 		pw.setEchoChar('●');
 		selectLocation = "충청남도";
-		setFrame("test", 797 + 81 + 30, 964 - 2 + 30, () -> {
-		});
+		setFrame("test", 797 + 81 + 30, 964 - 2 + 30);
 		repaint();
 	}
 

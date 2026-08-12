@@ -92,7 +92,6 @@ public class Game extends CFrame{
 	private boolean path(int r, int c, boolean[][] visit, int step) {
 		
 		visit[r][c] = true;
-		
 		if(r == 13 && c == 13) {
 			maze[r][c] = step;
 			return true;
@@ -104,9 +103,8 @@ public class Game extends CFrame{
 			if(nextR < 0 || nextR >= 14 || nextC < 0 || nextC >= 14) continue;
 			if(maze[nextR][nextC] == wall) continue;
 			if(visit[nextR][nextC]) continue;
-
-			if(path(nextR, nextC, visit, step+1)) {
-				if(step >= 5) maze[r][c] = step;
+			if(path(nextR, nextC, visit, step + 1)) {
+				maze[nextR][nextC] = step;
 				return true;
 			}
 		}

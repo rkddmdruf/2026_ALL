@@ -68,7 +68,7 @@ public class Pay extends CFrame{
 		t2.setEchoChar('●');
 		t3.setEchoChar('●');
 		o = ordersEntity.findById(ono).get();
-		setFrame("결제하기", 400, 350, () -> {});
+		setFrame("결제하기", 400, 350);
 	}
 
 	@Override

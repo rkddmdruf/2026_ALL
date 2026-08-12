@@ -39,7 +39,7 @@ public class Moment extends CFrame{
 	public Moment(int dno) {
 		doctor = doctorEntity.findById(dno).get();
 		setDate(0);
-		setFrame("달력", 350, 350, () -> {});
+		setFrame("달력", 350, 350);
 	}
 	@Override
 	public void desing() {

@@ -66,14 +66,12 @@ public class MyPage extends CFrame{
 		th.setBackground(sp.color);
 		th.setForeground(Color.white);
 		th.setPreferredSize(new Dimension(0, 30));
-		th.setReorderingAllowed(false);
 		th.setResizingAllowed(false);
 		
 		table.setRowHeight(70);
-		table.setShowGrid(false);
 		table.setIntercellSpacing(new Dimension(0, 0));
 		table.setShowVerticalLines(false);
-		setFrame("마이페이지", 700, 500, () -> {});
+		setFrame("마이페이지", 700, 500);
 	}
 
 	@Override

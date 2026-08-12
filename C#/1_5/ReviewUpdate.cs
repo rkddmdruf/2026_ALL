@@ -50,8 +50,9 @@ namespace _1_5 {
             }
             try {
                 re.review1 = textBox3.Text;
-                sp.infor("리뷰가 수정되었습니다.");
                 sp.entity.SaveChanges();
+                sp.infor("리뷰가 수정되었습니다.");
+                Close();
             } catch (Exception ex) {
                 sp.err("글씨가 넘쳤다");
             }

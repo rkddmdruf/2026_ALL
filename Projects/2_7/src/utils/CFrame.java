@@ -8,27 +8,36 @@ import javax.swing.JFrame;
 
 public abstract class CFrame extends JFrame{
 
-	public void setFrame(String s, int w, int h, Runnable r) {
+	public void setFrame(String s, int w, int h) {
 		setTitle(s);
 		setSize(w + 16, h + 39);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon("datafiles/icon/1.png").getImage());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) { 
-				r.run(); 
-			}
-			@Override
-			public void windowClosed(WindowEvent e) {
-				super.windowClosed(e);
-				System.out.println("fsdf");
-			}
-		});
 		desing();
 		action();
+		setVisible(true);
 	}
 	
-	public abstract void desing();
-	public abstract void action();
+	protected void setFramed(String s, int w, int h, Runnable r) {
+		setFrame(s, w, h);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				r.run();
+			}
+		});
+	}
+	
+	protected void setFrames(String s, int w, int h, Runnable r) {
+		setFrame(s, w, h);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				r.run();
+			}
+		});
+	}
+	protected abstract void desing();
+	protected abstract void action();
 }

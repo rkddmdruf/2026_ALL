@@ -36,8 +36,7 @@ public class Main extends CFrame{
 	}
 	
 	public Main() {
-		
-		setFrame("메인", 600, 400, () -> {});
+		setFrame("메인", 600, 400);
 	}
 	
 	
@@ -49,7 +48,7 @@ public class Main extends CFrame{
 			l.setIcon(cImage("icon/" + c.cno, 55, 55));
 			l.setHorizontalAlignment(JLabel.CENTER);
 			l.setVerticalTextPosition(SwingConstants.BOTTOM);
-			l.setHorizontalTextPosition(SwingConstants.CENTER);
+			l.setHorizontalTextPosition(SwingConstants.CENTER); 
 			p1.add(l);
 			list.add(l);
 		});
@@ -66,7 +65,6 @@ public class Main extends CFrame{
 		
 		BufferedImage bf = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g2 = bf.createGraphics();
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
 		g2.drawImage(img, 0, 0, null);
 		g2.dispose();
