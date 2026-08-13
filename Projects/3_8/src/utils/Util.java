@@ -1,13 +1,12 @@
-package main;
+package utils;
 
 import java.awt.AWTEvent;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
-import utils.sp;
 
 public class Util {
 	
@@ -30,4 +29,9 @@ public class Util {
 		t.printStackTrace();
 		sp.infor(t.getMessage());
 	}
+	
+	public static Color setA(Color c, int a) {
+		return new Color(c.getRed(), c.getGreen(), c.getBlue(), a);
+	}
 }
+

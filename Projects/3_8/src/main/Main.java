@@ -28,6 +28,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import orms.ProjectEntity;
 import orms.categoryEntity;
 import orms.productEntity;
 
@@ -105,6 +106,7 @@ public class Main extends CFrame{
 	}
 	
 	private JPanel card(productEntity p) {
+		ProjectEntity project = ProjectEntity.findById(p.pno).get();
 		JLabel img = new JLabel() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -113,7 +115,8 @@ public class Main extends CFrame{
 			}
 		};
 		set(img, BORDER(sp.com(sp.em(5, 5, 0, 5), sp.line(Color.black))), SIZE(0, 90));
-		JTextArea ta = new JTextArea("기종 : " + p.pname + "\n평균 가격 : 1,222,222원");
+		JTextArea ta = new JTextArea("기종 : " + p.pname + "\n평균 가격 : " + sp.df.format(project.items.stream().mapToInt(e -> e.price).average().getAsDouble()) + "원");
+		
 		ta.setLineWrap(true);
 		ta.setOpaque(false);
 		ta.setFont(sp.font.deriveFont(10f));

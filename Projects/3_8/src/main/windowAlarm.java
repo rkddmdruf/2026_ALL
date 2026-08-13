@@ -75,8 +75,6 @@ public class windowAlarm {
 	void showToast(String pass) {
 	    int w = 360, h = 100;
 	    JWindow toast = new JWindow();
-	    toast.setAlwaysOnTop(true);
-	    toast.setFocusableWindowState(false);
 	    toast.setSize(w, h);
 	    toast.setShape(new RoundRectangle2D.Double(0, 0, w, h, 8, 8));
 
@@ -107,6 +105,7 @@ public class windowAlarm {
 	    close.setForeground(Color.LIGHT_GRAY);
 	    close.setFont(sp.font.deriveFont(22f));
 	    close.addMouseListener(new MouseAdapter() { @Override public void mouseClicked(MouseEvent e) { toast.dispose(); } });
+	    
 	    toast.setContentPane(row(10, 
 		    		panel, 
 		    		f(set(colF(10, 

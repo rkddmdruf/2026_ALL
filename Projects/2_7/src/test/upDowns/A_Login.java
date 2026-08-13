@@ -165,8 +165,8 @@ public class A_Login extends CFrame {
 					g2.setColor(colors.get(n));
 					if (mouseMoved == n) {
 						Color c = colors.get(n);
-						g2.setColor(new Color(Math.min(255, c.getRed() + 20), Math.min(255, c.getGreen() + 20),
-								Math.min(255, c.getBlue() + 20)));
+						g2.setColor(new Color(Math.min(255, (int) (c.getRed() * 1.2)), Math.min(255, (int) (c.getGreen() * 1.2)),
+								Math.min(255,(int) (c.getBlue() * 1.2))));
 					}
 					g2.fill(s);
 					g2.setColor(Color.black);

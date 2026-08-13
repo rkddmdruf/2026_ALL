@@ -20,23 +20,15 @@ import javax.swing.TransferHandler;
 
 import utils.sp;
 
-class StarView extends JComponent {
-    private int value;  // 0~50
+public class StarView extends JComponent {
+    public int value;  // 0~50
 
     public StarView(int d) {
-        setValue(d);
-    }
-
-    void setValue(int value) {
-        this.value = Math.max(0, Math.min(50, value));
+        this.value = Math.max(0, Math.min(50, d));
+        System.out.println(value);
         repaint();
     }
-
     
-    private static File reviewImage;
-    private static void test() {
-    	
-    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -74,42 +66,6 @@ class StarView extends JComponent {
         
         g2.dispose();
     }
-    
-    
-    
-    public static void main(String[] args) {
-    	JLabel imageLabel = new JLabel();
-    	
-    	imageLabel.setTransferHandler(new TransferHandler() {
-    	    public boolean canImport(TransferSupport s) {
-    	        return s.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
-    	    }
-
-    	    public boolean importData(TransferSupport s) {
-    	        try {
-    	            File f = ((List<File>) s.getTransferable()
-    	                    .getTransferData(DataFlavor.javaFileListFlavor)).get(0);
-
-    	            if (!f.getName().toLowerCase().endsWith(".jfif"))
-    	                return false;
-
-    	            reviewImage = f;
-    	            imageLabel.setIcon(new ImageIcon(new ImageIcon(f.getPath()).getImage().getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(), 4)));
-    	            imageLabel.setText("");
-
-    	            return true;
-
-    	        } catch (Exception e) {
-    	            return false;
-    	        }
-    	    }
-    	});
-    	
-		JFrame f = new JFrame();
-		f.setSize(500, 500);
-		f.add(imageLabel);
-		f.setVisible(true);
-	}
     
     
 }

@@ -2,6 +2,9 @@ package utils;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.nio.ByteOrder;
 import java.text.DecimalFormat;
 
@@ -33,6 +36,12 @@ public class sp {
 		return BorderFactory.createCompoundBorder(outB, inB);
 	}
 	
+	public static Graphics2D anti(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		return g2;
+	}
 	public static void infor(String s) {
 		JOptionPane.showMessageDialog(null, s, "정보", JOptionPane.INFORMATION_MESSAGE);
 	}

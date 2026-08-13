@@ -23,15 +23,28 @@ public class ProjectEntity {
 	public static class Capacity {
 		public String value;
 		public Integer price;
+		@Override
+		public String toString() {
+			return "Capacity [value=" + value + ", price=" + price + "]";
+		}
 	}
 
 	public static class CarrierItem {
 		public String type;
 		public Integer price;
+		@Override
+		public String toString() {
+			return "CarrierItem [type=" + type + ", price=" + price + "]";
+		}
 	}
 
 	public static class Installment {
 		public Integer month;
+
+		@Override
+		public String toString() {
+			return "Installment [month=" + month + "]";
+		}
 	}
 	
 	public Optional<Capacity> find1(Predicate<Capacity> pre) {

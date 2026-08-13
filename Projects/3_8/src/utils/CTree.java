@@ -1,4 +1,4 @@
-package main;
+package utils;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -9,27 +9,41 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CTree extends JTree {
 
     Set<Object> checked = new HashSet<>();
-
+    Set<Object> parents = new HashSet<>();
     public CTree(DefaultMutableTreeNode root) {
         JTree tree = this;
         tree.setModel(new DefaultTreeModel(root));
         tree.setCellRenderer(new CircleCheckRenderer());
-
+        tree.setToggleClickCount(1);
+        
         tree.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-            	System.out.println("sdfds");
                 TreePath path = tree.getPathForLocation(e.getX(), e.getY());
                 if (path == null) return;
-                Object node = path.getLastPathComponent();
-                if (checked.contains(node)) checked.remove(node);
-                else checked.add(node);
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                if (!node.isLeaf()) {
+                    if (parents.contains(node)) {
+                        checked.remove(node);
+                        Collections.list(node.preorderEnumeration()).forEach(checked::remove);
+                    } else {
+                    	parents.add(node);
+                    }
+                } else {
+                    if (checked.contains(node))
+                        checked.remove(node);
+                    else
+                        checked.add(node);
+                }
+                System.out.println(checked);
                 tree.repaint();
+                
             }
         });
     }

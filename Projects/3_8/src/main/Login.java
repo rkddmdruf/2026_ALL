@@ -1,5 +1,6 @@
 package main;
 
+import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -14,13 +15,12 @@ import java.util.Optional;
 public class Login extends CFrame{
 	JTextField id = tf("아이디", SIZE(300, 26));
 	JPasswordField pw = comp(JPasswordField::new, NAME("비밀번호"), SIZE(300, 26));
-	CButton login = comp(CButton::new, TEXT("로그인"), FG(Color.white), BG(sp.color), SIZE(0, 32));
+	JButton login = bt("로그인", FG(Color.white), BG(sp.color), SIZE(0, 32));
 
 	boolean admin = false;
 
 	public Login() {
 		pw.setEchoChar('●');
-		login.r = 0;
 		setFramed("로그인", 485, 230, () -> {
 			if(admin) new Admin();
 			else new Main();

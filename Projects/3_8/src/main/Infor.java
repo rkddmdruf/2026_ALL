@@ -224,38 +224,64 @@ public class Infor extends CFrame{
 	    g.dispose();
 
 	    JLabel zoom = new JLabel() {
+	        @Override
 	        public boolean contains(int x, int y) {
 	            return false;
 	        }
 	    };
 
 	    int size = 125;
+
 	    zoom.setSize(size + 5, size);
 	    zoom.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 	    zoom.setVisible(false);
 
-	    Container parent = image.getParent();
-	    parent.add(zoom);
-	    parent.setComponentZOrder(zoom, 0);
+	    // 최상위 레이어에 추가해서 부모 패널 밖에서도 보이게 함
+	    JRootPane root = SwingUtilities.getRootPane(image);
+	    JLayeredPane layeredPane = root.getLayeredPane();
+
+	    layeredPane.add(zoom, JLayeredPane.POPUP_LAYER);
+	    layeredPane.setComponentZOrder(zoom, 0);
 
 	    MouseAdapter mouse = new MouseAdapter() {
-	        public void mouseMoved(MouseEvent e) {
-	            int x = Math.max(0,
-	                    Math.min(image.getWidth() - 30, e.getX() - 15));
-	            int y = Math.max(0,
-	                    Math.min(image.getHeight() - 30, e.getY() - 15));
 
-	            Image enlarged = shown.getSubimage(x, y, 30, 30)
-	                    .getScaledInstance(size + 5, size, Image.SCALE_FAST);
+	        @Override
+	        public void mouseMoved(MouseEvent e) {
+
+	            // 확대할 영역의 중심
+	            int x = e.getX() - 15;
+	            int y = e.getY() - 15;
+
+	            // 이미지 범위를 벗어나지 않게 제한
+	            x = Math.max(0, Math.min(image.getWidth() - 30, x));
+	            y = Math.max(0, Math.min(image.getHeight() - 30, y));
+
+	            Image enlarged = shown
+	                    .getSubimage(x, y, 30, 30)
+	                    .getScaledInstance(
+	                            size + 5,
+	                            size,
+	                            Image.SCALE_FAST);
 
 	            zoom.setIcon(new ImageIcon(enlarged));
+
+	            // image 기준 좌표 -> layeredPane 좌표로 변환
+	            Point p = SwingUtilities.convertPoint(
+	                    image,
+	                    e.getPoint(),
+	                    layeredPane);
+
+	            // 마우스 오른쪽 아래에 확대창 표시
 	            zoom.setLocation(
-	                    image.getX() + e.getX() + 10,
-	                    image.getY() + e.getY() + 10
+	                    p.x + 10,
+	                    p.y + 10
 	            );
+
 	            zoom.setVisible(true);
+	            layeredPane.repaint();
 	        }
 
+	        @Override
 	        public void mouseExited(MouseEvent e) {
 	            zoom.setVisible(false);
 	        }
@@ -264,6 +290,7 @@ public class Infor extends CFrame{
 	    image.addMouseMotionListener(mouse);
 	    image.addMouseListener(mouse);
 	}
+	
 	private void setPriceLabel() {
 		int price = project.capacities.get(storege.getSelectedIndex()).price + project.find2(i -> i.type.equals(company.getSelectedItem().toString())).get().price;
 		int mp = price / project.installments.get(moment.getSelectedIndex()).month + (ratep != null ? ratep.price : 0);

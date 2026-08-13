@@ -33,6 +33,7 @@ public final class Properties {
 			try {
 				target.getClass().getMethod(methodName, paramType).invoke(target, value);
 			} catch (ReflectiveOperationException e) {
+				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
 		}
@@ -100,6 +101,7 @@ public final class Properties {
 	}
 
 	public static JComboBox<String> cb(String items, Property... ps) {
+		if(items.isBlank()) return set(new JComboBox<>(), ps);
 		return set(new JComboBox<>(items.split(",")), ps);
 	}
 }

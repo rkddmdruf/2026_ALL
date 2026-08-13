@@ -95,7 +95,7 @@ public class ReviewInsert extends CFrame{
 		});
 
 		slider.addChangeListener(e -> {
-			star.setValue(slider.getValue());
+			star.value = (slider.getValue());
 			scopeLabel.setText("별점: " + sdf.format(slider.getValue() / 10.0));
 		});
 

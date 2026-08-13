@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -55,8 +56,8 @@ public class Admin extends CFrame{
 	JComboBox<String> carrier = comp(JComboBox::new, NAME("통신사"), SIZE(110, 24));
 	JComboBox<String> month = comp(JComboBox::new, NAME("약정"), SIZE(160, 24));
 
-	CButton image = comp(CButton::new, TEXT("이미지등록"), FG(Color.white), BG(new Color(150, 150, 150)), SIZE(105, 26));
-	CButton save = comp(CButton::new, TEXT("추가"), FG(Color.white), BG(sp.color), SIZE(65, 26));
+	JButton image = comp(JButton::new, TEXT("이미지등록"), FG(Color.white), BG(new Color(150, 150, 150)), SIZE(105, 26));
+	JButton save = comp(JButton::new, TEXT("추가"), FG(Color.white), BG(sp.color), SIZE(65, 26));
 
 	JTextField c128 = tf("128GB 추가금", SIZE(85, 22), BORDER(sp.line(sp.color)));
 	JTextField c256 = tf("256GB 추가금", SIZE(85, 22), BORDER(sp.line(sp.color)));
@@ -73,8 +74,6 @@ public class Admin extends CFrame{
 	File imageFile;
 
 	public Admin() {
-		image.r = 0;
-		save.r = 0;
 		subsets("128,256,512,1024", "GB").forEach(cap::addItem);
 		subsets("SKT,KT,LG U+", "").forEach(carrier::addItem);
 		subsets("12,24,36,48,60,72", "").forEach(month::addItem);
