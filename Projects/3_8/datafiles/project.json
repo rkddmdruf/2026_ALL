@@ -15,7 +15,7 @@
     "installments": [
       { "month": 12 },
       { "month": 24 },
-      { "month": 36 }
+      { "month": 36 },
     ]
   },
   {

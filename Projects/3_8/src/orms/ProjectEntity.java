@@ -71,7 +71,7 @@ public class ProjectEntity {
 		cache.clear();
 		try {
 			String json = Files.readString(Path.of("datafiles/project.json"));
-
+			
 			ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 			engine.put("jsonText", json);
 			Object result = engine.eval("Java.asJSONCompatible(JSON.parse(jsonText))");

@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.*;
+
+import test.test1.sdflkjsdflsdjfldskjflksdjflsdkfjsdlkfj;
+
 import static utils.BoxPanel.*;
 import static utils.Properties.*;
 
@@ -30,7 +33,9 @@ public class CTree extends JPanel{
 	}
 	
 	BoxPanel panel = col(10).setBackColor(Color.white);
-	public CTree(){
+	sdflkjsdflsdjfldskjflksdjflsdkfjsdlkfj f;
+	public CTree(sdflkjsdflsdjfldskjflksdjflsdkfjsdlkfj f){
+		this.f = f;
 		add(panel);
 	}
 	
@@ -61,8 +66,14 @@ public class CTree extends JPanel{
 				public void mouseClicked(MouseEvent e) {
 					if(selectLabel != null) selectLabel.setForeground(Color.LIGHT_GRAY);
 					l.setForeground(sp.red);
-					selectLabel = l;
-					System.out.println(selectLabel.getText());
+					if(l == selectLabel) {
+						l.setForeground(Color.LIGHT_GRAY);
+						selectLabel = null;
+					}
+					else selectLabel = l;
+					
+					f.category = selectLabel == null ? "" : selectLabel.getText();
+					f.reload();
 				}
 			});
 		});

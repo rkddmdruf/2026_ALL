@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace _1_6 {
     public partial class Form1 : Form {
 
-        public  Dictionary<string, UserControl> controls = new Dictionary<string, UserControl>();
+        public Dictionary<string, UserControl> controls = new Dictionary<string, UserControl>();
         public Label leftLabel;
         public Panel topPanel;
         public Form1() {
@@ -63,13 +63,14 @@ namespace _1_6 {
             };
             seatMap.SetMap(Properties.Resources._1, testList, new List<int>(), 1);*/
 
-            
+            sp.user = null;
             foreach (var value in controls.Values)
                 mainPanel.Controls.Add(value);
             if (sp.user == null) {
                 sp.Show("메인1");
             } else sp.Show("메인2");
-             
+            sp.Show("달력");
+
             label3.Click += (s, e) => {
                 topPanel.Controls.RemoveAt(topPanel.Controls.Count - 1);
                 topPanel.Controls.RemoveAt(topPanel.Controls.Count - 1);

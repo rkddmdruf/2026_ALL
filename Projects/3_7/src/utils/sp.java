@@ -17,7 +17,7 @@ import javax.swing.border.Border;
 import orms.userEntity;
 
 public class sp {
-	public static userEntity user;
+	public static userEntity user = userEntity.findById(1).get();
 	public static Color orange = new Color(255, 100, 0);
 	public static Color blue = new Color(65, 100, 235);
 	public static Color red = new Color(255, 90, 90);

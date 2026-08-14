@@ -26,12 +26,12 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -56,49 +56,6 @@
             this.panel1.Size = new System.Drawing.Size(416, 446);
             this.panel1.TabIndex = 4;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Black;
-            this.label3.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(12, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 27);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "<";
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Location = new System.Drawing.Point(0, 115);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(416, 330);
-            this.mainPanel.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label2.Location = new System.Drawing.Point(141, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 36);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Study cafe";
-            // 
-            // timeLabel
-            // 
-            this.timeLabel.AutoSize = true;
-            this.timeLabel.BackColor = System.Drawing.Color.Black;
-            this.timeLabel.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.timeLabel.ForeColor = System.Drawing.Color.White;
-            this.timeLabel.Location = new System.Drawing.Point(65, 60);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(274, 21);
-            this.timeLabel.TabIndex = 3;
-            this.timeLabel.Text = "현제날짜: 2026-08-23(일요일) 09:00";
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
@@ -116,6 +73,50 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "메인";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("굴림", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(12, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 27);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "<";
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.BackColor = System.Drawing.Color.Transparent;
+            this.mainPanel.Location = new System.Drawing.Point(0, 115);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(416, 330);
+            this.mainPanel.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label2.Location = new System.Drawing.Point(141, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 36);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Study cafe";
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.BackColor = System.Drawing.Color.Transparent;
+            this.timeLabel.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.timeLabel.ForeColor = System.Drawing.Color.White;
+            this.timeLabel.Location = new System.Drawing.Point(65, 60);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(274, 21);
+            this.timeLabel.TabIndex = 3;
+            this.timeLabel.Text = "현제날짜: 2026-08-23(일요일) 09:00";
             // 
             // Form1
             // 

@@ -1,0 +1,102 @@
+package test.test1;
+
+import utils.*;
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Arc2D;
+import java.awt.geom.Arc2D.Double;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.swing.*;
+
+import com.mysql.cj.util.Util;
+
+import orms.*;
+
+public class game extends CFrame {
+	JLabel l;
+	List<Color> cs = new ArrayList<>() {
+		{
+			add(new Color(153, 102, 255));
+			add(new Color(75, 192, 192));
+			add(new Color(255, 206, 86));
+			add(new Color(54, 162, 235));
+			add(new Color(255, 99, 132));
+		}
+	};
+	double rand = 0;
+	JLabel l2 = lb("START", FONT(sp.font.deriveFont(25f).deriveFont(1)));
+	List<Arc2D.Double> arcs = Arrays.asList(null, null, null, null, null);
+	CButton b = set(new CButton("룰렛 돌리기"), FONT(sp.font.deriveFont(24f).deriveFont(1)), BG(cs.get(2)));
+	List<rewardEntity> list = rewardEntity.findAll();
+	public game() {
+		Collections.shuffle(list);
+		list = list.subList(0, 5).stream().sorted((a, b) -> java.lang.Double.compare(b.resale, a.resale)).collect(Collectors.toList());
+		setFrame("룰렛", 500, 500);
+	}
+
+	protected void desing() {
+		l = new JLabel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Graphics2D g2 = sp.anti(g);
+				
+				int w = getWidth(), h = getHeight(), r = (int) (w / 3);
+				
+				double start = rand ;
+				for(int i = 0; i < 5; i++) {
+					double angle = 360.0 / 5;
+					g2.setColor(cs.get(i));
+					Arc2D.Double a = new Arc2D.Double();
+					a.setArcByCenter(w / 2, h / 2, r, start, angle, Arc2D.PIE);
+					g2.fill(a);
+					start += angle;
+				}
+				Arc2D.Double a = new Arc2D.Double();
+				a.setArcByCenter(w / 2, h / 2, r / 3.5, 0, 360, Arc2D.PIE);
+				g2.setColor(Color.black);
+				g2.fill(a);
+				
+				g2.setFont(sp.font.deriveFont(24f).deriveFont(1));
+				g2.setColor(Color.white);
+				FontMetrics fm = g2.getFontMetrics();
+				String s = "GO";
+				g2.drawString(s, (w - fm.stringWidth(s)) / 2, (h - fm.getHeight()) / 2 + fm.getAscent());
+				
+				AffineTransform old = g2.getTransform();
+				
+				start = rand;
+				g2.translate(w / 2, h / 2);
+				g2.rotate(Math.toRadians(start));
+				g2.setFont(g2.getFont().deriveFont(20f).deriveFont(1));
+				fm = g2.getFontMetrics();
+				for(int i = 0; i < 5; i++) {
+					double angle = 360d / 5;
+					g2.rotate(Math.toRadians(angle / 2));
+					s = (i + 1) + "등 " + (int)(list.get(i).resale * 100) + "%";
+					double rr = r / 3.5;
+					double x = ((r - rr) - fm.stringWidth(s)) / 2 + rr;
+					g2.drawString(s, (int) x, -fm.getHeight() / 2 + fm.getAscent());
+					g2.rotate(Math.toRadians(angle / 2));
+				}
+				g2.setTransform(old);
+			}
+		};
+		add(l);
+	}
+
+	protected void action() {
+	}
+	
+	public static void main(String[] args) {
+		main.Util.start(new game());
+	}
+}

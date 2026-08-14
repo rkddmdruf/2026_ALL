@@ -15,7 +15,7 @@
     "installments": [
       { "month": 12 },
       { "month": 24 },
-      { "month": 36 }
+      { "month": 36 },
     ]
   },
   {
@@ -119,7 +119,7 @@
       { "type": "SKT", "price": 160000 }    
     ],
     "installments": [
-      { "month": 24 }
+      { "month": 24 },
       { "month": 36 }
     ]
   },
@@ -172,7 +172,7 @@
       { "month": 36 },
       { "month": 48 },
       { "month": 60 },
-      { "month": 72 },
+      { "month": 72 }
     ]
   },
   {

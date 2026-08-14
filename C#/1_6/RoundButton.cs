@@ -32,10 +32,10 @@ namespace _1_6 {
 
                 var path = new System.Drawing.Drawing2D.GraphicsPath();
                 int r = 20, w = Width, h = Height;
-                path.AddArc(0, 0, r, r, 180, 90);
-                path.AddArc(w - r, 0, r, r, 270, 90);
                 path.AddArc(w - r, h - r, r, r, 0, 90);
                 path.AddArc(0, h - r, r, r, 90, 90);
+                path.AddArc(0, 0, r, r, 180, 90);
+                path.AddArc(w - r, 0, r, r, 270, 90);
                 path.CloseFigure();
                 Region = new Region(path);
             };

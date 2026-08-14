@@ -14,3 +14,10 @@ C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.csproj.C
 C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.csproj.CopyComplete
 C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.exe
 C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\1_6Test.pdb
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Main1.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Main2.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Login.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.DaySelect.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Card.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Moment.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_6Test\obj\Debug\_1_6Test.Map.resources
