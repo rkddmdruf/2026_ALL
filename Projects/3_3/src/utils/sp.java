@@ -3,6 +3,7 @@ package utils;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -23,11 +24,18 @@ import orms.userEntity;
 public class sp {
 
 	public static Font font = new Font("맑은 고딕", 0, 12);
-	public static userEntity user = userEntity.findById(1).get();
+	public static userEntity user;
 	public static Color color = new Color(0, 150, 250);
 	public static Color lineColor = new Color(255, 30, 80);
 	public static Border line = BorderFactory.createLineBorder(Color.lightGray);
 
+	
+	public static Graphics2D anti(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		return g2;
+	}
 	public static ImageIcon circleImage(int uno, int size) {
 		File file = new File("datafiles/profile/" + uno + ".jpg");
 		if (!file.exists()) return null;
@@ -62,6 +70,24 @@ public class sp {
 		}
 		return img;
 	}
+	public static ImageIcon circleLine2(ImageIcon imgi, Color color) {
+		Image img = imgi.getImage();
+		try {
+			BufferedImage bf = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
+			Graphics2D g2 = bf.createGraphics();
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2.setStroke(new BasicStroke(2));
+			g2.setColor(color);
+			g2.drawImage(img, 4, 4, bf.getWidth() - 8, bf.getHeight() - 8, null);
+			g2.drawOval(1, 1, bf.getWidth() - 3, bf.getHeight() - 3);
+			g2.dispose();
+			return new ImageIcon(bf.getScaledInstance(imgi.getIconHeight(), imgi.getIconHeight(), 4));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return imgi;
+	}
+	
 	public static ImageIcon getImage(String s, int w, int h) {
 		String str = s + (s.contains("icons/") ? ".png" : ".jpg");
 		return new ImageIcon(new ImageIcon("datafiles/" + str).getImage().getScaledInstance(w, h, 4));

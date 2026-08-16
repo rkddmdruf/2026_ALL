@@ -3,6 +3,7 @@ package orms;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,22 @@ public class userEntity {
 		}
 	}
 
+	public List<Integer> myFollow(){
+		List<Integer> list = new ArrayList<>();
+		userEntity.findBy(e -> !e.u_no.equals(u_no)).forEach(e -> {
+			var a = Arrays.stream(e.u_follow.split(","))
+					.map(c -> Integer.parseInt(c))
+					.filter(c -> c.equals(u_no))
+					.findFirst().orElse(null);
+			if(a != null) list.add(a);
+		});
+		return list;
+	}
+	
+	public List<Integer> myFollowing(){
+		return Arrays.stream(u_follow.split(",")).map(e -> Integer.parseInt(e)).collect(Collectors.toList());
+	}
+	
 	public void delete() {
 		try (var stmt = DBManager.execute("DELETE FROM user WHERE u_no =?", u_no)) {
 			stmt.executeUpdate();

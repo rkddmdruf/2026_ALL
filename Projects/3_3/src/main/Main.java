@@ -20,6 +20,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.time.format.DateTimeFormatter;
@@ -141,6 +142,24 @@ public class Main extends CFrame{
 			topComps.add(img);
 			aList.add(uno);
 		}else str = s;
+		MouseAdapter scma = new MouseAdapter() {
+			int x = 0;
+			@Override
+			public void mousePressed(MouseEvent e) { x = e.getX(); }
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				sc.getHorizontalScrollBar().setValue(sc.getHorizontalScrollBar().getValue() - e.getX() + x );
+				x = e.getX();
+			}
+		};
+		img.addMouseListener(scma);
+		img.addMouseMotionListener(scma);
+		img.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(uno);
+			}
+		});
 		JPanel panel = col(5, set(img, SIZE(60, 60)), lb(str, HOA(JLabel.CENTER), FONT(sp.font.deriveFont(11f)))).setBackColor(Color.white);
 		return panel;
 	}

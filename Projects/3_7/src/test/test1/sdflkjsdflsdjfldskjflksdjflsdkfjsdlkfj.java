@@ -181,6 +181,7 @@ public class sdflkjsdflsdjfldskjflksdjflsdkfjsdlkfj extends CFrame {
 			    	((JComponent)img.getParent()).setBorder(sp.com(sp.line(Color.lightGray),  sp.em(0, 7, 0, 7)));
 			    	img.b = false;
 			    }
+			    
 			    public void mouseClicked(MouseEvent ae) {
 			    	if(! img.b) return;
 			    	if(!img.rd.contains(ae.getPoint())) return;
@@ -198,6 +199,7 @@ public class sdflkjsdflsdjfldskjflksdjflsdkfjsdlkfj extends CFrame {
 					fw(row(10, lb(sp.df.format(e.pprice) + "원", FG(sp.red)), lb("재고 " + e.pcount + "개", FG(Color.LIGHT_GRAY))).setBackColor(Color.white))
 					), BG(Color.white), BORDER(sp.com(sp.line(Color.lightGray),  sp.em(0, 7, 0, 7))));
 			p1.add(p);
+			
 		});
 		slClick = false;
 		revalidate();

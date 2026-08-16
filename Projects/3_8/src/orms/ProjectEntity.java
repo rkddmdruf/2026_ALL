@@ -74,7 +74,7 @@ public class ProjectEntity {
 			
 			ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 			engine.put("jsonText", json);
-			Object result = engine.eval("Java.asJSONCompatible(JSON.parse(jsonText))");
+			Object result = engine.eval("Java.asJSONCompatible(eval ('(' + jsonText + ')'))");
 
 			List<Object> list = (List<Object>) result;
 			for (Object o : list) {
@@ -84,6 +84,7 @@ public class ProjectEntity {
 
 				e.capacities = new ArrayList<>();
 				for (Object co : (List<Object>) m.get("capacities")) {
+					if(co == null) continue;
 					Map<String, Object> cm = (Map<String, Object>) co;
 					var c = new Capacity();
 					c.value = (String) cm.get("value");
@@ -93,6 +94,7 @@ public class ProjectEntity {
 
 				e.items = new ArrayList<>();
 				for (Object io : (List<Object>) m.get("items")) {
+					if(io == null) continue;
 					Map<String, Object> im = (Map<String, Object>) io;
 					var it = new CarrierItem();
 					it.type = (String) im.get("type");
@@ -102,6 +104,7 @@ public class ProjectEntity {
 
 				e.installments = new ArrayList<>();
 				for (Object mo : (List<Object>) m.get("installments")) {
+					if(mo == null) continue;
 					Map<String, Object> mm = (Map<String, Object>) mo;
 					var ins = new Installment();
 					ins.month = num(mm.get("month"));

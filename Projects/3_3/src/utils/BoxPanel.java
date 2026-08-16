@@ -86,6 +86,7 @@ public class BoxPanel extends JPanel{
     }
     
     public BoxPanel addz(JComponent c) {
+    	this.setAlignmentX(Component.CENTER_ALIGNMENT);
     	this.add(c);
     	if(inner != 0)
     		this.add(alignment == R ? Box.createHorizontalStrut(inner) : Box.createVerticalStrut(inner));
