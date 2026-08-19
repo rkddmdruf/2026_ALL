@@ -27,6 +27,13 @@ public class Home extends JPanel{
 				f.dispose();
 			}
 		});
+		p3_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Roullet().setVisible(true);
+				f.dispose();
+			}
+		});
 		JPanel p = new JPanel(new GridLayout(2, 1, 10, 10));
 		JPanel p1 = set(col(5, fw(lb("광고", FONT(sp.font.deriveFont(14f))))), BORDER(sp.eLine(Color.LIGHT_GRAY, 5, 5, 5, 5)), BG(Color.white));
 		JPanel p2 = getPanel("logo/cash.png", "충전소", "포인트 충전하기");

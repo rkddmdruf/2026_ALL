@@ -17,7 +17,7 @@ public class sp {
 	public static final Font font = new Font("맑은 고딕", 0, 12);
 	public static final Color color = new Color(230, 240, 250);
 	public static final Border line = BorderFactory.createLineBorder(Color.black);
-	public static userEntity user = userEntity.findById(1).get();
+	public static userEntity user;
 	public static final DecimalFormat df = new DecimalFormat("###,###");
 	
 	

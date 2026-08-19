@@ -31,7 +31,9 @@ public class Roullet extends CFrame {
 	
 	public Roullet() {
 		getContentPane().setBackground(new JButton().getBackground());
-		setFrame("룰렛", 600, 500);
+		setFramed("룰렛", 600, 500, () -> {
+			new Main().setVisible(true);
+		});
 	}
 
 	protected void desing() {

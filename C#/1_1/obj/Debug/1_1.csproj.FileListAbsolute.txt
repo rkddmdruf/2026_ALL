@@ -46,3 +46,10 @@ F:\git\git_2026_ALL\C#\1_1\obj\Debug\_1_1.Store.resources
 F:\git\git_2026_ALL\C#\1_1\obj\Debug\_1_1.StoreUpdate.resources
 F:\git\git_2026_ALL\C#\1_1\obj\Debug\_1_1.Tiket.resources
 F:\git\git_2026_ALL\C#\1_1\obj\Debug\_1_1.TicketCard.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\WindowsFormsApp1.performerCard.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\WindowsFormsApp1.PerformerControl.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\WindowsFormsApp1.PerformUpdate.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\_1_1.Store.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\_1_1.StoreUpdate.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\_1_1.TicketCard.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_1\obj\Debug\_1_1.Tiket.resources

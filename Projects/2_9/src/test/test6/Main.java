@@ -25,7 +25,7 @@ public class Main extends CFrame {
 		b3.setVerticalTextPosition(JLabel.BOTTOM);
 		b3.setHorizontalTextPosition(JLabel.CENTER);
 		b1.setSelected(true);
-		setFrame("홈", 850, 550);
+		setFrameg("홈", 850, 550, () -> new test6_Login().setVisible(true));
 	}
 
 	protected void desing() {

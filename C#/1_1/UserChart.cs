@@ -32,8 +32,6 @@ namespace WindowsFormsApp1 {
             area.AxisY.MajorGrid.LineColor = Color.FromArgb(230, 230, 230);
             area.AxisY.LineColor = Color.Gainsboro;
             area.AxisY.Minimum = 0;
-            area.AxisY.Maximum = double.NaN;
-            area.AxisY.Interval = 0;
             area.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
             chart.ChartAreas.Add(area);
 
@@ -42,8 +40,8 @@ namespace WindowsFormsApp1 {
                 Alignment = ContentAlignment.TopLeft,
                 Docking = Docking.Top
             };
-            chart1.Titles.Add(chartTitle);
-            chart1.Legends.Clear();
+            chart.Titles.Add(chartTitle);
+            chart.Legends.Clear();
 
             series = new Series {
                 ChartType = SeriesChartType.Column,
@@ -53,14 +51,14 @@ namespace WindowsFormsApp1 {
                 Font = new Font("맑은 고딕", 9F, FontStyle.Bold)
             };
             
-            chart1.Series.Add(series);
-            foreach (Series s in chart1.Series) {
+            chart.Series.Add(series);
+            foreach (Series s in chart.Series) {
                 s.IsValueShownAsLabel = true;
                 s.LabelForeColor = Color.Black;
                 s.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
             }
 
-            chart1.DataBind();
+            chart.DataBind();
         }
 
         public Color SeriesColor { set => series.Color = value; }

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="festivaldbModelStoreContainer" CdmEntityContainer="Entiy">
+    <EntitySetMapping Name="AppUser">
+      <EntityTypeMapping TypeName="festivaldbModel.AppUser">
+        <MappingFragment StoreEntitySet="AppUser">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Booth">
+      <EntityTypeMapping TypeName="festivaldbModel.Booth">
+        <MappingFragment StoreEntitySet="Booth">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="W" ColumnName="W" />
+          <ScalarProperty Name="H" ColumnName="H" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="StageId" ColumnName="StageId" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BoothType">
+      <EntityTypeMapping TypeName="festivaldbModel.BoothType">
+        <MappingFragment StoreEntitySet="BoothType">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CodePrefix" ColumnName="CodePrefix" />
+          <ScalarProperty Name="DefaultW" ColumnName="DefaultW" />
+          <ScalarProperty Name="DefaultH" ColumnName="DefaultH" />
+          <ScalarProperty Name="ColorHex" ColumnName="ColorHex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventItem">
+      <EntityTypeMapping TypeName="festivaldbModel.EventItem">
+        <MappingFragment StoreEntitySet="EventItem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="StageId" ColumnName="StageId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+          <ScalarProperty Name="EndHour" ColumnName="EndHour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Festival">
+      <EntityTypeMapping TypeName="festivaldbModel.Festival">
+        <MappingFragment StoreEntitySet="Festival">
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Place" ColumnName="Place" />
+          <ScalarProperty Name="SaleSeq" ColumnName="SaleSeq" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Performer">
+      <EntityTypeMapping TypeName="festivaldbModel.Performer">
+        <MappingFragment StoreEntitySet="Performer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="Members" ColumnName="Members" />
+          <ScalarProperty Name="Fee" ColumnName="Fee" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sale">
+      <EntityTypeMapping TypeName="festivaldbModel.Sale">
+        <MappingFragment StoreEntitySet="Sale">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="SaleTime" ColumnName="SaleTime" />
+          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="TicketTypeId" ColumnName="TicketTypeId" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Pay" ColumnName="Pay" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SoldAt" ColumnName="SoldAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staff">
+      <EntityTypeMapping TypeName="festivaldbModel.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartHour" ColumnName="StartHour" />
+          <ScalarProperty Name="EndHour" ColumnName="EndHour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stage">
+      <EntityTypeMapping TypeName="festivaldbModel.Stage">
+        <MappingFragment StoreEntitySet="Stage">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Structure">
+      <EntityTypeMapping TypeName="festivaldbModel.Structure">
+        <MappingFragment StoreEntitySet="Structure">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="W" ColumnName="W" />
+          <ScalarProperty Name="H" ColumnName="H" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketType">
+      <EntityTypeMapping TypeName="festivaldbModel.TicketType">
+        <MappingFragment StoreEntitySet="TicketType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Sold" ColumnName="Sold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendor">
+      <EntityTypeMapping TypeName="festivaldbModel.Vendor">
+        <MappingFragment StoreEntitySet="Vendor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FestivalId" ColumnName="FestivalId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Kind" ColumnName="Kind" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Rent" ColumnName="Rent" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="BizNum" ColumnName="BizNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
