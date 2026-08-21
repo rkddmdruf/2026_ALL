@@ -83,6 +83,7 @@
             this.left.Size = new System.Drawing.Size(21, 19);
             this.left.TabIndex = 3;
             this.left.Text = "<";
+            this.left.Click += new System.EventHandler(this.left_Click);
             // 
             // panel3
             // 

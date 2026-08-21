@@ -29,5 +29,9 @@ namespace _1_6_test_2 {
         private void timer1_Tick(object sender, EventArgs e) {
             label3.Text = "현재날짜: " + DateTime.Now.ToString("yyyy-MM-dd(dddd) hh:mm");
         }
+
+        private void left_Click(object sender, EventArgs e) {
+            sp.Show(sp.action[sp.action.Count - 1]);
+        }
     }
 }

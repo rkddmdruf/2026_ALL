@@ -57,7 +57,7 @@ namespace _1_6 {
             return bit;
         }
         public static void Show(string text, bool actionInsert = true) {
-            string cur = panels.FirstOrDefault(panel => panel.Value.Visible).Key;
+            string cur = panels.FirstOrDefault(panel => panel.Value.Visible)?.Key;
 
             if (text.Contains("메인")) main.leftLabel.Visible = false;
             else main.leftLabel.Visible = true;

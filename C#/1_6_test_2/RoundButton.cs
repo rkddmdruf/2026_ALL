@@ -27,12 +27,11 @@ namespace _1_6_test_2 {
 
             TextImageRelation = TextImageRelation.ImageAboveText;
             ImageAlign = ContentAlignment.TopCenter;
-            TextAlign = ContentAlignment.BottomCenter;
-
+            TextAlign = img == null ? ContentAlignment.MiddleCenter : ContentAlignment.BottomCenter;
             Resize += (s, e) => {
-                int height = (int)(Font.Size * 1.4 + 10 + Image?.Height ?? 20);
+                int height = (int)(Font.Size * 1.4 + 10 + Image?.Height ?? 0);
                 Padding = new Padding(0, (Height - height) / 2, 0, 0);
-
+                if (img == null) Padding = new Padding(0);
                 var path = new System.Drawing.Drawing2D.GraphicsPath();
                 int r = 20, w = Width, h = Height;
                 path.AddArc(w - r, h - r, r, r, 0, 90);

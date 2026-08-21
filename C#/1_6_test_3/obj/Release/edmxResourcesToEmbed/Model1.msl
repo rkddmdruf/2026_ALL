@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="study_cafeModelStoreContainer" CdmEntityContainer="Entity">
+    <EntitySetMapping Name="outing">
+      <EntityTypeMapping TypeName="study_cafeModel.outing">
+        <MappingFragment StoreEntitySet="outing">
+          <ScalarProperty Name="ono" ColumnName="ono" />
+          <ScalarProperty Name="uno" ColumnName="uno" />
+          <ScalarProperty Name="rno" ColumnName="rno" />
+          <ScalarProperty Name="out_time" ColumnName="out_time" />
+          <ScalarProperty Name="in_time" ColumnName="in_time" />
+          <ScalarProperty Name="out_day" ColumnName="out_day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reservation">
+      <EntityTypeMapping TypeName="study_cafeModel.reservation">
+        <MappingFragment StoreEntitySet="reservation">
+          <ScalarProperty Name="rno" ColumnName="rno" />
+          <ScalarProperty Name="uno" ColumnName="uno" />
+          <ScalarProperty Name="sno" ColumnName="sno" />
+          <ScalarProperty Name="r_date" ColumnName="r_date" />
+          <ScalarProperty Name="cafe_date" ColumnName="cafe_date" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="r_time" ColumnName="r_time" />
+          <ScalarProperty Name="floor" ColumnName="floor" />
+          <ScalarProperty Name="pay" ColumnName="pay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seat">
+      <EntityTypeMapping TypeName="study_cafeModel.seat">
+        <MappingFragment StoreEntitySet="seat">
+          <ScalarProperty Name="sno" ColumnName="sno" />
+          <ScalarProperty Name="sname" ColumnName="sname" />
+          <ScalarProperty Name="s_x" ColumnName="s_x" />
+          <ScalarProperty Name="s_y" ColumnName="s_y" />
+          <ScalarProperty Name="s_w" ColumnName="s_w" />
+          <ScalarProperty Name="s_h" ColumnName="s_h" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="study_cafeModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="uno" ColumnName="uno" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="pw" ColumnName="pw" />
+          <ScalarProperty Name="card" ColumnName="card" />
+          <ScalarProperty Name="point" ColumnName="point" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

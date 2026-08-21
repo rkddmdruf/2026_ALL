@@ -11,7 +11,7 @@ namespace _1_6_test_2 {
         public static Entity entity = new Entity();
         public static user user = entity.user.ToList()[0];
         public static Dictionary<string, UserControl> panels = new Dictionary<string, UserControl>();
-
+        public static List<string> action = new List<string>();
         public static Color[] colors = {
 
 Color.FromArgb(68,204,174), 
@@ -40,12 +40,13 @@ Color.FromArgb(176,207,63)
             return b;
 
         }
-        public static void Show(string s) {
+        public static void Show(string s, bool b = false) {
             panels.Values.ToList().ForEach(t => t.Visible = false);
             UserControl p = new UserControl();
             if (panels.TryGetValue(s, out p)) {
                 p.Visible = true;
             }
+            if (!b) action.Add(s);
         }
         public static Font f(int size, FontStyle s = FontStyle.Regular) {
             return new Font("맑은 고딕", size, s);

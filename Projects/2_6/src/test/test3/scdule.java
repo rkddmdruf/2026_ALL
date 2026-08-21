@@ -52,7 +52,7 @@ public class scdule extends CFrame{
 		bt.arc = 25;
 		setFrame("노선 스케줄", 400, 550, () -> {new metro("","").setVisible(true);});
 	}
-
+	
 	@Override
 	protected void desing() {
 		setTime();

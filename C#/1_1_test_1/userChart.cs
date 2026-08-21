@@ -48,13 +48,6 @@ namespace _1_1_test_1 {
                 Font = sp.fk(9),
             };
             chart.Series.Add(series);
-            foreach (Series s in chart.Series) {
-                s.IsValueShownAsLabel = true;
-                s.LabelForeColor = Color.Black;
-                s.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
-            }
-
-            chart.DataBind();
         }
 
         public Color setColor { set => series.Color = value; }
