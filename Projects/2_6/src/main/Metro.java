@@ -1,5 +1,8 @@
 package main;
 
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,10 +41,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import orms.stationEntity;
-
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
-import uitls.*;
+import utils.*;
 
 public class Metro extends CFrame{
 	JLabel label;
@@ -84,8 +84,8 @@ public class Metro extends CFrame{
 	List<Integer> totalPix = Arrays.asList(0);
 	
 	public Metro() {
-		bLabel.setBorder(getter.em(2, 0, 2, 0));
-		bLabel.setFont(getter.font.deriveFont(13f));
+		bLabel.setBorder(sp.em(2, 0, 2, 0));
+		bLabel.setFont(sp.font.deriveFont(13f));
 		bLabel.setOpaque(false);
 		bLabel.setForeground(Color.white);
 		setFrame("경로 검색", 600, 930, () -> {});
@@ -162,7 +162,7 @@ public class Metro extends CFrame{
 		    
 		    private void drawStartEnd(Graphics2D g2, String str, int n) {
 		    	g2.setStroke(new BasicStroke(2f));
-		        g2.setFont(getter.font.deriveFont(17f));
+		        g2.setFont(sp.font.deriveFont(17f));
 		    	FontMetrics fm = getFontMetrics(getFont());
 	        	int textWidth = fm.stringWidth(str);
 	        	int textHeight = fm.getAscent();
@@ -178,7 +178,7 @@ public class Metro extends CFrame{
 	        	
 	        	g2.setColor(Color.white);
 	        	g2.fill(e);
-	        	g2.setColor(str.equals("출") ? getter.color : Color.red);
+	        	g2.setColor(str.equals("출") ? sp.color : Color.red);
 	        	g2.draw(e);
 	        	g2.drawString(str, x - 2, y + 2);
 		    }

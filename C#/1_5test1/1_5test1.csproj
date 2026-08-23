@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9EDABE5E-115F-4A2A-9F8A-CBCD1E5DDDB1}</ProjectGuid>
+    <ProjectGuid>{8F2697D3-A311-430A-BEF1-941F8EEEB145}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>_1_5test1</RootNamespace>
     <AssemblyName>1_5test1</AssemblyName>
@@ -58,6 +58,12 @@
     <Compile Include="address.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="adminPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="adminPanel.Designer.cs">
+      <DependentUpon>adminPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,12 @@
     </Compile>
     <Compile Include="hotel.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -93,24 +105,48 @@
     <Compile Include="reservation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReservationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservationForm.Designer.cs">
+      <DependentUpon>ReservationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="review.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="roomtype.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp.cs" />
-    <Compile Include="user.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Search.cs">
+      <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Search.Designer.cs">
+      <DependentUpon>Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sp.cs" />
     <Compile Include="topPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="topPanel.Designer.cs">
       <DependentUpon>topPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="userMain.Designer.cs">
+      <DependentUpon>userMain.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="adminPanel.resx">
+      <DependentUpon>adminPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -122,8 +158,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReservationForm.resx">
+      <DependentUpon>ReservationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search.resx">
+      <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="topPanel.resx">
       <DependentUpon>topPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userMain.resx">
+      <DependentUpon>userMain.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

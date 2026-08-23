@@ -13,5 +13,7 @@ namespace _1_5 {
         public adminMain() {
             InitializeComponent();
         }
+
+        public Panel getPanel { get => panel1; }
     }
 }

@@ -1,5 +1,8 @@
 package test.test3;
 
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,20 +21,18 @@ import javax.swing.SwingUtilities;
 
 import main.Util;
 import orms.stationEntity;
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
 
 public class Main3 extends CFrame{
-	JLabel l1 = lb("현재시간: " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), FONT(getter.font.deriveFont(1).deriveFont(16f)));
+	JLabel l1 = lb("현재시간: " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), FONT(sp.font.deriveFont(1).deriveFont(16f)));
 	JTextField t1 = tf("출발지");
 	JTextField t2 = tf("도착지");
 	CButton b1  = comp(CButton::new, TEXT("경로검색"), FG(Color.white));
-	CButton b2 = set(new CButton(getter.user == null ? "로그인" : "로그아웃", getter.getImage("icon/login", 40, 40)), FG(Color.white));
-	CButton b3 = set(new CButton("마이페이지", getter.getImage("icon/user", 40, 40)), FG(Color.white));
+	CButton b2 = set(new CButton(sp.user == null ? "로그인" : "로그아웃", sp.getImage("icon/login", 40, 40)), FG(Color.white));
+	CButton b3 = set(new CButton("마이페이지", sp.getImage("icon/user", 40, 40)), FG(Color.white));
 	
 	public Main3() {
-		b3.setEnabled(getter.user != null);
+		b3.setEnabled(sp.user != null);
 		setFrame("메인", 800, 475, () -> {System.exit(0);});
 	}
 
@@ -44,7 +45,7 @@ public class Main3 extends CFrame{
 				g.drawImage(new ImageIcon("datafiles/main.png").getImage(), 0, 0, getWidth(), getHeight(), null);
 			}
 		};
-		set(panel, BORDER(getter.em(100, 70, 100, 70)));
+		set(panel, BORDER(sp.em(100, 70, 100, 70)));
 		panel.add(setMainPanel());
 		add(panel);
 	}
@@ -65,7 +66,7 @@ public class Main3 extends CFrame{
 	        }
 		};
 		panel.setOpaque(false);
-		set(panel, BORDER(getter.em(10,20,10,50)));
+		set(panel, BORDER(sp.em(10,20,10,50)));
 		
 		JPanel p1 = new BoxPanel(C, 0, 20, 0,
 				fw(l1),
@@ -86,7 +87,7 @@ public class Main3 extends CFrame{
 			}
 		};
 		p1.setOpaque(false);
-		p1.setBorder(getter.em(15, 15, 15, 15));
+		p1.setBorder(sp.em(15, 15, 15, 15));
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 20, 20));
 		buttonPanel.setOpaque(false);
 		buttonPanel.add(b2);
@@ -102,8 +103,8 @@ public class Main3 extends CFrame{
 	@Override
 	protected void action() {
 		b1.addActionListener(e -> {
-			if(getter.user == null) {
-				getter.err("로그인이 되어있지 않습니다.");
+			if(sp.user == null) {
+				sp.err("로그인이 되어있지 않습니다.");
 				new Login().setVisible(true);
 				dispose();
 				return;
@@ -121,13 +122,13 @@ public class Main3 extends CFrame{
 			return;
 		});
 		b2.addActionListener(e -> {
-			if(getter.user == null) {
+			if(sp.user == null) {
 				new Login().setVisible(true);
 				dispose();
 				return;
 			}else {
-				getter.user = null;
-				getter.infor("로그아웃되어있습니다.");
+				sp.user = null;
+				sp.infor("로그아웃되어있습니다.");
 				b2.setText("로그인");
 				b3.setEnabled(false);
 			}

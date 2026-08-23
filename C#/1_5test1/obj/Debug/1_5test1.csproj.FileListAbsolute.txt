@@ -7,7 +7,6 @@ C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\bin\Debug\EntityFramework
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\bin\Debug\ko\EntityFramework.resources.dll
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\1_5test1.csproj.AssemblyReference.cache
-C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.Form1.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.Properties.Resources.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.topPanel.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\1_5test1.csproj.GenerateResource.cache
@@ -15,3 +14,9 @@ C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\1_5test1.csproj
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\1_5test1.csproj.CopyComplete
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\1_5test1.exe
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\1_5test1.pdb
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.Form1.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.userMain.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.adminPanel.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.Login.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.Search.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5test1\obj\Debug\_1_5test1.ReservationForm.resources

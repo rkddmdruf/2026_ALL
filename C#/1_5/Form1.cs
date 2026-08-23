@@ -39,9 +39,9 @@ namespace _1_5 {
 
         private Label settingScrollLabel(string key = "", int value = 0) {
             Label l = new Label {
-                Text = (value == 0 ? "• 오늘의 예약 현황" : " • " + key + " : " + value + "건"),
+                Text = (key.Length == 0 ? "• 오늘의 예약 현황" : " • " + key + " : " + value + "건"),
                 Font = sp.fk(15),
-                ForeColor = value == 0 ? Color.Red : Color.Black,
+                ForeColor = key.Length == 0 ? Color.Red : Color.Black,
             };
             l.Size = new Size(userMain1.inforPanel.Width - 30, l.Height + 5);
             userMain1.inforPanel.Controls.Add(l);
@@ -55,7 +55,7 @@ namespace _1_5 {
         }
         private void setTop3() {
             var top3 = sp.entity.reservation.ToList()
-                .Where(t => sp.owner == null || sp.owner != null && t.hotel.ono.Equals(sp.owner.ono))
+                .Where(t => sp.owner == null || (sp.owner != null && t.hotel.ono.Equals(sp.owner.ono)))
                 .GroupBy(t => t.hno)
                 .Select(t => new { key = t.Key, value = t.Count() })
                 .OrderByDescending(t => t.value)
@@ -89,6 +89,7 @@ namespace _1_5 {
             label2.Visible = sp.user != null || sp.owner != null;
             label2.Text = sp.user?.uname ?? sp.owner?.oname ?? "";
             label1.Text = DateTime.Now.ToString("오늘 날짜 : yyyy-MM-dd");
+            if (sp.owner is null) return;
         }
     }
 }

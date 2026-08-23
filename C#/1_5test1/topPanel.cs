@@ -13,5 +13,12 @@ namespace _1_5test1 {
         public topPanel() {
             InitializeComponent();
         }
+
+        private void topPanel_Load(object sender, EventArgs e) {
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Image = Properties.Resources.logo.ToBitmap();
+            label1.Text = this.Parent.Text;
+            ((Form)this.Parent).Icon = Properties.Resources.logo;
+        }
     }
 }

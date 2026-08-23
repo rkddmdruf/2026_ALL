@@ -7,9 +7,10 @@ import javax.swing.JPopupMenu;
 
 import main.Util;
 import orms.stationEntity;
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
+
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -41,7 +42,7 @@ public class metro extends CFrame{
 	Image img = new ImageIcon("datafiles/metro.png").getImage();
 	double imgX = img.getWidth(null);
 	double imgY = img.getHeight(null);
-	JLabel label, bLabel = lb("역을 우클릭하여 출발역을 선택하세요", FG(Color.white), BG(Color.black), HOA(JLabel.CENTER), VEA(JLabel.CENTER), BORDER(getter.em(10, 10, 10, 10)));
+	JLabel label, bLabel = lb("역을 우클릭하여 출발역을 선택하세요", FG(Color.white), BG(Color.black), HOA(JLabel.CENTER), VEA(JLabel.CENTER), BORDER(sp.em(10, 10, 10, 10)));
 	List<Integer> bfs = new ArrayList<>();
 	Map<Integer, Ellipse2D.Double> ovals = new HashMap<>();
 	int start = -1, end = -1, selectN = -1;
@@ -130,7 +131,6 @@ public class metro extends CFrame{
 					g2.draw(new Line2D.Double(s1.x * scaleX, s1.y * scaleY, s2.x * scaleX, s2.y * scaleY));
 					g2.setColor(Color.orange);
 					g2.fill(new Ellipse2D.Double(s1.x * scaleX - 2, s1.y * scaleY - 2, 4, 4));
-					g2.fill(new Ellipse2D.Double(s2.x * scaleX - 2, s2.y * scaleY - 2, 4, 4));
 				}
 
 				if(start != -1) seD(g2, "출");
@@ -170,9 +170,9 @@ public class metro extends CFrame{
 				g2.setColor(Color.white);
 				g2.setStroke(new BasicStroke(1.5f));
 				g2.fill(oval);
-				g2.setColor(s.equals("출") ? getter.color : Color.red);
+				g2.setColor(s.equals("출") ? sp.color : Color.red);
 				g2.draw(oval);
-				g2.setFont(getter.font.deriveFont(1).deriveFont(13f));
+				g2.setFont(sp.font.deriveFont(1).deriveFont(13f));
 				g2.drawString(s, (int) (oval.x + getFontMetrics(g2.getFont()).stringWidth(s) / 2), (int) oval.y + getFontMetrics(g2.getFont()).getHeight());
 
 			}
@@ -288,5 +288,9 @@ public class metro extends CFrame{
 		double dist = (totalPix.get(0) * 0.05);
 		bLabel.setText("출발: " + stationEntity.findById(start).get().name + " → 도착: " + stationEntity.findById(end).get().name +
 				" ( " + (bfs.size() - 1) + "구간 ) 약 " + new DecimalFormat("#.##").format(dist) + " km | 약 " + (int) Math.ceil(dist / 40*60)+ " 분");
+	}
+	
+	public static void main(String[] args) {
+		Util.start(new metro("", ""));
 	}
 }

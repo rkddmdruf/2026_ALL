@@ -21,7 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import orms.stationEntity;
-import uitls.getter;
+import utils.sp;
 
 public class Util {
 	public static Image logo;
@@ -157,6 +157,6 @@ public class Util {
 	}
 	private static void handle(Throwable t) {
 		t.printStackTrace();
-		getter.err(t.getMessage());
+		sp.err(t.getMessage());
 	}
 }

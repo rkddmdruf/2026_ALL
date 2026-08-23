@@ -1,5 +1,8 @@
 package test.test1;
 
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -30,9 +33,7 @@ import javax.swing.JPopupMenu;
 
 import main.Util;
 import orms.*;
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
 
 public class metro extends CFrame{
 	Image img = new ImageIcon("datafiles/metro.png").getImage();
@@ -42,7 +43,7 @@ public class metro extends CFrame{
 	List<Integer> bfs = new ArrayList<>();
 	List<Integer> totalpx = Arrays.asList(0);
 	Map<Integer, Ellipse2D.Double> ovals = new HashMap<>();
-	JLabel bLabel = lb("역을 우클릭하여 출발역을 선택하세요.", HOA(JLabel.CENTER), BG(Color.black), FG(Color.white), FONT(getter.font.deriveFont(14f)), BORDER(getter.em(5, 5, 5, 5)));
+	JLabel bLabel = lb("역을 우클릭하여 출발역을 선택하세요.", HOA(JLabel.CENTER), BG(Color.black), FG(Color.white), FONT(sp.font.deriveFont(14f)), BORDER(sp.em(5, 5, 5, 5)));
 	JLabel label;
 	JPopupMenu menu = new JPopupMenu();
 	JButton startB = bt("출발", HOA(JButton.LEFT));
@@ -176,7 +177,7 @@ public class metro extends CFrame{
 			}
 			private void sed(Graphics2D g2, String string, int i) {
 				Ellipse2D o = ovals.get(i);
-				g2.setFont(getter.font.deriveFont(17f));
+				g2.setFont(sp.font.deriveFont(17f));
 		    	FontMetrics fm = getFontMetrics(getFont());
 	        	int textWidth = fm.stringWidth(string);
 	        	int textHeight = fm.getAscent();
@@ -192,7 +193,7 @@ public class metro extends CFrame{
 	        	
 				g2.setColor(Color.white);
 				g2.fill(o);
-				g2.setColor(string.equals("출") ? getter.color : Color.red);
+				g2.setColor(string.equals("출") ? sp.color : Color.red);
 				g2.setStroke(new BasicStroke(2f));
 				g2.draw(o);
 				g2.drawString(string, x - 2, y - 2);

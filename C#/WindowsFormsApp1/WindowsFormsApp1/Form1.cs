@@ -27,7 +27,7 @@ namespace WindowsFormsApp1 {
         }
 
         public static void Main(String[] args) {
-            Application.Run(new MainF());
+            Application.Run(new Form1());
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -38,6 +38,11 @@ namespace WindowsFormsApp1 {
                 return;
             }
             getter.user = user;
+            Hide();
+            userText1.tb.Text = "";
+            userText2.tb.Text = "";
+            new MainF().ShowDialog();
+            Show();
         }
     }
 }

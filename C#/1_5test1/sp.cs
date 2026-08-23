@@ -12,17 +12,17 @@ namespace _1_5test1 {
         public static user user;
         public static owner owner;
 
-        public static Font f(int size, FontStyle fs = FontStyle.Regular) {
-            return new Font("맑은 고딕", size, fs);
+        public static Font f(int size, FontStyle s = FontStyle.Regular) {
+            return new Font("맑은 고딕", size, s);
         }
-        public static Font fk(int size, FontStyle fs = FontStyle.Bold) {
-            return new Font("맑은 고딕", size, fs);
+        public static Font fk(int size, FontStyle s = FontStyle.Bold) {
+            return new Font("맑은 고딕", size, s);
         }
 
-        public static void err(string s) {
+        public static void err(String s) {
             MessageBox.Show(s, "경고", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        public static void infor(string s) {
+        public static void infor(String s) {
             MessageBox.Show(s, "정보", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

@@ -27,6 +27,10 @@ namespace WindowsFormsApp1 {
         public MainF() {
             InitializeComponent();
             TitleBar();
+            logout.Click += (s, e) => {
+                getter.user = null;
+                Close();
+            };
             Size = new Size(Size.Width, Size.Height + 32);
             buttonPanel.Controls.Add(userStatus);
             buttonPanel.Controls.Add(logout);
@@ -63,7 +67,7 @@ namespace WindowsFormsApp1 {
                 Dock = DockStyle.Fill,
                 Size = new Size(panel1.Width, panel1.Height),
             };
-            panel1.Controls.Add(pc);
+            panel1.Controls.Add(b);
         }
 
         private void TitleBar() {
@@ -145,6 +149,10 @@ namespace WindowsFormsApp1 {
             title.Controls.Add(l1);
 
             dl.Click += (sender, e) => {
+                Close();
+            };
+            sl.Click += (sender, e) => {
+                WindowState = FormWindowState.Minimized;
             };
             Controls.Add(title);
         }

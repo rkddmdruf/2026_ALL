@@ -30,9 +30,9 @@ import javax.swing.JPopupMenu;
 
 import main.*;
 import orms.*;
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
 
 public class Metro extends CFrame{
 	
@@ -40,7 +40,7 @@ public class Metro extends CFrame{
 	double imgX = img.getWidth(null), imgY = img.getHeight(null);
 	List<Integer> bfs = new ArrayList<>();
 	JLabel label;
-	JLabel bLabel = lb("역을 우클릭하여 출발역을 선택하세요", FG(Color.white), BG(Color.black), HOA(JLabel.CENTER), BORDER(getter.em(10, 10, 10, 10)), FONT(getter.font.deriveFont(13f)));
+	JLabel bLabel = lb("역을 우클릭하여 출발역을 선택하세요", FG(Color.white), BG(Color.black), HOA(JLabel.CENTER), BORDER(sp.em(10, 10, 10, 10)), FONT(sp.font.deriveFont(13f)));
 	Map<Integer, Ellipse2D.Double> ovals = new HashMap<>();
 	JPopupMenu menu = new JPopupMenu();
 	JButton startB = bt("출발", HOA(JLabel.LEFT)), endB = bt("도착", HOA(JLabel.LEFT));
@@ -93,9 +93,9 @@ public class Metro extends CFrame{
 				Ellipse2D.Double o = ovals.get(n);
 				g2.setColor(Color.white);
 				g2.fill(o);
-				g2.setColor(s.equals("출") ? getter.color : Color.red);
+				g2.setColor(s.equals("출") ? sp.color : Color.red);
 				g2.draw(o);
-				g2.setFont(getter.font.deriveFont(1).deriveFont(13f));
+				g2.setFont(sp.font.deriveFont(1).deriveFont(13f));
 				FontMetrics fm = g2.getFontMetrics();
 				g2.drawString(s, (int) o.x + (fm.stringWidth(s) / 2), (int) o.y + (fm.getHeight()));
 			}

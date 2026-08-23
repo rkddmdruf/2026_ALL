@@ -31,6 +31,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -75,7 +77,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(414, 106);
+            this.label4.Location = new System.Drawing.Point(34, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(126, 32);
             this.label4.TabIndex = 38;
@@ -87,7 +89,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(414, 76);
+            this.label5.Location = new System.Drawing.Point(34, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(126, 32);
             this.label5.TabIndex = 37;
@@ -111,7 +113,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(414, 138);
+            this.label7.Location = new System.Drawing.Point(34, 62);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(104, 32);
             this.label7.TabIndex = 39;
@@ -129,20 +131,30 @@
             this.label8.TabIndex = 40;
             this.label8.Text = "• 인기 호텔 top3";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Location = new System.Drawing.Point(393, 66);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(291, 100);
+            this.panel1.TabIndex = 41;
+            // 
             // adminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "adminMain";
             this.Size = new System.Drawing.Size(684, 257);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +170,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel1;
     }
 }

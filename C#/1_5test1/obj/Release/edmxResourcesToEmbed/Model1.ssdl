@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="address">
+    <Key>
+      <PropertyRef Name="ano" />
+    </Key>
+    <Property Name="ano" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aName" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="hotel">
+    <Key>
+      <PropertyRef Name="hno" />
+    </Key>
+    <Property Name="hno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ono" Type="int" />
+    <Property Name="hName" Type="varchar" MaxLength="50" />
+    <Property Name="ratno" Type="int" />
+    <Property Name="rno" Type="varchar" MaxLength="30" />
+    <Property Name="ano" Type="int" />
+    <Property Name="x" Type="int" />
+    <Property Name="y" Type="int" />
+    <Property Name="explanation" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="owner">
+    <Key>
+      <PropertyRef Name="ono" />
+    </Key>
+    <Property Name="ono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="oname" Type="varchar" MaxLength="10" />
+    <Property Name="id" Type="varchar" MaxLength="10" />
+    <Property Name="pw" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="rating">
+    <Key>
+      <PropertyRef Name="ratno" />
+    </Key>
+    <Property Name="ratno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="percentage" Type="float" />
+  </EntityType>
+  <EntityType Name="reservation">
+    <Key>
+      <PropertyRef Name="rvno" />
+    </Key>
+    <Property Name="rvno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uno" Type="int" />
+    <Property Name="hno" Type="int" />
+    <Property Name="rtno" Type="int" />
+    <Property Name="sdate" Type="date" />
+    <Property Name="day" Type="int" />
+  </EntityType>
+  <EntityType Name="review">
+    <Key>
+      <PropertyRef Name="reno" />
+    </Key>
+    <Property Name="reno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rvno" Type="int" />
+    <Property Name="review" Type="varchar" MaxLength="500" />
+    <Property Name="score" Type="int" />
+  </EntityType>
+  <EntityType Name="roomtype">
+    <Key>
+      <PropertyRef Name="rtno" />
+    </Key>
+    <Property Name="rtno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rtname" Type="varchar" MaxLength="10" />
+    <Property Name="baseprice" Type="int" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="uno" />
+    </Key>
+    <Property Name="uno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uname" Type="varchar" MaxLength="10" />
+    <Property Name="id" Type="varchar" MaxLength="10" />
+    <Property Name="pw" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_hotel_address">
+    <End Role="address" Type="Self.address" Multiplicity="0..1" />
+    <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="address">
+        <PropertyRef Name="ano" />
+      </Principal>
+      <Dependent Role="hotel">
+        <PropertyRef Name="ano" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotel_owner">
+    <End Role="owner" Type="Self.owner" Multiplicity="0..1" />
+    <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="owner">
+        <PropertyRef Name="ono" />
+      </Principal>
+      <Dependent Role="hotel">
+        <PropertyRef Name="ono" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hotel_rating">
+    <End Role="rating" Type="Self.rating" Multiplicity="0..1" />
+    <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rating">
+        <PropertyRef Name="ratno" />
+      </Principal>
+      <Dependent Role="hotel">
+        <PropertyRef Name="ratno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservation_hotel">
+    <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+    <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotel">
+        <PropertyRef Name="hno" />
+      </Principal>
+      <Dependent Role="reservation">
+        <PropertyRef Name="hno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservation_roomtype">
+    <End Role="roomtype" Type="Self.roomtype" Multiplicity="0..1" />
+    <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roomtype">
+        <PropertyRef Name="rtno" />
+      </Principal>
+      <Dependent Role="reservation">
+        <PropertyRef Name="rtno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservation_user">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="uno" />
+      </Principal>
+      <Dependent Role="reservation">
+        <PropertyRef Name="uno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_review_reservation">
+    <End Role="reservation" Type="Self.reservation" Multiplicity="0..1" />
+    <End Role="review" Type="Self.review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reservation">
+        <PropertyRef Name="rvno" />
+      </Principal>
+      <Dependent Role="review">
+        <PropertyRef Name="rvno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="hotelModelStoreContainer">
+    <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hotel" EntityType="Self.hotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="owner" EntityType="Self.owner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rating" EntityType="Self.rating" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservation" EntityType="Self.reservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="review" EntityType="Self.review" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="roomtype" EntityType="Self.roomtype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_hotel_address" Association="Self.FK_hotel_address">
+      <End Role="address" EntitySet="address" />
+      <End Role="hotel" EntitySet="hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotel_owner" Association="Self.FK_hotel_owner">
+      <End Role="owner" EntitySet="owner" />
+      <End Role="hotel" EntitySet="hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hotel_rating" Association="Self.FK_hotel_rating">
+      <End Role="rating" EntitySet="rating" />
+      <End Role="hotel" EntitySet="hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservation_hotel" Association="Self.FK_reservation_hotel">
+      <End Role="hotel" EntitySet="hotel" />
+      <End Role="reservation" EntitySet="reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservation_roomtype" Association="Self.FK_reservation_roomtype">
+      <End Role="roomtype" EntitySet="roomtype" />
+      <End Role="reservation" EntitySet="reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservation_user" Association="Self.FK_reservation_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="reservation" EntitySet="reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_review_reservation" Association="Self.FK_review_reservation">
+      <End Role="reservation" EntitySet="reservation" />
+      <End Role="review" EntitySet="review" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

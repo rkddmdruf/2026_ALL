@@ -2,9 +2,10 @@ package test.test3;
 
 import javax.swing.*;
 
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
+
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,9 +29,9 @@ public class TimeSelect extends CFrame{
 	JSpinner hour = new JSpinner(new SpinnerNumberModel(now.getHour(), 6, 22, 1));
 	JSpinner minute = new JSpinner(new SpinnerNumberModel(now.getMinute(), min.toLocalTime().getMinute(), max.toLocalTime().getMinute(), 1));
 	List<JSpinner> jps = Arrays.asList(year, moment, day, hour, minute);
-	CButton b = comp(CButton::new, TEXT("확인"), FG(Color.white), BG(getter.color), SIZE(200, 50));
-	JLabel l1 = lb("d", FONT(getter.font.deriveFont(1).deriveFont(13f)));
-	JLabel l2 = lb("※ 시간은 06:00 ~ 23:00 범위에서 선택 가능합니다.", FONT(getter.font.deriveFont(11f)), FG(Color.LIGHT_GRAY));
+	CButton b = comp(CButton::new, TEXT("확인"), FG(Color.white), BG(sp.color), SIZE(200, 50));
+	JLabel l1 = lb("d", FONT(sp.font.deriveFont(1).deriveFont(13f)));
+	JLabel l2 = lb("※ 시간은 06:00 ~ 23:00 범위에서 선택 가능합니다.", FONT(sp.font.deriveFont(11f)), FG(Color.LIGHT_GRAY));
 	
 	scdule s;
 	public TimeSelect(scdule s) {
@@ -44,12 +45,12 @@ public class TimeSelect extends CFrame{
 		hour.setValue(now.getHour());
 		minute.setValue(now.getMinute());
 		jps.forEach(e -> {
-			e.setBorder(getter.line(getter.color));
-			e.setForeground(getter.color);
+			e.setBorder(sp.line(sp.color));
+			e.setForeground(sp.color);
 			((JSpinner.DefaultEditor)e.getEditor()).getTextField().setHorizontalAlignment(JTextField.CENTER);
 			((JSpinner.DefaultEditor)e.getEditor()).getTextField().setFocusable(false);
-			((JSpinner.DefaultEditor)e.getEditor()).getTextField().setForeground(getter.color);
-			e.setFont(getter.font.deriveFont(20f).deriveFont(1));
+			((JSpinner.DefaultEditor)e.getEditor()).getTextField().setForeground(sp.color);
+			e.setFont(sp.font.deriveFont(20f).deriveFont(1));
 		});
 		setFrame("날짜/시간 설정", 425, 450, () -> {});
 	}
@@ -57,13 +58,13 @@ public class TimeSelect extends CFrame{
 	@Override
 	protected void desing() {
 		JPanel topPanel = set(col(10, 10, 10
-				, lb("출발 날짜 / 시간 설정", FG(getter.color), FONT(getter.font.deriveFont(1).deriveFont(15f)))
-				, lb("조회할 날짜와 출발 시간을 선택하세요", FG(Color.gray), FONT(getter.font)))
+				, lb("출발 날짜 / 시간 설정", FG(sp.color), FONT(sp.font.deriveFont(1).deriveFont(15f)))
+				, lb("조회할 날짜와 출발 시간을 선택하세요", FG(Color.gray), FONT(sp.font)))
 				.setBackColor(Color.white), BORDER(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.lightGray)));
 		
 		JPanel mainPanel = colF(10, daySp(), timeSp()).setBackColor(Color.white);
 		JPanel buttonPanel = col(10, l1, b, l2).setBackColor(Color.white);
-		JPanel panel = set(col(10, topPanel, f(mainPanel), buttonPanel), BORDER(getter.em(10, 10, 10, 5))).setBackColor(Color.white);
+		JPanel panel = set(col(10, topPanel, f(mainPanel), buttonPanel), BORDER(sp.em(10, 10, 10, 5))).setBackColor(Color.white);
 		add(panel);
 	}
 
@@ -75,7 +76,7 @@ public class TimeSelect extends CFrame{
 		JPanel panel = new JPanel(new BorderLayout()) {
 			@Override
 			protected void paintComponent(Graphics g) {
-				g.setColor(new Color(getter.color.getRed(), getter.color.getGreen(), getter.color.getBlue(), 20));
+				g.setColor(new Color(sp.color.getRed(), sp.color.getGreen(), sp.color.getBlue(), 20));
 				g.fillRoundRect(0, 0, getWidth() - 1,  getHeight() - 1, 20, 20);
 				g.setColor(Color.LIGHT_GRAY);
 				g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
@@ -83,13 +84,13 @@ public class TimeSelect extends CFrame{
 			}
 		};
 		panel.setOpaque(false);
-		set(panel, BORDER(getter.em(5, 10, 10, 10)));
-		panel.add(lb("날짜 선택", HOA(JLabel.CENTER), FONT(getter.font.deriveFont(11f)), FG(getter.color)), BorderLayout.NORTH);
+		set(panel, BORDER(sp.em(5, 10, 10, 10)));
+		panel.add(lb("날짜 선택", HOA(JLabel.CENTER), FONT(sp.font.deriveFont(11f)), FG(sp.color)), BorderLayout.NORTH);
 		
 		List<JPanel> panels = Arrays.asList(
-				col(5, lb("년", FG(getter.color)), f(year)), 
-				col(5, lb("월", FG(getter.color)), f(moment)), 
-				col(5, lb("일", FG(getter.color)), f(day)));
+				col(5, lb("년", FG(sp.color)), f(year)), 
+				col(5, lb("월", FG(sp.color)), f(moment)), 
+				col(5, lb("일", FG(sp.color)), f(day)));
 		panels.forEach(e -> {
 			Arrays.asList(e.getComponents()).forEach(c -> ((JComponent) c).setOpaque(false));
 			e.setOpaque(false);
@@ -105,28 +106,28 @@ public class TimeSelect extends CFrame{
 		JPanel panel = new JPanel(new BorderLayout()) {
 			@Override
 			protected void paintComponent(Graphics g) {
-				g.setColor(new Color(getter.color.getRed(), getter.color.getGreen(), getter.color.getBlue(), 20));
+				g.setColor(new Color(sp.color.getRed(), sp.color.getGreen(), sp.color.getBlue(), 20));
 				g.fillRoundRect(0, 0, getWidth() - 1,  getHeight() - 1, 20, 20);
 				g.setColor(Color.LIGHT_GRAY);
 				g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
 				super.paintComponent(g);
-				g.setColor(getter.color);
-				g.setFont(getter.font.deriveFont(50f));
+				g.setColor(sp.color);
+				g.setFont(sp.font.deriveFont(50f));
 				g.drawString(":", getWidth() / 2, getHeight() / 2 + 25);
 			}
 		};
 		panel.setOpaque(false);
-		set(panel, BORDER(getter.em(5, 10, 10, 10)));
-		panel.add(lb("날짜 선택", HOA(JLabel.CENTER), FONT(getter.font.deriveFont(11f)), FG(getter.color)), BorderLayout.NORTH);
+		set(panel, BORDER(sp.em(5, 10, 10, 10)));
+		panel.add(lb("날짜 선택", HOA(JLabel.CENTER), FONT(sp.font.deriveFont(11f)), FG(sp.color)), BorderLayout.NORTH);
 		
 		List<JPanel> panels = Arrays.asList(
-				col(5, lb("시", FG(getter.color)), f(hour)),
-				col(5, lb("분", FG(getter.color)), f(minute)));
+				col(5, lb("시", FG(sp.color)), f(hour)),
+				col(5, lb("분", FG(sp.color)), f(minute)));
 		panels.forEach(e -> {
 			Arrays.asList(e.getComponents()).forEach(c -> ((JComponent) c).setOpaque(false));
 			e.setOpaque(false);
 		});
-		JPanel mainPanel = set(new JPanel(new GridLayout(1, 3, 40, 10)), BORDER(getter.em(0, 20, 0, 40)));
+		JPanel mainPanel = set(new JPanel(new GridLayout(1, 3, 40, 10)), BORDER(sp.em(0, 20, 0, 40)));
 		panels.forEach(e -> mainPanel.add(e));
 		mainPanel.setOpaque(false);
 		panel.add(mainPanel);
@@ -136,12 +137,12 @@ public class TimeSelect extends CFrame{
 	protected void action() {
 		moment.addChangeListener(e -> {
 			day.setModel(new SpinnerNumberModel((int) day.getValue(), 1, LocalDate.of((int) year.getValue(), (int) moment.getValue(), 1).lengthOfMonth(), 1));
-			day.setBorder(getter.line(getter.color));
-			day.setForeground(getter.color);
+			day.setBorder(sp.line(sp.color));
+			day.setForeground(sp.color);
 			((JSpinner.DefaultEditor)day.getEditor()).getTextField().setHorizontalAlignment(JTextField.CENTER);
 			((JSpinner.DefaultEditor)day.getEditor()).getTextField().setFocusable(false);
-			((JSpinner.DefaultEditor)day.getEditor()).getTextField().setForeground(getter.color);
-			day.setFont(getter.font.deriveFont(20f).deriveFont(1));
+			((JSpinner.DefaultEditor)day.getEditor()).getTextField().setForeground(sp.color);
+			day.setFont(sp.font.deriveFont(20f).deriveFont(1));
 		});
 		jps.forEach(j -> {
 			j.addChangeListener(ac -> {

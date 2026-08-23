@@ -1,5 +1,8 @@
 package test.test3;
 
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,9 +29,7 @@ import javax.swing.JTextArea;
 
 import main.Util;
 import orms.*;
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
 
 public class scdule extends CFrame{
 	public LocalTime firstTime = LocalTime.of(6, 0);
@@ -38,11 +39,11 @@ public class scdule extends CFrame{
 	List<Integer> totalPix = Arrays.asList(0);
 	List<Integer> bfs = new ArrayList<>();
 	stationEntity start, end;
-	public JLabel tLabel = lb(ldt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd/hh:mm")), FONT(getter.font));
+	public JLabel tLabel = lb(ldt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd/hh:mm")), FONT(sp.font));
 	
-	JPanel mainPanel = set(new JPanel(new GridLayout(0, 1, 10, 10)), BG(Color.white), BORDER(getter.em(5, 5, 5, 5)));
-	JScrollPane sc = set(new JScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BG(Color.white), BORDER(getter.em(5, 5, 5, 5)));
-	CButton bt = comp(CButton::new , TEXT("시간 변경"), SIZE(110, 25), FG(Color.white), BG(getter.color));
+	JPanel mainPanel = set(new JPanel(new GridLayout(0, 1, 10, 10)), BG(Color.white), BORDER(sp.em(5, 5, 5, 5)));
+	JScrollPane sc = set(new JScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BG(Color.white), BORDER(sp.em(5, 5, 5, 5)));
+	CButton bt = comp(CButton::new , TEXT("시간 변경"), SIZE(110, 25), FG(Color.white), BG(sp.color));
 	
 	public scdule(int start, int end) {
 		this.start = stationEntity.findById(start).get();
@@ -57,10 +58,10 @@ public class scdule extends CFrame{
 		setTime();
 		init();
 		JLabel logo = new JLabel(new ImageIcon(Util.logo.getScaledInstance(110, 40, 4)));
-		JLabel seLabel = lb(start.name + " → " + end.name, FONT(getter.font.deriveFont(16f).deriveFont(1)));
-		JTextArea ta = comp(JTextArea::new, TEXT(setTLStr()), FONT(getter.font.deriveFont(11f)), BORDER(getter.com(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY), getter.em(0, 0, 0, 30))));
+		JLabel seLabel = lb(start.name + " → " + end.name, FONT(sp.font.deriveFont(16f).deriveFont(1)));
+		JTextArea ta = comp(JTextArea::new, TEXT(setTLStr()), FONT(sp.font.deriveFont(11f)), BORDER(sp.com(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY), sp.em(0, 0, 0, 30))));
 		ta.setLineWrap(true);
-		JPanel topPanel = set(col(10, 0, 0, row(0, logo, hg(60),  seLabel).setBackColor(Color.white), row(5, bt, tLabel).setBackColor(Color.white), fw(ta)).setBackColor(Color.white), BORDER(getter.em(5, 5, 0, 5)));
+		JPanel topPanel = set(col(10, 0, 0, row(0, logo, hg(60),  seLabel).setBackColor(Color.white), row(5, bt, tLabel).setBackColor(Color.white), fw(ta)).setBackColor(Color.white), BORDER(sp.em(5, 5, 0, 5)));
 		add(col(0, fw(topPanel), f(sc)).setBackColor(Color.white));
 	}
 	
@@ -83,30 +84,30 @@ public class scdule extends CFrame{
 				@Override
 				protected void paintComponent(Graphics g) {
 					super.paintComponent(g);
-					g.setColor(getter.color);
+					g.setColor(sp.color);
 					g.fillRoundRect(0, 0, 6, getHeight(), 25, 20);
 					g.setColor(Color.lightGray);
 					g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
 				}
 			};
-			set(panel, BORDER(getter.em(5, 45, 5, 45)), BG(Color.white), SIZE(0, 100));
+			set(panel, BORDER(sp.em(5, 45, 5, 45)), BG(Color.white), SIZE(0, 100));
 			
-			JLabel label = lb(str, HOA(JLabel.CENTER), BG(new Color(255, 140, 0)), FG(Color.white), FONT(getter.font.deriveFont(11f)));
+			JLabel label = lb(str, HOA(JLabel.CENTER), BG(new Color(255, 140, 0)), FG(Color.white), FONT(sp.font.deriveFont(11f)));
 			label.setOpaque(true);
 			JPanel p = new JPanel(new GridLayout(3, 3, 0, 0));
-			p.add(lb(start.name, FONT(getter.font.deriveFont(16f))));
+			p.add(lb(start.name, FONT(sp.font.deriveFont(16f))));
 			p.add(new JPanel() {{
 				setBackground(Color.white);
 				add(label);
 			}});
-			p.add(lb(end.name, FONT(getter.font.deriveFont(16f))));
-			p.add(lb(time.format(DateTimeFormatter.ofPattern("HH:mm")),FONT(getter.font.deriveFont(17f).deriveFont(1)), FG(getter.color)));
-			p.add(lb("→", FG(getter.color), HOA(JLabel.CENTER)));
-			p.add(lb(time.plusMinutes(totalTime).format(DateTimeFormatter.ofPattern("HH:mm")),FONT(getter.font.deriveFont(17f).deriveFont(1)), FG(getter.color)));
-			JLabel img = new JLabel(getter.getImage("icon/trains", 50, 25));
+			p.add(lb(end.name, FONT(sp.font.deriveFont(16f))));
+			p.add(lb(time.format(DateTimeFormatter.ofPattern("HH:mm")),FONT(sp.font.deriveFont(17f).deriveFont(1)), FG(sp.color)));
+			p.add(lb("→", FG(sp.color), HOA(JLabel.CENTER)));
+			p.add(lb(time.plusMinutes(totalTime).format(DateTimeFormatter.ofPattern("HH:mm")),FONT(sp.font.deriveFont(17f).deriveFont(1)), FG(sp.color)));
+			JLabel img = new JLabel(sp.getImage("icon/trains", 50, 25));
 			img.setHorizontalAlignment(JLabel.LEFT);
 			p.add(img);
-			p.add(lb(totalTime + "분 소요", FONT(getter.font.deriveFont(11f)), HOA(JLabel.CENTER)));
+			p.add(lb(totalTime + "분 소요", FONT(sp.font.deriveFont(11f)), HOA(JLabel.CENTER)));
 			set(p, BG(Color.white));
 			panel.add(p);
 			mainPanel.add(panel);

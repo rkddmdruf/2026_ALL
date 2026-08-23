@@ -1,5 +1,8 @@
 package test.test3;
 
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -17,9 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import main.Util;
 import orms.userEntity;
-import uitls.*;
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
+import utils.*;
 
 public class Login extends CFrame{
 	
@@ -55,15 +56,15 @@ public class Login extends CFrame{
 
 	@Override
 	protected void desing() {
-		TitledBorder tBorder = new TitledBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.black), "LOGIN", TitledBorder.TOP, TitledBorder.CENTER, getter.font.deriveFont(1).deriveFont(20f));
-		JPanel panel = set(colF(10, setPanel(id), setPanel(pw), setPanel(login)), BORDER(getter.com(tBorder, getter.em(20, 20, 20, 20))), BG(Color.white));
+		TitledBorder tBorder = new TitledBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.black), "LOGIN", TitledBorder.TOP, TitledBorder.CENTER, sp.font.deriveFont(1).deriveFont(20f));
+		JPanel panel = set(colF(10, setPanel(id), setPanel(pw), setPanel(login)), BORDER(sp.com(tBorder, sp.em(20, 20, 20, 20))), BG(Color.white));
 		add(panel);
 	}
 
 	private JPanel setPanel(JComponent t) {
 		String imgs = t == id ? "user" : t == pw ? "lock" : "";
 		System.out.println(imgs);
-		JLabel imgL = lb("", SIZE(25, 25), ICON(getter.getImage("icon/" + imgs, 25, 25)));
+		JLabel imgL = lb("", SIZE(25, 25), ICON(sp.getImage("icon/" + imgs, 25, 25)));
 		return row(10, imgL, f(t)).setBackColor(Color.white);
 	}
 	@Override
@@ -74,14 +75,14 @@ public class Login extends CFrame{
 				throw new RuntimeException("빈칸이 존재합니다.");
 			}
 			if(i.equals("admin") && p.equals("1234")) {
-				getter.infor("관리자님 환영합니다.");
+				sp.infor("관리자님 환영합니다.");
 			}
 			List<userEntity> users = userEntity.findBy(c -> c.id.equals(i) && c.pw.equals(p));
 			if(users.isEmpty()) {
 				throw new RuntimeException("해당 유저가 존재하지 않습니다.");
 			}
-			getter.user = users.get(0);
-			getter.infor(getter.user.name + "님 환영합니다");
+			sp.user = users.get(0);
+			sp.infor(sp.user.name + "님 환영합니다");
 			dispose();
 		});
 	}

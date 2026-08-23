@@ -1,5 +1,8 @@
 package main;
 
+import static utils.BoxPanel.*;
+import static utils.Properties.*;
+
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,17 +20,15 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 
-import static uitls.BoxPanel.*;
-import static uitls.Properties.*;
-import uitls.*;
+import utils.*;
 
 public class Main extends CFrame{
-	JLabel timeLabel = lb("현재시간: " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), FONT(getter.font.deriveFont(1).deriveFont(16f)));
+	JLabel timeLabel = lb("현재시간: " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), FONT(sp.font.deriveFont(1).deriveFont(16f)));
 	JTextField tf1 = tf("출발지", TEXT("서구청"));
 	JTextField tf2 = tf("도착지", TEXT("경입교대입구"));
 	CButton search  = comp(CButton::new, TEXT("경로검색"), FG(Color.white));
-	CButton login = set(new CButton("로그인", getter.getImage("icon/login", 40, 40)));
-	CButton myHome = set(new CButton("마이페이지", getter.getImage("icon/user", 40, 40)));
+	CButton login = set(new CButton("로그인", sp.getImage("icon/login", 40, 40)));
+	CButton myHome = set(new CButton("마이페이지", sp.getImage("icon/user", 40, 40)));
 	
 	public Main() {
 		setFrame("메인", 800, 500, () -> {});
@@ -43,7 +44,7 @@ public class Main extends CFrame{
 				g.drawImage(new ImageIcon("datafiles/main.png").getImage(), 0, 0, getWidth() + 16, getHeight() + 39, null);
 			}
 		};
-		paintPanel.setBorder(getter.em(100, 50, 100, 50));
+		paintPanel.setBorder(sp.em(100, 50, 100, 50));
 		
 		paintPanel.add(mainPanel());
 		
@@ -66,7 +67,7 @@ public class Main extends CFrame{
 			}
 		};
 		panel.setOpaque(false);
-		panel.setBorder(getter.em(20, 25, 20, 25));
+		panel.setBorder(sp.em(20, 25, 20, 25));
 		
 		JPanel p1 = new BoxPanel(C, 0, 20, 0,
 				fw(timeLabel),
@@ -87,7 +88,7 @@ public class Main extends CFrame{
 			}
 		};
 		p1.setOpaque(false);
-		p1.setBorder(getter.em(15, 15, 15, 15));
+		p1.setBorder(sp.em(15, 15, 15, 15));
 		
 		JPanel p = row(20);
 		
