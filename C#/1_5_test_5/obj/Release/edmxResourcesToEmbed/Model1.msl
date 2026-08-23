@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hotelModelStoreContainer" CdmEntityContainer="Entity">
+    <EntitySetMapping Name="address">
+      <EntityTypeMapping TypeName="hotelModel.address">
+        <MappingFragment StoreEntitySet="address">
+          <ScalarProperty Name="ano" ColumnName="ano" />
+          <ScalarProperty Name="aName" ColumnName="aName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hotel">
+      <EntityTypeMapping TypeName="hotelModel.hotel">
+        <MappingFragment StoreEntitySet="hotel">
+          <ScalarProperty Name="hno" ColumnName="hno" />
+          <ScalarProperty Name="ono" ColumnName="ono" />
+          <ScalarProperty Name="hName" ColumnName="hName" />
+          <ScalarProperty Name="ratno" ColumnName="ratno" />
+          <ScalarProperty Name="rno" ColumnName="rno" />
+          <ScalarProperty Name="ano" ColumnName="ano" />
+          <ScalarProperty Name="x" ColumnName="x" />
+          <ScalarProperty Name="y" ColumnName="y" />
+          <ScalarProperty Name="explanation" ColumnName="explanation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="owner">
+      <EntityTypeMapping TypeName="hotelModel.owner">
+        <MappingFragment StoreEntitySet="owner">
+          <ScalarProperty Name="ono" ColumnName="ono" />
+          <ScalarProperty Name="oname" ColumnName="oname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="pw" ColumnName="pw" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rating">
+      <EntityTypeMapping TypeName="hotelModel.rating">
+        <MappingFragment StoreEntitySet="rating">
+          <ScalarProperty Name="ratno" ColumnName="ratno" />
+          <ScalarProperty Name="percentage" ColumnName="percentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reservation">
+      <EntityTypeMapping TypeName="hotelModel.reservation">
+        <MappingFragment StoreEntitySet="reservation">
+          <ScalarProperty Name="rvno" ColumnName="rvno" />
+          <ScalarProperty Name="uno" ColumnName="uno" />
+          <ScalarProperty Name="hno" ColumnName="hno" />
+          <ScalarProperty Name="rtno" ColumnName="rtno" />
+          <ScalarProperty Name="sdate" ColumnName="sdate" />
+          <ScalarProperty Name="day" ColumnName="day" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="review">
+      <EntityTypeMapping TypeName="hotelModel.review">
+        <MappingFragment StoreEntitySet="review">
+          <ScalarProperty Name="reno" ColumnName="reno" />
+          <ScalarProperty Name="rvno" ColumnName="rvno" />
+          <ScalarProperty Name="review1" ColumnName="review" />
+          <ScalarProperty Name="score" ColumnName="score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roomtype">
+      <EntityTypeMapping TypeName="hotelModel.roomtype">
+        <MappingFragment StoreEntitySet="roomtype">
+          <ScalarProperty Name="rtno" ColumnName="rtno" />
+          <ScalarProperty Name="rtname" ColumnName="rtname" />
+          <ScalarProperty Name="baseprice" ColumnName="baseprice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="hotelModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="uno" ColumnName="uno" />
+          <ScalarProperty Name="uname" ColumnName="uname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="pw" ColumnName="pw" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

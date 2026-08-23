@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="770d11125fbd41768b5345d59358551e" Name="Diagram1">
+        <EntityTypeShape EntityType="festivaldbModel.AppUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Booth" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.BoothType" Width="1.5" PointX="3" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.EventItem" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Festival" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Performer" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Sale" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Staff" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Stage" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Structure" Width="1.5" PointX="3" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.TicketType" Width="1.5" PointX="3" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="festivaldbModel.Vendor" Width="1.5" PointX="3" PointY="35.375" IsExpanded="true" />
+        <AssociationConnector Association="festivaldbModel.FK__Booth__FestivalI__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Booth__StageId__43D61337" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Booth__TypeCode__41EDCAC5" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Booth__VendorId__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__EventItem__Festi__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__EventItem__Stage__498EEC8D" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Performer__Festi__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Sale__FestivalId__5D95E53A" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Staff__FestivalI__4E53A1AA" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Structure__Festi__3A4CA8FD" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__TicketTyp__Festi__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Vendor__Festival__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="festivaldbModel.FK__Sale__TicketType__5E8A0973" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

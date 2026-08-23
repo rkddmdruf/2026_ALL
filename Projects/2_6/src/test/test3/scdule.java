@@ -151,6 +151,6 @@ public class scdule extends CFrame{
 	}
 
 	public static void main(String[] args) {
-		Util.start(new scdule(43, 9));//46, 12
+		Util.start(new scdule(43, 63));//46, 12
 	}
 }

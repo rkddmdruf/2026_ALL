@@ -13,7 +13,7 @@ namespace _1_1_test_3 {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new Form1());
         }
     }
 }

@@ -1,0 +1,12 @@
+들어가서 C# 먼저 sa 로그인 풀고 EntityFramework -> masterDB 사용해서 확인하기
+그리고 C# 단축키 설정. end 템플릿 내보내기 해보기
+
+자바는 MySql 확인 - JDBC확인 orm에 들어가는 DBQurey 작성 -
+자바 터미널 버전도 확인하기 -> json 파일 만들고 nashorn test
+자바 버전 확인 System.out.println(Runtime.version()); - 아닐경우 Project > Properties> java Compiler 확인 -> jdk12 깔려있는거 수정
+jar 파일로 뽑아보기 setting 조금 해보기
+돼면 Entity -> Box -> properties -> CFrame(addWindowFocus 조심) -> sp순서
+템플릿 저장할꺼
+lb, bt, imports, tf, 엔티티
+
+
