@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 
 import main.Util;
 import utils.CFrame;
-import utils.getter;
+import utils.sp;
 
 public class Game extends CFrame{
 	final int wall = 50_000;
@@ -56,9 +56,9 @@ public class Game extends CFrame{
 				
 				path(1, 1, new boolean[15][15], 5);
 				int point = maze[13][13];
-				getter.infor("탈출 성공!\n " + point + "원이 적립되었습니다.");
-				getter.user.point += point;
-				getter.user.save();
+				sp.infor("탈출 성공!\n " + point + "원이 적립되었습니다.");
+				sp.user.point += point;
+				sp.user.save();
 				dispose();
 			}catch (Exception e) {
 				e.printStackTrace();

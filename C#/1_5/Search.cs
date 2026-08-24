@@ -98,5 +98,9 @@ namespace _1_5 {
             GraphicsUnit.Pixel);
             list.ForEach(t => g.DrawImage(Properties.Resources.ping, t.x.Value, t.y.Value, 10, 12));
         }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 }

@@ -33,7 +33,7 @@ public class R5 extends CFrame{
 	Point point = new Point();
 	List<Arc2D.Double> arcs = Arrays.asList(new Arc2D.Double(), new Arc2D.Double(), new Arc2D.Double(), new Arc2D.Double(), new Arc2D.Double());
 	
-	JButton button = bt("경품 뽑기! (9회 남음)", FONT(getter.font.deriveFont(17f).deriveFont(1)), BG(Color.white));
+	JButton button = bt("경품 뽑기! (9회 남음)", FONT(sp.font.deriveFont(17f).deriveFont(1)), BG(Color.white));
 	Timer timer;
 	public R5() {
 		setFrame("경품", 600, 500, () -> {});
@@ -67,7 +67,7 @@ public class R5 extends CFrame{
 				g2.translate(w, h);
 				g2.rotate(Math.toRadians(-rand));
 				g2.setColor(Color.white);
-				g2.setFont(getter.font.deriveFont(15f).deriveFont(1));
+				g2.setFont(sp.font.deriveFont(15f).deriveFont(1));
 				for(chanceitemEntity item : items) {
 					double angle = 360d * item.chance;
 					g2.rotate(Math.toRadians(angle / 2));
@@ -89,9 +89,9 @@ public class R5 extends CFrame{
 			}
 		};
 		label.setBackground(Color.white);
-		label.setBorder(getter.line(Color.LIGHT_GRAY));
+		label.setBorder(sp.line(Color.LIGHT_GRAY));
 		label.setOpaque(true);
-		add(set(col(0,fill(label), fillWidth(button)), BORDER(getter.em(10, 10, 10, 10))));
+		add(set(col(0,f(label), fw(button)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 	
 	double speed = 0;
@@ -99,10 +99,10 @@ public class R5 extends CFrame{
 	protected void action() {
 		button.addActionListener(ac -> {
 			button.setEnabled(false);
-			speed = Math.random() * 20 + 30;
+			speed = Math.random() * 40 + 30;
 			timer = new Timer(1, e -> {
 				rand -= speed;
-				speed *= 0.995;
+				speed *= 0.99;
 				repaint();
 				if(speed < 0.1) {
 					button.setEnabled(true);

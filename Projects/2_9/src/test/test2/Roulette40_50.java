@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Roulette40_50 extends CFrame{
-	JButton button = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
+	JButton button = bt("경품 뽑기! (" + sp.user.chance + "회 남음)", FONT(sp.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
 	List<Arc2D.Double> arcs = Arrays.asList(null, null, null,null,null);
 	Point2D.Double point = new Point2D.Double();
 	List<chanceitemEntity> items = chanceitemEntity.findAll();
@@ -81,7 +81,7 @@ public class Roulette40_50 extends CFrame{
 			    AffineTransform oldF = g2.getTransform();
 				g2.translate(sx + (os/2), sy + (os/2));
 				g2.setColor(Color.white);
-				g2.setFont(getter.font.deriveFont(13f).deriveFont(1));
+				g2.setFont(sp.font.deriveFont(13f).deriveFont(1));
 				g2.rotate(Math.toRadians(-rand));
 				for(int i = 0; i < 5; i++) {
 					double angle = 360 * items.get(i).chance;
@@ -101,8 +101,8 @@ public class Roulette40_50 extends CFrame{
 		};
 		label.setBackground(Color.white);
 		label.setOpaque(true);
-		label.setBorder(getter.line(Color.lightGray));
-		add(set(col(0,fill(label), fillWidth(button)), BORDER(getter.em(10, 10, 10, 10))));
+		label.setBorder(sp.line(Color.lightGray));
+		add(set(col(0,f(label), fw(button)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	@Override
@@ -127,11 +127,11 @@ public class Roulette40_50 extends CFrame{
 			        }
 			        SwingUtilities.invokeLater(() -> {
 			        	chanceitemEntity item = items.get(arcs.indexOf(arcs.stream().filter(e -> e.contains(point)).findFirst().get()));
-			        	getter.infor("축하합니다!\n" + item.ciname + "에 당첨되셨습니다.");
-			        	getter.user.chance -= 1;
-			        	getter.user.point += Integer.parseInt(item.ciname.split(" ")[0].replace(",", ""));
-			        	getter.user.save();
-			        	button.setText("경품 뽑기! (" + getter.user.chance + "회 남음)");
+			        	sp.infor("축하합니다!\n" + item.ciname + "에 당첨되셨습니다.");
+			        	sp.user.chance -= 1;
+			        	sp.user.point += Integer.parseInt(item.ciname.split(" ")[0].replace(",", ""));
+			        	sp.user.save();
+			        	button.setText("경품 뽑기! (" + sp.user.chance + "회 남음)");
 			        	button.setEnabled(true);
 			        });
 				} catch (Exception e) {

@@ -37,40 +37,40 @@ public class Home extends JPanel{
 		JPanel panel = new JPanel(new GridLayout(2, 1, 10, 10));
 		panel.add(rowPanel);
 		panel.add(chartPanel());
-		add(fill(panel));
+		add(f(panel));
 	}
 	
 	public JPanel adverPanel() {
 		JPanel p = 
 			col(10, 5, 10, 
-				fillWidth(lb("광고", FONT(getter.font.deriveFont(16f).deriveFont(1)))), 
-				fill(set(new JLabel(getter.getImage("advertise/1.jpg", 100, 100))))
+				fw(lb("광고", FONT(sp.font.deriveFont(16f).deriveFont(1)))), 
+				f(set(new JLabel(sp.getImage("advertise/1.jpg", 100, 100))))
 			).setBackColor(Color.white);
-		p.setBorder(getter.com(getter.line(Color.LIGHT_GRAY), getter.em(0, 10, 0, 10)));
+		p.setBorder(sp.com(sp.line(Color.LIGHT_GRAY), sp.em(0, 10, 0, 10)));
 		return p;
 	}
 	
 	public JPanel cashPanel() {
-		return panel(getter.getImage("logo/cash.png", 50, 50), "충전소", "포인트 충전하기");
+		return panel(sp.getImage("logo/cash.png", 50, 50), "충전소", "포인트 충전하기");
 	}
 	
 	public JPanel goToPanel() {
-		JPanel p1 = panel(getter.getImage("logo/maze.png", 50, 50), "미로", "포인트 적립");
+		JPanel p1 = panel(sp.getImage("logo/maze.png", 50, 50), "미로", "포인트 적립");
 		p1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new Maps(1).setVisible(true);
 			}
 		});
-		JPanel p2 = panel(getter.getImage("logo/roulette.png", 50, 50), "경품", "룰렛 뽑기");
+		JPanel p2 = panel(sp.getImage("logo/roulette.png", 50, 50), "경품", "룰렛 뽑기");
 		JPanel panel = col(
-					10, 5, 10, fillWidth(lb("바로가기", FONT(getter.font.deriveFont(1).deriveFont(16f)))),
-					fill(row(10,
-							set(p1, BORDER(getter.line), BG(Color.white)),
-							set(p2, BORDER(getter.line), BG(Color.white))
+					10, 5, 10, fw(lb("바로가기", FONT(sp.font.deriveFont(1).deriveFont(16f)))),
+					f(row(10,
+							set(p1, BORDER(sp.line), BG(Color.white)),
+							set(p2, BORDER(sp.line), BG(Color.white))
 							).setBackColor(Color.white))
 				).setBackColor(Color.white);
-		panel.setBorder(getter.com(getter.line(Color.LIGHT_GRAY), getter.em(0, 10, 0, 10)));
+		panel.setBorder(sp.com(sp.line(Color.LIGHT_GRAY), sp.em(0, 10, 0, 10)));
 		panel.setBackground(Color.white);
 		return panel;
 	}
@@ -122,7 +122,7 @@ for (Category c : categoryEntity.findAll()) {
 		};
 		
 		JPanel categoryPanel = new JPanel(new GridLayout(categoryEntity.findAll().size(), 1, 10, 10));
-		categoryPanel.setBorder(getter.em(30, 0, 20, 0));
+		categoryPanel.setBorder(sp.em(30, 0, 20, 0));
 		categoryPanel.setBackground(Color.white);
 		categoryEntity.findAll().forEach(e -> {
 			JLabel label = new JLabel() {
@@ -132,9 +132,9 @@ for (Category c : categoryEntity.findAll()) {
 					Graphics2D g2 = (Graphics2D) g;
 					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 					g2.setColor(Color.black);
-					g2.setFont(getter.font.deriveFont(10f));
+					g2.setFont(sp.font.deriveFont(10f));
 					while(getFontMetrics(getFont()).getHeight() < getHeight())
-						g2.setFont(getter.font.deriveFont(Float.valueOf(getFont().getSize())));
+						g2.setFont(sp.font.deriveFont(Float.valueOf(getFont().getSize())));
 					g2.drawString(e.cname, getHeight() + 5, (getFontMetrics(getFont()).getHeight() / 2) - 1);
 					g2.setColor(colors.get(e.cno - 1));
 					g2.fillRect(0, 0, getHeight(), getHeight());
@@ -143,8 +143,8 @@ for (Category c : categoryEntity.findAll()) {
 			categoryPanel.add(label);
 		});
 		JPanel panel = col(2, 
-				fillWidth(comp(JLabel::new, TEXT("사람들이 많이 구매하는 카테고리"), FONT(getter.font.deriveFont(1).deriveFont(14f)))),
-				fill(row(10, fill(chart), fill(categoryPanel)).setBackColor(Color.white))
+				fw(comp(JLabel::new, TEXT("사람들이 많이 구매하는 카테고리"), FONT(sp.font.deriveFont(1).deriveFont(14f)))),
+				f(row(10, f(chart), f(categoryPanel)).setBackColor(Color.white))
 				).setBackColor(Color.white);
 		panel.setBorder(BorderFactory.createLineBorder(Color.lightGray));
 		return panel;
@@ -153,10 +153,10 @@ for (Category c : categoryEntity.findAll()) {
 	private JPanel panel(ImageIcon img, String title, String subTitle) {
 		JPanel titlesPanel = 
 				col(0, 2, 10, 
-						comp(JLabel::new, TEXT(title), FONT(getter.font.deriveFont(1).deriveFont(16f))), 
-					comp(JLabel::new, TEXT(subTitle), FG(Color.LIGHT_GRAY), FONT(getter.font.deriveFont(1).deriveFont(13f)))
+						comp(JLabel::new, TEXT(title), FONT(sp.font.deriveFont(1).deriveFont(16f))), 
+					comp(JLabel::new, TEXT(subTitle), FG(Color.LIGHT_GRAY), FONT(sp.font.deriveFont(1).deriveFont(13f)))
 				).setBackColor(Color.white);
-		JPanel p = set(col(0, fill(new JLabel(img)), fillWidth(titlesPanel)), BORDER(getter.line(Color.LIGHT_GRAY))).setBackColor(Color.white);
+		JPanel p = set(col(0, f(new JLabel(img)), fw(titlesPanel)), BORDER(sp.line(Color.LIGHT_GRAY))).setBackColor(Color.white);
 		return p;
 	}
 }

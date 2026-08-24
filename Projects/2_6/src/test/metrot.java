@@ -64,10 +64,6 @@ public class metrot extends CFrame {
 				
 				g2.setStroke(new BasicStroke(4f));
 				
-				for(int i = 0; i < path.size(); i++) {
-					stationEntity s1 = path.get(i);
-					stationEntity s2 = path.get(i + 1);
-				}
 				
 				if(start != -1) se(g2, "출");
 				if(end != -1) se(g2, "도");

@@ -54,7 +54,7 @@ import orms.sub_areaEntity;
 import orms.userEntity;
 
 import static utils.Properties.*;
-import utils.getter;
+import utils.sp;
 
 public class Util {
 	private static boolean[][] visit = new boolean[800][800];
@@ -89,7 +89,7 @@ public class Util {
 	}
 	private static void handle(Throwable throwable) {
 		throwable.printStackTrace();
-		getter.err(throwable.getMessage());
+		sp.err(throwable.getMessage());
 	}
 	
 	public static Border rrb(Color color) {

@@ -31,7 +31,7 @@ public class r3 extends CFrame{
 	List<chanceitemEntity> items = chanceitemEntity.findAll();
 	List<Color> color = IntStream.range(0, 5).mapToObj(e -> new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256))).collect(Collectors.toList());
 	List<Arc2D.Double> arcs = Arrays.asList(null, null, null, null, null);
-	JButton b = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
+	JButton b = bt("경품 뽑기! (" + sp.user.chance + "회 남음)", FONT(sp.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
 	JLabel label;
 	Point point = new Point();
 	
@@ -78,7 +78,7 @@ public class r3 extends CFrame{
 				AffineTransform old = g2.getTransform();
 				g2.translate(cx, cy);
 				g2.rotate(Math.toRadians(-rand));
-				g2.setFont(getter.font.deriveFont(15f).deriveFont(1));
+				g2.setFont(sp.font.deriveFont(15f).deriveFont(1));
 				for(int i = 0; i < items.size(); i++) {
 					double angle = 360.0 * items.get(i).chance;
 					g2.rotate(Math.toRadians(angle / 2));
@@ -95,8 +95,8 @@ public class r3 extends CFrame{
 		};
 		label.setBackground(Color.white);
 		label.setOpaque(true);
-		label.setBorder(getter.line(Color.LIGHT_GRAY));
-		add(set(col(0, fill(label), fillWidth(b)), BORDER(getter.em(10, 10, 10, 10))));
+		label.setBorder(sp.line(Color.LIGHT_GRAY));
+		add(set(col(0, f(label), fw(b)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	@Override
@@ -120,10 +120,10 @@ public class r3 extends CFrame{
 					}
 					SwingUtilities.invokeLater(() -> {
 						int n = arcs.indexOf(arcs.stream().filter(c -> c.contains(point)).findFirst().get());
-						getter.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
-						getter.user.chance -= 1;
-						getter.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
-						getter.user.save();
+						sp.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
+						sp.user.chance -= 1;
+						sp.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
+						sp.user.save();
 						b.setEnabled(true);
 					});
 				} catch (Exception e2) {

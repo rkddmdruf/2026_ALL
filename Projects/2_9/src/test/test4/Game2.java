@@ -107,10 +107,10 @@ public class Game2 extends CFrame{
 	@Override
 	protected void desing() {
 		JPanel topPanel = set(col(10
-				, fillWidth(lb("방향키로 이동", FONT(getter.font.deriveFont(14f))))
-				, lb("미로 탈출", FONT(getter.font.deriveFont(1).deriveFont(18f))))
-				, BG(Color.white), BORDER(getter.eLine(Color.lightGray, 10, 10, 10, 10)));
-		JPanel panel = set(new JPanel(new GridLayout(15, 15, 0, 0)), BORDER(getter.line(Color.LIGHT_GRAY)));
+				, fw(lb("방향키로 이동", FONT(sp.font.deriveFont(14f))))
+				, lb("미로 탈출", FONT(sp.font.deriveFont(1).deriveFont(18f))))
+				, BG(Color.white), BORDER(sp.eLine(Color.lightGray, 10, 10, 10, 10)));
+		JPanel panel = set(new JPanel(new GridLayout(15, 15, 0, 0)), BORDER(sp.line(Color.LIGHT_GRAY)));
 		for(int yy = 0; yy < SIZE; yy++) {
 			int y = yy;
 			for(int xx = 0; xx < SIZE; xx++) {
@@ -140,7 +140,7 @@ public class Game2 extends CFrame{
 			}
 		}
 		
-		add(set(col(10, fillWidth(topPanel), fill(panel)), BORDER(getter.em(10, 10, 10, 10))));
+		add(set(col(10, fw(topPanel), f(panel)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	@Override

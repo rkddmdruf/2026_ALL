@@ -1,8 +1,8 @@
 package demo;
 
 import static utils.BoxPanel.col;
-import static utils.BoxPanel.fill;
-import static utils.BoxPanel.fillWidth;
+import static utils.BoxPanel.f;
+import static utils.BoxPanel.fw;
 import static utils.Properties.BG;
 import static utils.Properties.BORDER;
 import static utils.Properties.FONT;
@@ -31,14 +31,14 @@ import demo.PieChart.Pie;
 import main.Util;
 import orms.chanceitemEntity;
 import utils.CFrame;
-import utils.getter;
+import utils.sp;
 
 public class Roullet extends CFrame{
 	double rand = Math.random() * 360;
 	List<chanceitemEntity> items = chanceitemEntity.findAll();
 	List<Color> color = IntStream.range(0, 5).mapToObj(e -> new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256))).collect(Collectors.toList());
 	List<Arc2D.Double> arcs = Arrays.asList(null, null, null, null, null);
-	JButton b = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
+	JButton b = bt("경품 뽑기! (" + sp.user.chance + "회 남음)", FONT(sp.font.deriveFont(20f).deriveFont(1)), BG(Color.white));
 	Point point = new Point();
 	PieChart pcs;
 	javax.swing.Timer timer;
@@ -68,7 +68,7 @@ public class Roullet extends CFrame{
 		};
 		pcs.setBackground(Color.white);
 		pcs.setOpaque(true);
-		add(set(col(0, fill(pcs), fillWidth(b)), BORDER(getter.em(10, 10, 10, 10))));
+		add(set(col(0, f(pcs), fw(b)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	@Override
@@ -98,10 +98,10 @@ public class Roullet extends CFrame{
 							n = i;
 							break;
 						}
-					getter.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
-					getter.user.chance -= 1;
-					getter.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
-					getter.user.save();
+					sp.infor("축하합니다!\n" + items.get(n).ciname + "에 당첨되셨습니다!");
+					sp.user.chance -= 1;
+					sp.user.point += Integer.parseInt(items.get(n).ciname.split(" ")[0].replace(",", ""));
+					sp.user.save();
 					b.setEnabled(true);
 				}
 			});

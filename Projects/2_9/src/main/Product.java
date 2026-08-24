@@ -32,14 +32,14 @@ public class Product extends JPanel{
 		
 		JPanel topPanel = set(rowF(10, 
 				nameCom(order), nameCom(category), nameCom(tf), search).setBackColor(Color.white),
-				BORDER(getter.com(getter.line(Color.LIGHT_GRAY), getter.em(10, 10, 10, 10))));
+				BORDER(sp.com(sp.line(Color.LIGHT_GRAY), sp.em(10, 10, 10, 10))));
 		JButton but = new JButton();
-		JPanel panel = col(20, fillWidth(topPanel), fill(new JScrollPane(mainPanel()) {{ setBorder(null); }}));
+		JPanel panel = col(20, fw(topPanel), f(new JScrollPane(mainPanel()) {{ setBorder(null); }}));
 		add(panel);
 	}
 
 	private JPanel mainPanel() {
-		JPanel panel = set(new JPanel(new GridLayout(0, 4, 10, 10)), BORDER(getter.em(0, 10, 0, 10)));
+		JPanel panel = set(new JPanel(new GridLayout(0, 4, 10, 10)), BORDER(sp.em(0, 10, 0, 10)));
 		
 		List<productEntity> list = productEntity.findAll();
 		
@@ -57,17 +57,17 @@ public class Product extends JPanel{
 			};
 			image.setPreferredSize(new Dimension(160, 180));
 			JPanel p = set(colF(15, image, 
-					lb(pro.pname, FONT(getter.font.deriveFont(14f).deriveFont(1))),
-					lb(getter.df.format(pro.price) + "원", FONT(getter.font.deriveFont(1).deriveFont(14f))),
-					lb("별" + star + " 구매 " + buyed, FONT(getter.font), FG(Color.LIGHT_GRAY))
-					).setBackColor(Color.white), BORDER(getter.eLine(Color.LIGHT_GRAY, 2, 5, 10, 5)));
+					lb(pro.pname, FONT(sp.font.deriveFont(14f).deriveFont(1))),
+					lb(sp.df.format(pro.price) + "원", FONT(sp.font.deriveFont(1).deriveFont(14f))),
+					lb("별" + star + " 구매 " + buyed, FONT(sp.font), FG(Color.LIGHT_GRAY))
+					).setBackColor(Color.white), BORDER(sp.eLine(Color.LIGHT_GRAY, 2, 5, 10, 5)));
 			panel.add(p);
 		}
 		return panel;
 	}
 	private JPanel nameCom(JComponent c) {
 		c.setPreferredSize(new Dimension(0, 30));
-		JPanel p = col(1, fillWidth(lb(c.getName())), fill(c)).setBackColor(Color.white);
+		JPanel p = col(1, fw(lb(c.getName())), f(c)).setBackColor(Color.white);
 		return p;
 	}
 }

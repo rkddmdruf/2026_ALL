@@ -40,7 +40,7 @@ public class Maps extends CFrame{
 	boolean[][] visit = new boolean[800][800];
 	Map<Integer, List<Point>> guPoints = new LinkedHashMap<>();
 	
-	sub_areaEntity startStation, userStation = sub_areaEntity.findById(getter.user.sno).get();
+	sub_areaEntity startStation, userStation = sub_areaEntity.findById(sp.user.sno).get();
 	int nowStation;
 	int productStation = 0;      // 지금 몇 번째 구간(sted[i] -> sted[i+1])을 그리는 중인지
 	int productLine = 0;         // 그 구간 안에서 몇 스텝째인지 (0 ~ STEPS)
@@ -56,7 +56,7 @@ public class Maps extends CFrame{
 	@Override
 	protected void desing() {
 		try {
-			Image img = getter.getImage("map.png", 800, 800).getImage();
+			Image img = sp.getImage("map.png", 800, 800).getImage();
 			BufferedImage bfi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics2D g2 = bfi.createGraphics();
 			g2.drawImage(img, 0, 0, null);
@@ -71,7 +71,7 @@ public class Maps extends CFrame{
 		areaEntity.findAll().forEach(a -> settingMap(a));
 		
 		
-		JLabel label = new JLabel(getter.getImage("map.png", 800, 800)) {
+		JLabel label = new JLabel(sp.getImage("map.png", 800, 800)) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				int n = 0;
@@ -148,11 +148,11 @@ public class Maps extends CFrame{
 			} catch (Exception e2) {
 			}
 		}).start();
-		label.setBorder(getter.line(Color.LIGHT_GRAY));
+		label.setBorder(sp.line(Color.LIGHT_GRAY));
 		label.setBackground(Color.white);
 		label.setOpaque(true);
 		JPanel p = colF(0, label);
-		p.setBorder(getter.em(10, 10, 10, 10));
+		p.setBorder(sp.em(10, 10, 10, 10));
 		add(p);
 	}
 

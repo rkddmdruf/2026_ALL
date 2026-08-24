@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -114,6 +115,24 @@
     <Compile Include="Performer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="performerCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="performerCard.Designer.cs">
+      <DependentUpon>performerCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PerformerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PerformerControl.Designer.cs">
+      <DependentUpon>PerformerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PerformUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PerformUpdate.Designer.cs">
+      <DependentUpon>PerformUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs">
@@ -126,11 +145,35 @@
     <Compile Include="Stage.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Store.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Store.Designer.cs">
+      <DependentUpon>Store.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StoreUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoreUpdate.Designer.cs">
+      <DependentUpon>StoreUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Structure.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TicketCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TicketCard.Designer.cs">
+      <DependentUpon>TicketCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="TicketType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tiket.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tiket.Designer.cs">
+      <DependentUpon>Tiket.cs</DependentUpon>
     </Compile>
     <Compile Include="UserChart.cs">
       <SubType>UserControl</SubType>
@@ -153,6 +196,15 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="performerCard.resx">
+      <DependentUpon>performerCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PerformerControl.resx">
+      <DependentUpon>PerformerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PerformUpdate.resx">
+      <DependentUpon>PerformUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -162,6 +214,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Store.resx">
+      <DependentUpon>Store.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StoreUpdate.resx">
+      <DependentUpon>StoreUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TicketCard.resx">
+      <DependentUpon>TicketCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tiket.resx">
+      <DependentUpon>Tiket.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserChart.resx">
       <DependentUpon>UserChart.cs</DependentUpon>
     </EmbeddedResource>

@@ -22,21 +22,23 @@ namespace _1_1 {
                 c.SeriesColor = colors[i];
             }
 
+            TimeSpan time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             var cardTitles = "오늘 티켓 판매,누적 매출,진행 공연,배치 부스".Split(',');
             var cardInfor = new string[] { 
                 sp.entity.TicketType.ToList().Sum(t => t.Sold) + "매",
                 "\\" + sp.entity.TicketType.ToList().Sum(t => t.Sold * t.Price).ToString("N0"),
-                "1 / 10",
+                sp.entity.EventItem.ToList().Where(t => getTime(t.StartHour) <= time && getTime(t.EndHour) >= time).Count().ToString() + " / 10",
                 sp.entity.Booth.ToList().Count() + " / 50"
             };
 
+            Color[] colorss = { Color.DodgerBlue, Color.Chocolate, Color.ForestGreen, Color.SteelBlue };
             for (int i = 0; i < 4; i++) {
                 Panel p = new Panel() {
                     Padding = new Padding(10, 10, 10, 15),
                     BackColor = Color.White,
                     BorderStyle = BorderStyle.FixedSingle
                 };
-                Color color = colors[i];
+                Color color = colorss[i];
                 p.Paint += (sender, e) => {
                     Graphics g = e.Graphics;
                     using (Brush b = new SolidBrush(color)) {
@@ -64,7 +66,11 @@ namespace _1_1 {
             setChart3();
             setChart4();
         }
-
+        private TimeSpan getTime(decimal d)
+        {
+            decimal m = d - ((int)d);
+            return new TimeSpan((int)d, (int) (Math.Round(d * 60)), 0);
+        }
         private void setChart1() {
             List<int> id = new List<int> { 2, 4, 3, 1 };
             sp.entity.TicketType.ToList().OrderBy(t => id.IndexOf(t.Id)).ToList().ForEach(t => userChart1.AddData(t.Name, t.Sold));

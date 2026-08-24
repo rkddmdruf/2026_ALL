@@ -16,8 +16,8 @@ public class BoxPanel extends JPanel{
 	public static final BoxPanel row(int inner, JComponent...cs) { return new BoxPanel(BoxPanel.R, 0, inner, 0, cs); }
 	public static final BoxPanel col(int s, int inner, int e, JComponent...cs) { return new BoxPanel(BoxPanel.C, s, inner, e, cs); }
 	public static final BoxPanel row(int s, int inner, int e, JComponent...cs) { return new BoxPanel(BoxPanel.R, s, inner, e, cs); }
-	public static final BoxPanel colF(int inner, JComponent...cs) { for(var c : cs) fill(c); return col(inner, cs); }
-	public static final BoxPanel rowF(int inner, JComponent...cs) { for(var c : cs) fill(c); return row(inner, cs); }
+	public static final BoxPanel colF(int inner, JComponent...cs) { for(var c : cs) f(c); return col(inner, cs); }
+	public static final BoxPanel rowF(int inner, JComponent...cs) { for(var c : cs) f(c); return row(inner, cs); }
 	
 	public static int R = BoxLayout.X_AXIS; // x 0, x 1, x 2 옆으로 이동
 	public static int C = BoxLayout.Y_AXIS;
@@ -36,29 +36,32 @@ public class BoxPanel extends JPanel{
         return l;
     }
 
-    public static JComponent VGAP(int h) {
+    public static JComponent vg(int h) {
         return (JComponent) Box.createVerticalStrut(h);
     }
 
-    public static JComponent VGAP() {
+    public static JComponent vg() {
         return (JComponent) Box.createVerticalGlue();
     }
 
-    public static JComponent HGAP() {
+    public static JComponent hg() {
         return (JComponent) Box.createHorizontalGlue();
     }
+    public static JComponent hg(int v) {
+    	return (JComponent) Box.createHorizontalStrut(v);
+    }
 
-    public static <T extends JComponent> T fillWidth(T c) {
+    public static <T extends JComponent> T fw(T c) {
         c.setMaximumSize(new Dimension(Integer.MAX_VALUE, c.getPreferredSize().height));
         return c;
     }
 
-    public static <T extends JComponent> T fillHeight(T c) {
+    public static <T extends JComponent> T fh(T c) {
         c.setMaximumSize(new Dimension(c.getPreferredSize().width, Integer.MAX_VALUE));
         return c;
     }
 
-    public static <T extends JComponent> T fill(T c) {
+    public static <T extends JComponent> T f(T c) {
     	if (c == null) return null; // 🔥
         c.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
         return c;

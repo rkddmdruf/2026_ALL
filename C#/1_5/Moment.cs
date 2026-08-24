@@ -46,7 +46,7 @@ namespace _1_5 {
             }
 
 
-            for(int i = 0; i < (int)first.DayOfWeek; i++) {
+            for(int i = 0; i < (int) first.DayOfWeek; i++) {
                 p1.Controls.Add(new Label());
             }
 

@@ -37,7 +37,7 @@ public class map extends CFrame{
 	List<linelistEntity> lineList = linelistEntity.findAll();
 	List<Integer> bfs = new ArrayList<>();
 	
-	sub_areaEntity startStation, userStation = sub_areaEntity.findById(getter.user.sno).get();
+	sub_areaEntity startStation, userStation = sub_areaEntity.findById(sp.user.sno).get();
 	JLabel label;
 	int selectStation = 1, productStation = 0;
 	double step = 0d;
@@ -159,13 +159,13 @@ public class map extends CFrame{
 				
 			}
 		};
-		set(label, BG(Color.white), BORDER(getter.line(Color.LIGHT_GRAY)));
+		set(label, BG(Color.white), BORDER(sp.line(Color.LIGHT_GRAY)));
 		label.setOpaque(true);
-		add(set(colF(0, label), BORDER(getter.em(10, 10, 10, 10))));
+		add(set(colF(0, label), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	private void setting() {
-		Image img = getter.getImage("map.png", 800, 800).getImage();
+		Image img = sp.getImage("map.png", 800, 800).getImage();
 		try {
 			BufferedImage b = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics2D g2 = b.createGraphics();

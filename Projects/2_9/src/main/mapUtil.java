@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import orms.areaEntity;
-import utils.getter;
+import utils.sp;
 
 public class mapUtil {
 	static boolean[][] visit = new boolean[800][800];
@@ -57,7 +57,7 @@ public class mapUtil {
 	
 	private static void setPs() {
 		try {
-			Image img = getter.getImage("map.png", 800, 800).getImage();
+			Image img = sp.getImage("map.png", 800, 800).getImage();
 			BufferedImage bfi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics2D g2 = bfi.createGraphics();
 			g2.drawImage(img, 0, 0, null);

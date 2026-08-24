@@ -23,3 +23,7 @@ C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.ReservationForm
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.Moment.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.ReviewForm.resources
 C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.ReviewUpdate.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.CustomForm1.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.MomentCard.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.CustomForm2.resources
+C:\Users\user\Desktop\응결임\2026전국\C#\1_5\obj\Debug\_1_5.CustomForm3.resources

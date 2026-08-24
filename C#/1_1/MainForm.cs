@@ -14,13 +14,23 @@ using RadioButton = System.Windows.Forms.RadioButton;
 namespace _1_1 {
     public partial class MainForm : Form {
         string[] menuNames = "대시보드,행사장 구조,부스 배치,타임테이블,공연자,스태프,티켓 판매,입점 업체,통계 리포트,설정".Split(',');
+        Dictionary<String, UserControl> panels = new Dictionary<string, UserControl>();
         public MainForm() {
             InitializeComponent();
             button1.BackColor = Color.White;
             label2.Text = label2.Text + sp.entity.Festival.ToList()[0].Name;
             settingLeft();
-            mainPanel.Controls.Add(new DashBoard());
+            panels.Add("대시보드", new DashBoard());
+            panels.Add("공연자", new PerformerControl());
+            panels.Add("입점 업체", new Store());
+            panels.Add("티켓 판매", new Tiket());
 
+            panels.Values.ToList().ForEach(t =>
+            {
+                mainPanel.Controls.Add(t);
+                t.Visible = false;
+            });
+            panels["티켓 판매"].Visible = true;
         }
 
         private void settingLeft() {
@@ -40,11 +50,18 @@ namespace _1_1 {
                 };
                 tableLayoutPanel1.Controls.Add(rb);
 
+                int index = i;
                 rb.BackColor = Color.Transparent;
                 rb.FlatAppearance.BorderSize = 0;
                 rb.CheckedChanged += (s, e) => {
                     rb.ForeColor = rb.Checked ? SystemColors.MenuHighlight : Color.Black;
                     rb.BackColor = rb.Checked ? sp.setA(SystemColors.MenuHighlight, 200) : SystemColors.Control;
+                    var ts = new UserControl();
+                    if(panels.TryGetValue(menuNames[index], out ts))
+                    {
+                        panels.Values.ToList().ForEach(x => x.Visible = false);
+                        ts.Visible = true;
+                    }
                 };
             }
             tableLayoutPanel1.Controls[0].Select();

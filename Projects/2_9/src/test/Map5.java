@@ -46,7 +46,7 @@ public class Map5 extends CFrame{
 	JLabel l;
 	public Map5(int pno) {
 		product = productEntity.findById(pno).get();
-		path.addAll(dijkstar(product.sno, getter.user.sno));
+		path.addAll(dijkstar(product.sno, sp.user.sno));
 		setting();
 		setFrame("배송", 820, 820, () -> {});
 	}
@@ -58,6 +58,7 @@ public class Map5 extends CFrame{
 				super.paintComponent(g);
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
 				
 				AffineTransform old = g2.getTransform();
 				if(zoom) {
@@ -78,6 +79,7 @@ public class Map5 extends CFrame{
 				
 				var s1 = path.get(nowArea);
 				var s2 = path.get(Math.min(nowArea + 1, path.size() - 1));
+				
 				int curX = (int) (s1.sx + (s2.sx - s1.sx) * step);
 				int curY = (int) (s1.sy + (s2.sy - s1.sy) * step);
 				g2.drawLine(s1.sx, s1.sy, curX, curY);
@@ -86,9 +88,9 @@ public class Map5 extends CFrame{
 				int r= 2;
 				sub_areaEntity.findAll().forEach(e -> g2.fillOval(e.sx - r, e.sy - r, r*2, r*2) );
 				sub_areaEntity imgS1 = sub_areaEntity.findById(product.sno).get();
-				sub_areaEntity imgS2 = sub_areaEntity.findById(getter.user.sno).get();
-				g2.drawImage(getter.getImage("logo/start.png", 40, 40).getImage(), imgS1.sx-20, imgS1.sy - 40, null);
-				g2.drawImage(getter.getImage("logo/destination.png", 50, 50).getImage(), imgS2.sx-24, imgS2.sy - 40, null);
+				sub_areaEntity imgS2 = sub_areaEntity.findById(sp.user.sno).get();
+				g2.drawImage(sp.getImage("logo/start.png", 40, 40).getImage(), imgS1.sx-20, imgS1.sy - 40, null);
+				g2.drawImage(sp.getImage("logo/destination.png", 50, 50).getImage(), imgS2.sx-24, imgS2.sy - 40, null);
 				
 				g2.setTransform(old);
 			};
@@ -98,10 +100,10 @@ public class Map5 extends CFrame{
 			}
 		};
 		
-		l.setBorder(getter.line(Color.LIGHT_GRAY));
+		l.setBorder(sp.line(Color.LIGHT_GRAY));
 		l.setBackground(Color.white);
 		l.setOpaque(true);
-		add(set(col(0, fill(l)), BORDER(getter.em(10, 10, 10, 10))));
+		add(set(col(0, f(l)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	@Override
@@ -129,7 +131,7 @@ public class Map5 extends CFrame{
 					Thread.sleep(16);
 				}
 				SwingUtilities.invokeLater(() -> {
-					getter.infor("배송이 완료되었습니다.");
+					sp.infor("배송이 완료되었습니다.");
 					dispose();
 				});
 			} catch (Exception e) {
@@ -174,7 +176,7 @@ public class Map5 extends CFrame{
 	}
 	
 	private void setting() {
-		Image img = getter.getImage("map.png", 800, 800).getImage();
+		Image img = sp.getImage("map.png", 800, 800).getImage();
 		BufferedImage bf = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g2 = bf.createGraphics();
 		g2.drawImage(img, 0, 0, null);

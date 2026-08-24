@@ -31,7 +31,7 @@ public class Maps2 extends CFrame{
 	List<Point> lines = new ArrayList<>();
 	Map<Integer, List<Point>> guPoints = new LinkedHashMap<>();
 	
-	sub_areaEntity pstation, userStation = sub_areaEntity.findById(getter.user.sno).get();
+	sub_areaEntity pstation, userStation = sub_areaEntity.findById(sp.user.sno).get();
 	
 	public Maps2(int pno) {
 		pstation = sub_areaEntity.findById(pno).get();
@@ -46,7 +46,7 @@ public class Maps2 extends CFrame{
 		linelistEntity.findAll().forEach(e -> {
 			linelistEntity.findBy(c -> c.u.equals(e.u));
 		});
-		JLabel label = new JLabel(getter.getImage("map.png", 800, 800)) {
+		JLabel label = new JLabel(sp.getImage("map.png", 800, 800)) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -77,12 +77,12 @@ public class Maps2 extends CFrame{
 		};
 		label.setBackground(Color.white);
 		label.setOpaque(true);
-		label.setBorder(getter.line(Color.LIGHT_GRAY));
-		add(set(col(0, fill(label)), BORDER(getter.em(10, 10, 10, 10))));
+		label.setBorder(sp.line(Color.LIGHT_GRAY));
+		add(set(col(0, f(label)), BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	private void settingMap() {
-		Image img = getter.getImage("map.png", 800, 800).getImage();
+		Image img = sp.getImage("map.png", 800, 800).getImage();
 		try {
 			BufferedImage bfi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics2D g2 = bfi.createGraphics();

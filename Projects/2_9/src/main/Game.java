@@ -142,8 +142,8 @@ public class Game extends CFrame{
 	
 	@Override
 	protected void desing() {
-		JPanel topPanel = set(col(10, fillWidth(lb("방향키로 이동", FONT(getter.font.deriveFont(14f).deriveFont(1)))), lb("미로 탈출", FONT(getter.font.deriveFont(1).deriveFont(20f)))),
-				BG(Color.white), BORDER(getter.eLine(Color.LIGHT_GRAY, 10, 10, 10, 10)));
+		JPanel topPanel = set(col(10, fw(lb("방향키로 이동", FONT(sp.font.deriveFont(14f).deriveFont(1)))), lb("미로 탈출", FONT(sp.font.deriveFont(1).deriveFont(20f)))),
+				BG(Color.white), BORDER(sp.eLine(Color.LIGHT_GRAY, 10, 10, 10, 10)));
 		JPanel mainPanel = new JPanel(new GridLayout(15, 15));
 		for(int i = 0; i < SIZE; i++) {
 			int index = i;
@@ -180,7 +180,7 @@ public class Game extends CFrame{
 			}
 			labels.add(list);
 		}
-		add(set(col(10, 10, 0, fillWidth(topPanel), fill(mainPanel), tf), BORDER(getter.em(0, 10, 0, 10))));
+		add(set(col(10, 10, 0, fw(topPanel), f(mainPanel), tf), BORDER(sp.em(0, 10, 0, 10))));
 	}
 
 	@Override
@@ -206,9 +206,9 @@ public class Game extends CFrame{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(user.equals(new Point(13, 13))) {
-					getter.infor("탈출 성고!\n" + testLines2.size() + "원이 적립되었습니다.");
-					getter.user.point += testLines2.size();
-					getter.user.save();
+					sp.infor("탈출 성고!\n" + testLines2.size() + "원이 적립되었습니다.");
+					sp.user.point += testLines2.size();
+					sp.user.save();
 					dispose();
 				}
 			}

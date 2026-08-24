@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\git\\git_2026_ALL\\C#\\1_1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|f:\\git\\git_2026_all\\c#\\1_1\\tiket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|solutionrelative:tiket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|F:\\git\\git_2026_ALL\\C#\\1_1\\tiket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|solutionrelative:tiket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|F:\\git\\git_2026_ALL\\C#\\1_1\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|solutionrelative:dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|F:\\git\\git_2026_ALL\\C#\\1_1\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|F:\\git\\git_2026_ALL\\C#\\1_1\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FFD4E57-B4CA-4F92-9E46-89CD594D9C18}|1_1.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "F:\\git\\git_2026_ALL\\C#\\1_1\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "F:\\git\\git_2026_ALL\\C#\\1_1\\MainForm.cs",
+              "RelativeToolTip": "MainForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T14:39:32.603Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainForm.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "F:\\git\\git_2026_ALL\\C#\\1_1\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "F:\\git\\git_2026_ALL\\C#\\1_1\\MainForm.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "MainForm.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T14:39:31.073Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DashBoard.cs",
+              "DocumentMoniker": "F:\\git\\git_2026_ALL\\C#\\1_1\\DashBoard.cs",
+              "RelativeDocumentMoniker": "DashBoard.cs",
+              "ToolTip": "F:\\git\\git_2026_ALL\\C#\\1_1\\DashBoard.cs",
+              "RelativeToolTip": "DashBoard.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T17:08:05.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Tiket.cs",
+              "DocumentMoniker": "F:\\git\\git_2026_ALL\\C#\\1_1\\Tiket.cs",
+              "RelativeDocumentMoniker": "Tiket.cs",
+              "ToolTip": "F:\\git\\git_2026_ALL\\C#\\1_1\\Tiket.cs",
+              "RelativeToolTip": "Tiket.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAuwHMAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T16:19:30.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Tiket.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "F:\\git\\git_2026_ALL\\C#\\1_1\\Tiket.cs",
+              "RelativeDocumentMoniker": "Tiket.cs",
+              "ToolTip": "F:\\git\\git_2026_ALL\\C#\\1_1\\Tiket.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "Tiket.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T14:39:58.991Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

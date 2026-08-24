@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _1_5_test {
+    public partial class CustomForm4 : Form {
+        public CustomForm4() {
+            InitializeComponent();
+        }
+    }
+}

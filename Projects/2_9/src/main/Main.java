@@ -24,9 +24,9 @@ import static utils.Properties.*;
 
 
 public class Main extends CFrame{
-	JToggleButton b1 = set(new JToggleButton("홈", getter.getImage("logo/home.png", 30, 30)));
-	JToggleButton b2 = set(new JToggleButton("상품", getter.getImage("logo/product.png", 30, 30)));
-	JToggleButton b3 = set(new JToggleButton("설정", getter.getImage("logo/setting.png", 30, 30)));
+	JToggleButton b1 = set(new JToggleButton("홈", sp.getImage("logo/home.png", 30, 30)));
+	JToggleButton b2 = set(new JToggleButton("상품", sp.getImage("logo/product.png", 30, 30)));
+	JToggleButton b3 = set(new JToggleButton("설정", sp.getImage("logo/setting.png", 30, 30)));
 	List<JToggleButton> buttonList = Arrays.asList(b1, b2, b3);
 	
 	JLabel timer = new JLabel("10:10:10", JLabel.CENTER) {{
@@ -38,7 +38,7 @@ public class Main extends CFrame{
 	Option option = new Option();
 	
 	CardLayout card = new CardLayout();
-	JPanel cardPanel = set(new JPanel(card), BORDER(getter.em(0, 10, 0, 10)));
+	JPanel cardPanel = set(new JPanel(card), BORDER(sp.em(0, 10, 0, 10)));
 	
 	public Main() {
 		ButtonGroup bg = new ButtonGroup();
@@ -63,15 +63,15 @@ public class Main extends CFrame{
 
 	@Override
 	protected void desing() {
-		JLabel logoLabel = set(new JLabel("iDelivery", getter.getImage("logo/logo.png", 30, 30), JLabel.LEFT), FONT(getter.font.deriveFont(20f)));
-		JLabel cashLabel = new JLabel("충전소", getter.getImage("logo/cash.png", 40, 40), JLabel.RIGHT);
-		JLabel userImage = new JLabel(getter.getImage("logo/user.png", 40, 40));
+		JLabel logoLabel = set(new JLabel("iDelivery", sp.getImage("logo/logo.png", 30, 30), JLabel.LEFT), FONT(sp.font.deriveFont(20f)));
+		JLabel cashLabel = new JLabel("충전소", sp.getImage("logo/cash.png", 40, 40), JLabel.RIGHT);
+		JLabel userImage = new JLabel(sp.getImage("logo/user.png", 40, 40));
 
-		JPanel userInforPanel = col(2, lb(getter.user.uname), lb(getter.df.format(getter.user.point) + "P") , lb("룰렛 " + getter.user.chance + "회", HOA(JLabel.RIGHT))).setBackColor(Color.white);
-		JPanel topPanel = set(row(10, 0, 30, fill(logoLabel), fill(timer), row(40, fill(cashLabel), userImage).setBackColor(Color.white), userInforPanel), BORDER(getter.em(10, 0, 10, 0)), BG(Color.white));
+		JPanel userInforPanel = col(2, lb(sp.user.uname), lb(sp.df.format(sp.user.point) + "P") , lb("룰렛 " + sp.user.chance + "회", HOA(JLabel.RIGHT))).setBackColor(Color.white);
+		JPanel topPanel = set(row(10, 0, 30, f(logoLabel), f(timer), row(40, f(cashLabel), userImage).setBackColor(Color.white), userInforPanel), BORDER(sp.em(10, 0, 10, 0)), BG(Color.white));
 		JPanel buttonPanel = rowF(1, b1, b2, b3).setBackColor(Color.white);
 		
-		add(new BoxPanel(C, 0, 10, 0, topPanel, fill(cardPanel), BoxPanel.fillWidth(buttonPanel)));
+		add(new BoxPanel(C, 0, 10, 0, topPanel, f(cardPanel), BoxPanel.fw(buttonPanel)));
 	}
 
 	@Override
@@ -81,10 +81,10 @@ public class Main extends CFrame{
 	}
 
 	public static void main(String[] args) {
-		UIManager.put("Label.font", getter.font.deriveFont(1).deriveFont(13f));
+		UIManager.put("Label.font", sp.font.deriveFont(1).deriveFont(13f));
 		UIManager.put("ToggleButton.foreground", Color.black);
 		UIManager.put("ToggleButton.background", Color.white);
-		UIManager.put("ToggleButton.font", getter.font.deriveFont(1).deriveFont(13f));
+		UIManager.put("ToggleButton.font", sp.font.deriveFont(1).deriveFont(13f));
 		Util.start(new Main());
 	}
 }

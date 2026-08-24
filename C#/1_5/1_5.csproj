@@ -64,6 +64,24 @@
     <Compile Include="adminMain.Designer.cs">
       <DependentUpon>adminMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForm1.Designer.cs">
+      <DependentUpon>CustomForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForm2.Designer.cs">
+      <DependentUpon>CustomForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForm3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForm3.Designer.cs">
+      <DependentUpon>CustomForm3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +117,12 @@
     </Compile>
     <Compile Include="Moment.Designer.cs">
       <DependentUpon>Moment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MomentCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MomentCard.Designer.cs">
+      <DependentUpon>MomentCard.cs</DependentUpon>
     </Compile>
     <Compile Include="owner.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -160,6 +184,15 @@
     <EmbeddedResource Include="adminMain.resx">
       <DependentUpon>adminMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomForm1.resx">
+      <DependentUpon>CustomForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomForm2.resx">
+      <DependentUpon>CustomForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomForm3.resx">
+      <DependentUpon>CustomForm3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Moment.resx">
       <DependentUpon>Moment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MomentCard.resx">
+      <DependentUpon>MomentCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -205,6 +241,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\address.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -336,6 +373,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

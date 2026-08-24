@@ -26,7 +26,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Roulette extends CFrame{
 	
-	JButton b = bt("경품 뽑기! (" + getter.user.chance + "회 남음)", FONT(getter.font.deriveFont(20f).deriveFont(1)), BG(Color.white), SIZE(0, 30)); 
+	JButton b = bt("경품 뽑기! (" + sp.user.chance + "회 남음)", FONT(sp.font.deriveFont(20f).deriveFont(1)), BG(Color.white), SIZE(0, 30)); 
 
 	Point2D.Double point = new Point2D.Double(0, 0);
 	List<Arc2D.Double> arcs = new ArrayList<>();
@@ -78,7 +78,7 @@ public class Roulette extends CFrame{
 					arcs.add(arc);
 				}
 				g2.translate(sx + (ox / 2), sy + (ox / 2));
-				g2.setFont(getter.font.deriveFont(17f).deriveFont(1));
+				g2.setFont(sp.font.deriveFont(17f).deriveFont(1));
 				g2.rotate(Math.toRadians(-r));
 				g2.setColor(Color.white);
 				for(int i = 0; i < angle.size(); i++) {
@@ -99,8 +99,8 @@ public class Roulette extends CFrame{
 		};
 		label.setBackground(Color.white);
 		label.setOpaque(true);
-		label.setBorder(getter.line(Color.lightGray));
-		add(set(col(0, fill(label), fillWidth(b)), BORDER(getter.em(10, 10, 10, 10))));
+		label.setBorder(sp.line(Color.lightGray));
+		add(set(col(0, f(label), fw(b)), BORDER(sp.em(10, 10, 10, 10))));
 		
 	}
 
@@ -131,11 +131,11 @@ public class Roulette extends CFrame{
 			        	int index = arcs.indexOf(arcs.stream().filter(e -> e.contains(point)).findFirst().get());
 			        	if(index != -1) {
 			        		chanceitemEntity c = chanceitemEntity.findById(index + 1).get();
-			        		getter.infor("축하합니다!\n" + c.ciname + "에 당첨되셨습니다!");
-			        		getter.user.point += Integer.parseInt(c.ciname.split(" ")[0].replace(",", ""));
-			        		getter.user.chance--;
-			        		getter.user.save();
-			        		b.setText("경품 뽑기! (" + getter.user.chance + "회 남음)");
+			        		sp.infor("축하합니다!\n" + c.ciname + "에 당첨되셨습니다!");
+			        		sp.user.point += Integer.parseInt(c.ciname.split(" ")[0].replace(",", ""));
+			        		sp.user.chance--;
+			        		sp.user.save();
+			        		b.setText("경품 뽑기! (" + sp.user.chance + "회 남음)");
 			        	}
 			        });
 			        b.setEnabled(true);

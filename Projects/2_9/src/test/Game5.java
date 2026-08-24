@@ -108,8 +108,8 @@ public class Game5 extends CFrame{
 	
 	@Override
 	protected void desing() {
-		JPanel topPanel = set(col(5, fillWidth(lb("방향키로 이동", HOA(JLabel.LEFT), FONT(getter.font)))
-				, lb("미로 탈출", FONT(getter.font.deriveFont(20f).deriveFont(1)))).setBackColor(Color.white), BORDER(getter.eLine(Color.LIGHT_GRAY, 5, 5, 5, 5)));
+		JPanel topPanel = set(col(5, fw(lb("방향키로 이동", HOA(JLabel.LEFT), FONT(sp.font)))
+				, lb("미로 탈출", FONT(sp.font.deriveFont(20f).deriveFont(1)))).setBackColor(Color.white), BORDER(sp.eLine(Color.LIGHT_GRAY, 5, 5, 5, 5)));
 		JPanel panel = new JPanel(new GridLayout(15, 15, 0, 0));
 		
 		for(int yy = 0; yy < SIZE; yy++) {
@@ -142,7 +142,7 @@ public class Game5 extends CFrame{
 			}
 		}
 		
-		add(set(col(10, topPanel, fill(panel)) ,BORDER(getter.em(10, 10, 10, 10))));
+		add(set(col(10, topPanel, f(panel)) ,BORDER(sp.em(10, 10, 10, 10))));
 	}
 
 	@Override

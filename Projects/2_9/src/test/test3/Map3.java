@@ -29,7 +29,7 @@ import orms.linelistEntity;
 import orms.productEntity;
 import orms.sub_areaEntity;
 import utils.CFrame;
-import utils.getter;
+import utils.sp;
 
 public class Map3 extends CFrame{
 	List<linelistEntity> lineEList = linelistEntity.findAll();
@@ -44,7 +44,7 @@ public class Map3 extends CFrame{
 	int selectStation = 1;
 	public Map3(int pno) {
 		startStation = productEntity.findById(pno).get().sno;
-		endStation = getter.user.sno;
+		endStation = sp.user.sno;
 		setting();
 		bfs = dijkstra(startStation, endStation);
 		selectStation = sub_areaEntity.findById(bfs.get(0)).get().ano;
@@ -52,7 +52,7 @@ public class Map3 extends CFrame{
 	}
 	
 	private void setting() {
-		Image img = getter.getImage("map.png", 800, 800).getImage();
+		Image img = sp.getImage("map.png", 800, 800).getImage();
 		try {
 			BufferedImage bfi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics2D g2 = bfi.createGraphics();
@@ -146,10 +146,10 @@ public class Map3 extends CFrame{
 		};
 		label.setBackground(Color.white);
 		label.setOpaque(true);
-		label.setBorder(getter.line(Color.lightGray));
+		label.setBorder(sp.line(Color.lightGray));
 		JPanel p = new JPanel(new BorderLayout());
 		p.add(label);
-		p.setBorder(getter.em(10, 10, 10, 10));
+		p.setBorder(sp.em(10, 10, 10, 10));
 		add(p);
 	}
 

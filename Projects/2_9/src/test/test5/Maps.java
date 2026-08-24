@@ -26,7 +26,7 @@ import orms.linelistEntity;
 import orms.productEntity;
 import orms.sub_areaEntity;
 import utils.CFrame;
-import utils.getter;
+import utils.sp;
 
 public class Maps extends CFrame{
 	List<linelistEntity> lines = linelistEntity.findAll();
@@ -39,15 +39,15 @@ public class Maps extends CFrame{
 	
 	public Maps(int pno) {
 		product = productEntity.findById(pno).get();
-		dik.addAll(dijkstar(product.sno, getter.user.sno));
-		System.out.println(product.sno + ", " + getter.user.sno);
+		dik.addAll(dijkstar(product.sno, sp.user.sno));
+		System.out.println(product.sno + ", " + sp.user.sno);
 		System.out.println(dik);
 		setImage();
 		setFrame("배송", 820, 820, () -> {});
 	}
 
 	private void setImage() {
-		Image image = getter.getImage("map.png", 800, 800).getImage();
+		Image image = sp.getImage("map.png", 800, 800).getImage();
 		try {
 			img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics2D g2 = this.img.createGraphics();
@@ -93,7 +93,7 @@ public class Maps extends CFrame{
 				sub_areaEntity.findAll().forEach(e -> g2.fillOval(e.sx - 2, e.sy - 2, 4, 4));
 				
 				sub_areaEntity sp = sub_areaEntity.findById(product.pno).get();
-				sub_areaEntity su = sub_areaEntity.findById(getter.user.sno).get();
+				sub_areaEntity su = sub_areaEntity.findById(utils.sp.user.sno).get();
 				g2.drawImage(new ImageIcon("datafiles/logo/start.png").getImage(), sp.sx - 20, sp.sy- 40,  40, 40, null);
 				g2.drawImage(new ImageIcon("datafiles/logo/destination.png").getImage(), su.sx - 25, su.sy - 40, 50, 50, null);
 			}

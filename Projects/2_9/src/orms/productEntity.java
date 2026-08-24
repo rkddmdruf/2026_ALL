@@ -48,6 +48,9 @@ public class productEntity {
 		}
 	}
 
+	public double review() {
+		return reviewEntity.findBy(e -> orderEntity.findById(e.ono).get().pno.equals(pno)).stream().mapToInt(e -> e.star).average().getAsDouble();
+	}
 	public static Optional<productEntity> findById(int id) {
 		return Optional.ofNullable(cache.get(id));
 	}
